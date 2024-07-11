@@ -1,80 +1,115 @@
 <template>
-      <header class="header sticky-bar">
+    <header class="header sticky-bar">
         <div class="container">
             <div class="main-header">
                 <div class="header-left">
-                    <div class="header-logo"><a class="d-flex" href="index.html"><img alt="jobBox" src="assets/imgs/template/jobhub-logo.svg"></a></div>
+                    <div class="header-logo"> <router-link to="/"><img alt="PortailTN"
+                                src="assets/imgs/template/jobhub-logo.svg"></router-link>
+
+                    </div>
                 </div>
                 <div class="header-nav">
                     <nav class="nav-main-menu">
                         <ul class="main-menu">
-                            <li class="has-children"><a class="active" href="index.html">Home</a>
+                            <li>
+                                <router-link to="/">Accueil</router-link>
+                            </li>
+                            <li>
+                                <a href="jobs-grid.html">Liste des Offres</a>
                                 <ul class="sub-menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                    <li><a href="index-5.html">Home 5</a></li>
-                                    <li><a href="index-6.html">Home 6</a></li>
+                                    <li><a href="jobs-grid.html">Stages</a></li>
+                                    <li><a href="jobs-list.html">Travail</a></li>
                                 </ul>
                             </li>
-                            <li class="has-children"><a href="jobs-grid.html">Find a Job</a>
+                            <li><a href="companies-grid.html">Sociétés</a></li>
+                            <li>
+                                <a href="candidates-grid.html">Annonces Featured</a>
                                 <ul class="sub-menu">
-                                    <li><a href="jobs-grid.html">Jobs Grid</a></li>
-                                    <li><a href="jobs-list.html">Jobs List</a></li>
-                                    <li><a href="job-details.html">Jobs Details  </a></li>
-                                    <li><a href="job-details-2.html">Jobs Details 2              </a></li>
+                                    <li><a href="candidates-grid.html">Nos stages</a></li>
+                                    <li><a href="candidate-details.html">Nos offres de travail</a></li>
                                 </ul>
                             </li>
-                            <li class="has-children"><a href="companies-grid.html">Recruiters</a>
-                                <ul class="sub-menu">
-                                    <li><a href="companies-grid.html">Recruiters</a></li>
-                                    <li><a href="company-details.html">Company Details</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-children"><a href="candidates-grid.html">Candidates</a>
-                                <ul class="sub-menu">
-                                    <li><a href="candidates-grid.html">Candidates Grid</a></li>
-                                    <li><a href="candidate-details.html">Candidate Details</a></li>
-                                    <li><a href="candidate-profile.html">Candidate Profile</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-children"><a href="blog-grid.html">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="page-about.html">About Us</a></li>
-                                    <li><a href="page-pricing.html">Pricing Plan</a></li>
-                                    <li><a href="page-contact.html">Contact Us</a></li>
-                                    <li><a href="page-register.html">Register</a></li>
-                                    <li><a href="page-signin.html">Signin</a></li>
-                                    <li><a href="page-reset-password.html">Reset Password</a></li>
-                                    <li><a href="page-content-protected.html">Content Protected</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-children"><a href="blog-grid.html">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-grid-2.html">Blog Grid 2</a></li>
-                                    <li><a href="blog-details.html">Blog Single</a></li>
-                                </ul>
-                            </li>
-                            <li class="dashboard"><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard" target="_blank">Dashboard</a></li>
+                            <li class=""><a href="blog-grid.html">Notre Blog</a></li>
+
                         </ul>
                     </nav>
-                    <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+                    <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
+                            class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
                 </div>
                 <div class="header-right">
-                    <div class="block-signin"><a class="text-link-bd-btom hover-up" href="page-register.html">Register</a><a class="btn btn-default btn-shadow ml-40 hover-up" href="page-signin.html">Sign in</a></div>
+                    <template v-if="loggedIn">
+                        <nav class="nav-main-menu">
+                            <ul class="main-menu">
+                                <li>
+                                    <a href="">Bonjour , {{ firstName }} {{ lastName }}</a>
+                                    <ul class="sub-menu">
+                                        <li><router-link to="/">Votre Profil</router-link></li>
+                                        <li><a href="#" @click.prevent="logout">Déconnexion</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </nav>
+
+                    </template>
+                    <template v-else>
+                        <div class="block-signin">
+                            <router-link class="text-link-bd-btom hover-up" to="/signup">Register</router-link>
+                            <router-link class="btn btn-default btn-shadow ml-40 hover-up" to="/signin">Sign
+                                in</router-link>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
     </header>
 </template>
 
-<script>
-export default {
-  name: 'Header',
- 
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+
+const loggedIn = ref()
+const firstName = ref('')
+const lastName = ref('')
+const router = useRouter()
+
+loggedIn.value = localStorage.getItem('islogged')
+
+if (loggedIn.value) {
+    firstName.value = localStorage.getItem('firstName');
+    lastName.value = localStorage.getItem('lastName');
 }
+
+const axiosConfig = {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+};
+
+const logout = async () => {
+    try {
+        const response = await axios.post('http://localhost:8000/api/logout', {}, axiosConfig)
+
+        console.log(response.data)
+        if (response.data.message === 'Successfully logged out') {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            localStorage.removeItem('islogged')
+            localStorage.removeItem('firstName')
+            localStorage.removeItem('lastName')
+            loggedIn.value = false
+            router.push('/')
+        } else {
+            console.error('Logout failed')
+        }
+    } catch (error) {
+        console.error('Logout error:', error)
+    }
+}
+
+
 </script>
-
-

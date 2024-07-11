@@ -60,7 +60,7 @@
                                         <li><a href="blog-details.html">Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard" target="_blank">Dashboard</a></li>
+                                <li><a href="http://wp.alithemes.com/html/PortailTN/demos/dashboard" target="_blank">Dashboard</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -74,7 +74,7 @@
                             <li><a href="page-signin.html">Sign Out</a></li>
                         </ul>
                     </div>
-                    <div class="site-copyright">Copyright 2022 &copy; JobBox. <br>Designed by AliThemes.</div>
+                    <div class="site-copyright">Copyright 2022 &copy; PortailTN. <br>Designed by AliThemes.</div>
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@
                                         <li><a href="blog-details.html">Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard" target="_blank">Dashboard</a></li>
+                                <li><a href="http://wp.alithemes.com/html/PortailTN/demos/dashboard" target="_blank">Dashboard</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -154,7 +154,7 @@
                             <li><a href="page-signin.html">Sign Out</a></li>
                         </ul>
                     </div>
-                    <div class="site-copyright">Copyright 2022 &copy; JobBox. <br>Designed by AliThemes.</div>
+                    <div class="site-copyright">Copyright 2022 &copy; PortailTN. <br>Designed by AliThemes.</div>
                 </div>
             </div>
         </div>
@@ -441,7 +441,7 @@
                     </div>
                     <div class="col-xl-5 col-lg-12 d-none d-xl-block col-md-6">
                         <div class="banner-imgs">
-                            <div class="block-1 shape-1"><img class="img-responsive" alt="jobBox"
+                            <div class="block-1 shape-1"><img class="img-responsive" alt="PortailTN"
                                     src="assets/imgs/page/homepage4/banner.png"></div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 /***
- Template Name: JobBox
+ Template Name: PortailTN
  Description: Job Board Finder HTML template
  Version: 4.1
  License: GNU General Public License v2 or later
@@ -2200,6 +2200,12 @@ label {
   display: inline-block;
   padding: 0px 15px 0px 25px;
   background: url(../imgs/template/icons/time.svg) no-repeat 0px 3px;
+}
+.card-grid-3 .card-block-info .card-location {
+  font-size: 14px;
+  display: inline-block;
+  padding: 0px 15px 0px 25px;
+  background: url(../imgs/template/icons/icon-location-2.svg) no-repeat 0px 3px;
 }
 .card-grid-3 .card-block-info .card-text-price {
   color: #3C65F5;

@@ -2,8 +2,8 @@
     <footer class="footer mt-50">
         <div class="container">
             <div class="row">
-                <div class="footer-col-1 col-md-3 col-sm-12"><a href="index.html"><img alt="jobBox" src="assets/imgs/template/jobhub-logo.svg"></a>
-                    <div class="mt-20 mb-20 font-xs color-text-paragraph-2">JobBox est le cœur de la communauté de design et la meilleure ressource pour découvrir et se connecter avec des designers et des emplois du monde entier.</div>
+                <div class="footer-col-1 col-md-3 col-sm-12"><a href="index.html"><img alt="PortailTN" src="assets/imgs/template/jobhub-logo.svg"></a>
+                    <div class="mt-20 mb-20 font-xs color-text-paragraph-2">PortailTN est le cœur de la communauté de design et la meilleure ressource pour découvrir et se connecter avec des designers et des emplois du monde entier.</div>
                     <div class="footer-social"><a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter" href="#"></a><a class="icon-socials icon-linkedin" href="#"></a></div>
                 </div>
                 <div class="footer-col-2 col-md-2 col-xs-6">
@@ -50,7 +50,7 @@
             </div>
             <div class="footer-bottom mt-50">
                 <div class="row">
-                    <div class="col-md-6"><span class="font-xs color-text-paragraph">Copyright &copy; 2022. JobBox. Tous droits réservés</span></div>
+                    <div class="col-md-6"><span class="font-xs color-text-paragraph">Copyright &copy; 2022. PortailTN. Tous droits réservés</span></div>
                     <div class="col-md-6 text-md-end text-start">
                         <div class="footer-social"><a class="font-xs color-text-paragraph" href="#">Politique de confidentialité</a><a class="font-xs color-text-paragraph mr-30 ml-30" href="#">Conditions générales</a><a class="font-xs color-text-paragraph" href="#">Sécurité</a></div>
                     </div>
