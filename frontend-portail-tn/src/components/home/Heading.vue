@@ -442,7 +442,7 @@
                     <div class="col-xl-5 col-lg-12 d-none d-xl-block col-md-6">
                         <div class="banner-imgs">
                             <div class="block-1 shape-1"><img class="img-responsive" alt="PortailTN"
-                                    src="assets/imgs/page/homepage4/banner.png"></div>
+                                    src="assets/home/imgs/page/homepage4/banner.png"></div>
                         </div>
                     </div>
                 </div>
