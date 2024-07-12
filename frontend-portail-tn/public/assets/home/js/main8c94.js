@@ -548,5 +548,3 @@ function checkBilled() {
         }
     }
 }
-//Perfect Scrollbar
-const ps = new PerfectScrollbar(".mobile-header-wrapper-inner");

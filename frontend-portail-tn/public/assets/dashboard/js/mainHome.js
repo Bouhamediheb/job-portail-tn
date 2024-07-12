@@ -548,4 +548,3 @@ function checkBilled() {
         }
     }
 }
-//Perfect Scrollbar
