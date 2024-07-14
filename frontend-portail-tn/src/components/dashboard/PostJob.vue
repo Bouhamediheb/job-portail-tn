@@ -51,6 +51,7 @@
                       class="form-control"
                       type="text"
                       placeholder="Exemple : Développeur Full Stack"
+                      v-model="jobDetails.title"
                     />
                   </div>
                   <div class="col-lg-12">
@@ -63,6 +64,7 @@
                         name="message"
                         rows="8"
                         placeholder="Exemple : Nous recherchons un développeur Full Stack pour rejoindre notre équipe de développement."
+                        v-model="jobDetails.description"
                       ></textarea>
                     </div>
                   </div>
@@ -74,13 +76,16 @@
                       class="form-control"
                       type="number"
                       placeholder="Exemple : 2"
+                      v-model="jobDetails.experience"
                     />
                   </div>
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
                       >Type de lieu de travail *</label
                     >
-                    <select class="form-control">
+                    <select class="form-control" 
+                    v-model="jobDetails.workplaceType"
+                    >
                       <option value="remote">Teletravail</option>
                       <option value="office">Bureau</option>
                       <option value="hybrid">Hybride</option>
@@ -95,6 +100,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Route de la Marsa"
+                        v-model="jobDetails.location.address"
                       />
                     </div>
                     <div class="flex-grow-1 me-2">
@@ -105,6 +111,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Tunis"
+                        v-model="jobDetails.location.city"
                       />
                     </div>
                     <div class="flex-grow-1">
@@ -115,6 +122,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Tunisie"
+                        v-model="jobDetails.location.country"
                       />
                     </div>
                   </div>
@@ -127,6 +135,7 @@
                         class="form-control"
                         type="number"
                         placeholder="Exemple : 1200DT "
+                        v-model="jobDetails.salary.min"
                       />
                     </div>
                     <div class="flex-grow-1">
@@ -137,6 +146,7 @@
                         class="form-control"
                         type="number"
                         placeholder="Exemple : 1500DT"
+                        v-model="jobDetails.salary.max"
                       />
                     </div>
                   </div>
@@ -213,6 +223,7 @@
                       class="form-control"
                       type="text"
                       placeholder="Exemple : Stage en développement web"
+                      v-model="internshipDetails.title"
                     />
                   </div>
                   <div class="col-lg-12">
@@ -225,6 +236,7 @@
                         name="message"
                         rows="8"
                         placeholder="Exemple : Nous recherchons un stagiaire en développement web pour rejoindre notre équipe de développement."
+                        v-model="internshipDetails.description"
                       ></textarea>
                     </div>
                   </div>
@@ -236,13 +248,15 @@
                       class="form-control"
                       type="number"
                       placeholder="Exemple : 3"
+                      v-model="internshipDetails.duration"
                     />
                   </div>
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
                       >Type de lieu de travail *</label
                     >
-                    <select class="form-control">
+                    <select class="form-control"
+                    v-model="internshipDetails.workplaceType">
                       <option value="remote">Teletravail</option>
                       <option value="office">Bureau</option>
                       <option value="hybrid">Hybride</option>
@@ -257,6 +271,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Route de la Marsa"
+                        v-model="internshipDetails.location.address"
                       />
                     </div>
                     <div class="flex-grow-1 me-2">
@@ -267,6 +282,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Tunis"
+                        v-model="internshipDetails.location.city"
                       />
                     </div>
                     <div class="flex-grow-1">
@@ -277,6 +293,7 @@
                         class="form-control"
                         type="text"
                         placeholder="Exemple : Tunisie"
+                        v-model="internshipDetails.location.country"
                       />
                     </div>
                   </div>
@@ -289,6 +306,7 @@
                         class="form-control"
                         type="number"
                         placeholder="Exemple : 300DT "
+                        v-model="internshipDetails.motivation"
                       />
                     </div>
                   </div>
@@ -353,84 +371,165 @@
                     </div>
                 </div></div>
                 <div class="form-group mt-10">
-                  <button class="btn btn-default btn-brand icon-tick">
-                    Post New Offer
-                  </button>
+                  <button @click="submitForm" class="btn btn-default btn-brand icon-tick">
+        Post New Offer
+      </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Additional footer content can go here -->
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      offerType: "job", // Default to Job Offer
-      skillInput: "",
+      offerType: 'job',
+      skillInput: '',
       selectedSkills: [],
-      skills: ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"], // Add more skills as needed
+      skills: ['Java', 'Python', 'JavaScript', 'C++', 'Ruby', 'Go', 'PHP'],
       filteredSkills: [],
+      jobDetails: {
+        title: '',
+        description: '',
+        experience: '',
+        workplaceType: '',
+        location: {
+          address: '',
+          city: '',
+          country: ''
+        },
+        salary: {
+          min: '',
+          max: ''
+        },
+        file: null,
+      },
+      internshipDetails: {
+        title: '',
+        description: '',
+        duration: '',
+        workplaceType: '',
+        location: {
+          address: '',
+          city: '',
+          country: ''
+        },
+        motivation: '',
+        file: null,
+      },
     };
   },
   methods: {
     resetFields() {
       this.selectedSkills = [];
-      this.skillInput = "";
+      this.skillInput = '';
       this.filteredSkills = [];
+      this.jobDetails = {
+        title: '',
+        description: '',
+        experience: '',
+        workplaceType: '',
+        location: {
+          address: '',
+          city: '',
+          country: ''
+        },
+        salary: {
+          min: '',
+          max: ''
+        },
+        file: null,
+      };
+      this.internshipDetails = {
+        title: '',
+        description: '',
+        duration: '',
+        workplaceType: '',
+        location: {
+          address: '',
+          city: '',
+          country: ''
+        },
+        motivation: '',
+        file: null,
+      };
     },
     filterSkills() {
-      // Check if filter function is triggered
-      console.log("Filtering skills:", this.skillInput);
-
       this.filteredSkills = this.skills.filter(
         (skill) =>
           skill.toLowerCase().includes(this.skillInput.toLowerCase()) &&
           !this.selectedSkills.includes(skill)
       );
-
-      // Log filtered skills for debugging
-      console.log("Filtered skills:", this.filteredSkills);
     },
     addSkill(skill) {
       if (!this.selectedSkills.includes(skill)) {
         this.selectedSkills.push(skill);
-        this.skillInput = ""; // Clear input after selection
-        this.filteredSkills = []; // Clear the dropdown
+        this.skillInput = '';
+        this.filteredSkills = [];
       }
     },
     removeSkill(skill) {
       this.selectedSkills = this.selectedSkills.filter((s) => s !== skill);
     },
+    handleFileUpload(event, type) {
+      if (type === 'job') {
+        this.jobDetails.file = event.target.files[0];
+      } else {
+        this.internshipDetails.file = event.target.files[0];
+      }
+    },
+    async submitForm() {
+      const data = {
+        offerType: this.offerType,
+        skills: this.selectedSkills,
+        details: this.offerType === 'job' ? this.jobDetails : this.internshipDetails,
+      };
+
+      console.log('Submitting form data:', data);
+
+      try {
+        const response = await axios.post('/api/offres', data, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log('Form submitted successfully:', response.data);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    },
   },
 };
 </script>
+
 
 <style scoped>
 .dropdown-menu {
   position: absolute;
   z-index: 1000;
-  width: 100%; /* Match the width of the input */
-  background-color: white; /* Background color */
-  max-height: 200px; /* Limit the height */
-  overflow-y: auto; /* Enable scrolling if needed */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border-radius: 4px; /* Slightly rounded corners */
-  padding: 0; /* No padding around the menu */
+  width: 100%; 
+  background-color: white; 
+  max-height: 200px; 
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 4px;
+  padding: 0; 
 }
 
 .list-group-item {
-  padding: 8px 12px; /* Padding: top/bottom, left/right */
-  font-size: 14px; /* Smaller text size */
-  cursor: pointer; /* Pointer on hover */
+  padding: 8px 12px; 
+  font-size: 14px; 
+  cursor: pointer; 
 }
 
 .list-group-item:hover {
-  background-color: #f0f0f0; /* Highlight on hover */
+  background-color: #f0f0f0; 
 }
 </style>

@@ -3,8 +3,9 @@
   <Header @navigateToPostJob="updateViewMode" /> 
   <main class="main">
     <Menu @updateViewMode="updateViewMode" />
-    <Overview v-if="viewMode === 1" />
-    <MyPosts v-if="viewMode === 2" />
+    <Overview v-if="viewMode === 0" />
+    <MyPosts v-if="viewMode === 1" />
+    <UserProfile v-if="viewMode === 3" />
     <PostJob v-if="viewMode === 10" />
   </main>
 </template>
@@ -14,6 +15,7 @@ import Menu from "@/components/dashboard/Menu.vue";
 import Overview from "@/components/dashboard/Overview.vue";
 import MyPosts from "@/components/dashboard/MyPosts.vue";
 import PostJob from "@/components/dashboard/PostJob.vue";
+import UserProfile from "@/components/dashboard/User/UserProfile.vue";
 
 export default {
   name: "DashboardView",
@@ -23,6 +25,7 @@ export default {
     Overview,
     MyPosts,
     PostJob, 
+    UserProfile
   },
   mounted() {
     this.loadScripts();
@@ -30,7 +33,7 @@ export default {
   },
   data() {
     return {
-      viewMode: 1,
+      viewMode: 0,
     };
   },
   methods: {
