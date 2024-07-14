@@ -1,58 +1,58 @@
 <template>
-    <div class="nav">
-      <a class="btn btn-expanded"></a>
-      <nav class="nav-main-menu">
-        <ul class="main-menu">
-          <li @click="changeViewMode(0, $event)">
-            <a class="dashboard2 active" href="index.html">
-              <img src="assets/dashboard/imgs/page/dashboard/dashboard.svg" alt="jobBox" />
-              <span class="name">Dashboard</span>
-            </a>
-          </li>
-          <li @click="changeViewMode(1, $event)">
-            <a class="dashboard2" href="my-job-grid.html">
-              <img src="assets/dashboard/imgs/page/dashboard/jobs.svg" alt="jobBox" />
-              <span class="name">Mes annonces</span>
-            </a>
-          </li>
-          <li>
-            <a class="dashboard2" href="candidates.html">
-              <img src="assets/dashboard/imgs/page/dashboard/candidates.svg" alt="jobBox" />
-              <span class="name">Mes Candidats</span>
-            </a>
-          </li>
-          <li>
-            <a class="dashboard2" href="profile.html">
-              <img src="assets/dashboard/imgs/page/dashboard/profiles.svg" alt="jobBox" />
-              <span class="name">Mon Profile</span>
-            </a>
-          </li>
-          <li>
-            <a class="dashboard2" href="settings.html">
-              <img src="assets/dashboard/imgs/page/dashboard/settings.svg" alt="jobBox" />
-              <span class="name">Paramètres</span>
-            </a>
-          </li>
-          <li>
-            <a class="dashboard2" href="login.html">
-              <img src="assets/dashboard/imgs/page/dashboard/logout.svg" alt="jobBox" />
-              <span class="name">Deconnexion</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    methods: {
-      changeViewMode(mode, event) {
-        console.log("salem")
-        this.$emit('updateViewMode', mode);
-        event.preventDefault();
-      }
+  <div class="nav">
+    <nav class="nav-main-menu">
+      <ul class="main-menu">
+        <li v-for="(item, index) in menuItems" :key="index" @click="changeViewMode(index, $event)">
+          <a :class="['dashboard2', { active: selectedMenuIndex === index }]" :href="item.href">
+            <img :src="item.img" :alt="item.name" />
+            <span class="name">{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectedMenuIndex: 0, 
+      menuItems: [
+        { name: 'Dashboard', href: '', img: 'assets/dashboard/imgs/page/dashboard/dashboard.svg' },
+        { name: 'Mes annonces', href: '', img: 'assets/dashboard/imgs/page/dashboard/jobs.svg' },
+        { name: 'Mes Candidats', href: '', img: 'assets/dashboard/imgs/page/dashboard/candidates.svg' },
+        { name: 'Mon Profile', href: '', img: 'assets/dashboard/imgs/page/dashboard/profiles.svg' },
+        { name: 'Paramètres', href: '', img: 'assets/dashboard/imgs/page/dashboard/settings.svg' },
+        { name: 'Deconnexion', href: '', img: 'assets/dashboard/imgs/page/dashboard/logout.svg' },
+        
+      ]
+    };
+  },
+  methods: {
+    changeViewMode(mode, event) {
+      this.selectedMenuIndex = mode; 
+      this.$emit('updateViewMode', mode);
+      event.preventDefault();
     }
   }
-  </script>
-  
+}
+</script>
+
+<style lang="css">
+.nav {
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  background-color: #f8f9fa; 
+}
+.nav-main-menu {
+  flex: 1; 
+  overflow-y: auto;
+}
+.main-menu {
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
+}
+</style>

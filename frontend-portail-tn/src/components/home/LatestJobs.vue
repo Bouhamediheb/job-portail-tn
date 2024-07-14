@@ -15,69 +15,7 @@
             <br class="d-none d-lg-block" />qui vous convient.
           </p>
           <div class="list-tabs list-tabs-2 mt-30">
-            <ul class="nav nav-tabs" role="tablist">
-              <li>
-                <a
-                  class="active"
-                  id="nav-tab-job-1"
-                  href="#tab-job-1"
-                  data-bs-toggle="tab"
-                  role="tab"
-                  aria-controls="tab-job-1"
-                  aria-selected="true"
-                  ><img
-                    src="assets/home/imgs/page/homepage1/management.svg"
-                    alt="PortailTN"
-                  />
-                  Informatique</a
-                >
-              </li>
-              <li>
-                <a
-                  id="nav-tab-job-2"
-                  href="#tab-job-2"
-                  data-bs-toggle="tab"
-                  role="tab"
-                  aria-controls="tab-job-2"
-                  aria-selected="false"
-                  ><img
-                    src="assets/home/imgs/page/homepage1/marketing.svg"
-                    alt="PortailTN"
-                  />
-                  Marketing</a
-                >
-              </li>
-              <li>
-                <a
-                  id="nav-tab-job-3"
-                  href="#tab-job-3"
-                  data-bs-toggle="tab"
-                  role="tab"
-                  aria-controls="tab-job-3"
-                  aria-selected="false"
-                  ><img
-                    src="assets/home/imgs/page/homepage1/finance.svg"
-                    alt="PortailTN"
-                  />
-                  Finance</a
-                >
-              </li>
-              <li>
-                <a
-                  id="nav-tab-job-4"
-                  href="#tab-job-4"
-                  data-bs-toggle="tab"
-                  role="tab"
-                  aria-controls="tab-job-4"
-                  aria-selected="false"
-                  ><img
-                    src="assets/home/imgs/page/homepage1/human.svg"
-                    alt="PortailTN"
-                  />
-                  Ressources Humaine</a
-                >
-              </li>
-            </ul>
+            
           </div>
         </div>
         <div class="mt-10">
@@ -314,5 +252,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

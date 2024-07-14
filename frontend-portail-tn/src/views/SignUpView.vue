@@ -1,4 +1,5 @@
 <template>
+  <link href="assets/home/css/stylecd4e.css" rel="stylesheet" />
 
     <Header />
     <SignUpForm />

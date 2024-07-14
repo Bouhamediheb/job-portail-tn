@@ -1,10 +1,16 @@
 <template>
   <link href="assets/home/css/stylecd4e.css" rel="stylesheet" />
+  
+  <Spinner />
   <Header />
+  <main class="main">
+
   <Heading />
   <LatestJobs />
   <JobsByCategory />
+</main>
   <Footer />
+
 </template>
 
 <script>

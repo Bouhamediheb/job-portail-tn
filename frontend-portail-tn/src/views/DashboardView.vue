@@ -1,18 +1,19 @@
 <template>
   <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
-  <Header />
+  <Header @navigateToPostJob="updateViewMode" /> 
   <main class="main">
     <Menu @updateViewMode="updateViewMode" />
-    <Overview v-if="viewMode === 0" />
-    <MyPosts v-else-if="viewMode === 1" />
+    <Overview v-if="viewMode === 1" />
+    <MyPosts v-if="viewMode === 2" />
+    <PostJob v-if="viewMode === 10" />
   </main>
 </template>
-
 <script>
 import Header from "@/components/dashboard/Header.vue";
 import Menu from "@/components/dashboard/Menu.vue";
 import Overview from "@/components/dashboard/Overview.vue";
 import MyPosts from "@/components/dashboard/MyPosts.vue";
+import PostJob from "@/components/dashboard/PostJob.vue";
 
 export default {
   name: "DashboardView",
@@ -21,13 +22,15 @@ export default {
     Menu,
     Overview,
     MyPosts,
+    PostJob, 
   },
   mounted() {
     this.loadScripts();
+    console.log(this.viewMode);
   },
   data() {
     return {
-      viewMode: 0,
+      viewMode: 1,
     };
   },
   methods: {
@@ -57,9 +60,12 @@ export default {
         document.head.appendChild(script);
       });
     },
+    
     updateViewMode(mode) {
       this.viewMode = mode;
+      console.log(this.viewMode); 
     }
+  
   },
 };
 </script>

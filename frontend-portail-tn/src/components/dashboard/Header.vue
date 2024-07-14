@@ -3,7 +3,9 @@
       <div class="container">
         <div class="main-header">
           <div class="header-left">
-            <div class="header-logo"><a class='d-flex' href='index.html'><img alt="jobBox" src="assets/dashboard/imgs/page/dashboard/logo.svg"></a></div><span class="btn btn-grey-small ml-10">Admin area</span>
+            <div class="header-logo"><a class='d-flex' 
+              @click="changeViewMode(0, $event)"
+              ><img alt="PortailTN" src="assets/dashboard/imgs/page/dashboard/logo.svg"></a></div><span class="btn btn-grey-small ml-10">Admin area</span>
           </div>
           <div class="header-search"> 
             <div class="box-search"> 
@@ -14,14 +16,18 @@
           </div>
           <div class="header-menu d-none d-md-block">
             <ul> 
-              <li>        <a href="http://wp.alithemes.com/html/jobbox/demos/index.html">Home </a></li>
-              <li> <a href="http://wp.alithemes.com/html/jobbox/demos/page-about.html">About us </a></li>
-              <li> <a href="http://wp.alithemes.com/html/jobbox/demos/page-contact.html">Contact</a></li>
+              <li>        
+                <router-link to="/">Accueil</router-link>
+              
+              </li>
+              <li> <a href="">Nous contacter</a></li>
             </ul>
           </div>
           <div class="header-right">
-            <div class="block-signin"><a class='btn btn-default icon-edit hover-up' href='post-job.html'>Post Job</a>
-              <div class="dropdown d-inline-block"><a class="btn btn-notify" id="dropdownNotify" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
+            <div class="block-signin">
+              <a class='btn btn-default icon-edit hover-up' @click="postJob">Poster une annonce</a>
+              
+        <div class="dropdown d-inline-block"><a class="btn btn-notify" id="dropdownNotify" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
                 <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownNotify">
                   <li><a class="dropdown-item active" href="#">10 notifications</a></li>
                   <li><a class="dropdown-item" href="#">12 messages</a></li>
@@ -29,12 +35,11 @@
                 </ul>
               </div>
               <div class="member-login"><img alt="" src="assets/dashboard/imgs/page/dashboard/profile.png">
-                <div class="info-member"> <strong class="color-brand-1">Steven Jobs</strong>
+                <div class="info-member"> <strong class="color-brand-1">Admin/RH</strong>
                   <div class="dropdown"><a class="font-xs color-text-paragraph-2 icon-down" id="dropdownProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">Super Admin</a>
                     <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownProfile">
-                      <li><a class='dropdown-item' href='profile.html'>Profiles</a></li>
-                      <li><a class='dropdown-item' href='my-resume.html'>CV Manager</a></li>
-                      <li><a class='dropdown-item' href='login.html'>Logout</a></li>
+                      <li><a class='dropdown-item' href=''>Profile</a></li>
+                      <li><a class='dropdown-item' href=''>Logout</a></li>
                     </ul>
                   </div>
                 </div>
@@ -55,46 +60,72 @@
               </form>
             </div>
             <div class="mobile-menu-wrap mobile-header-border">
-              <!-- mobile menu start-->
-              <nav>
-                <ul class="main-menu">
-                  <li> <a class='dashboard2 active' href='index.html'><img src="assets/dashboard/imgs/page/dashboard/dashboard.svg" alt="jobBox"><span class="name">Dashboard</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='candidates.html'><img src="assets/dashboard/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Candidates</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='recruiters.html'><img src="assets/dashboard/imgs/page/dashboard/recruiters.svg" alt="jobBox"><span class="name">Recruiters</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='my-job-grid.html'><img src="assets/dashboard/imgs/page/dashboard/jobs.svg" alt="jobBox"><span class="name">My Jobs</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='my-tasks-list.html'><img src="assets/dashboard/imgs/page/dashboard/tasks.svg" alt="jobBox"><span class="name">Tasks List</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='profile.html'><img src="assets/dashboard/imgs/page/dashboard/profiles.svg" alt="jobBox"><span class="name">My Profiles</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='my-resume.html'><img src="assets/dashboard/imgs/page/dashboard/cv-manage.svg" alt="jobBox"><span class="name">CV Manage</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='settings.html'><img src="assets/dashboard/imgs/page/dashboard/settings.svg" alt="jobBox"><span class="name">Setting</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='authentication.html'><img src="assets/dashboard/imgs/page/dashboard/authentication.svg" alt="jobBox"><span class="name">Authentication</span></a>
-                  </li>
-                  <li> <a class='dashboard2' href='login.html'><img src="assets/dashboard/imgs/page/dashboard/logout.svg" alt="jobBox"><span class="name">Logout</span></a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+  <nav>
+    <ul class="main-menu">
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(1)">
+          <img src="assets/dashboard/imgs/page/dashboard/dashboard.svg" alt="PortailTN">
+          <span class="name">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(2)">
+          <img src="assets/dashboard/imgs/page/dashboard/jobs.svg" alt="PortailTN">
+          <span class="name">Mes annonces</span>
+        </a>
+      </li>
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(3)">
+          <img src="assets/dashboard/imgs/page/dashboard/candidates.svg" alt="PortailTN">
+          <span class="name">Mes candidats</span>
+        </a>
+      </li>
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(4)">
+          <img src="assets/dashboard/imgs/page/dashboard/profiles.svg" alt="PortailTN">
+          <span class="name">Mon profil</span>
+        </a>
+      </li>
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(5)">
+          <img src="assets/dashboard/imgs/page/dashboard/settings.svg" alt="PortailTN">
+          <span class="name">Paramètres</span>
+        </a>
+      </li>
+      <li>
+        <a class='dashboard2' href='#' @click.prevent="postJob(6)">
+          <img src="assets/dashboard/imgs/page/dashboard/logout.svg" alt="PortailTN">
+          <span class="name">Déconnexion</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
             <div class="mobile-account">
-              <h6 class="mb-10">Your Account</h6>
+              <h6 class="mb-10">Mon Compte</h6>
               <ul class="mobile-menu font-heading">
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Work Preferences</a></li>
-                <li><a href="#">Account Settings</a></li>
-                <li><a href="#">Go Pro</a></li>
-                <li><a href="page-signin.html">Sign Out</a></li>
+                <li><a href="">Deconnexion</a></li>
               </ul>
-              <div class="mb-15 mt-15"> <a class='btn btn-default icon-edit hover-up' href='post-job.html'>Post Job</a></div>
+              <div class="mb-15 mt-15">               <a class='btn btn-default icon-edit hover-up' @click="postJob">Poster une annonce</a>
+              </div>
             </div>
-            <div class="site-copyright">Copyright 2022 &copy; JobBox. <br>Designed by AliThemes.</div>
+            <div class="site-copyright">Copyright 2024 &copy;</div>
           </div>
         </div>
       </div>
     </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    postJob(x) {
+      console.log("xxx",x);
+      this.$emit('navigateToPostJob', x);
+    }
+  }
+}
+</script>
+

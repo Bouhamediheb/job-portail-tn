@@ -22,7 +22,7 @@
               <div class="row"> 
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6"> 
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>1568<span class="font-sm status up">25<span>%</span></span>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/bank.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/bank.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>284<span class="font-sm status up">5<span>%</span></span>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/lamp.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/lamp.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>136<span class="font-sm status up">12<span>%</span></span>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/headphone.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/headphone.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>985<span class="font-sm status up">5<span>%</span></span>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/look.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/look.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>165<span class="font-sm status up">15<span>%</span></span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/open-file.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/open-file.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>2356<span class="font-sm status down">- 2%</span>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/doc.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/doc.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>254<span class="font-sm status up">2<span>%</span></span>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/man.svg" alt="jobBox"></div>
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/man.svg" alt="PortailTN"></div>
                     <div class="card-info"> 
                       <div class="card-title">
                         <h3>548<span class="font-sm status up">48<span>%</span></span>
@@ -149,7 +149,7 @@
                   <div class="panel-body">
                     <div class="card-style-2 hover-up">
                       <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img1.png" alt="jobBox"></div>
+                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img1.png" alt="PortailTN"></div>
                         <div class="card-title"> 
                           <h6>Senior Full Stack Engineer, Creator Success</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">New York, US</span>
                         </div>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="card-style-2 hover-up">
                       <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img2.png" alt="jobBox"></div>
+                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img2.png" alt="PortailTN"></div>
                         <div class="card-title"> 
                           <h6>Senior Full Stack Engineer, Creator Success</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Chicago, US</span>
                         </div>
@@ -171,7 +171,7 @@
                     </div>
                     <div class="card-style-2 hover-up">
                       <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img3.png" alt="jobBox"></div>
+                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img3.png" alt="PortailTN"></div>
                         <div class="card-title"> 
                           <h6>Lead Product/UX/UI Designer Role</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Paris, France</span>
                         </div>
@@ -182,7 +182,7 @@
                     </div>
                     <div class="card-style-2 hover-up">
                       <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img4.png" alt="jobBox"></div>
+                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img4.png" alt="PortailTN"></div>
                         <div class="card-title"> 
                           <h6>Marketing Graphic Designer</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Tokyto, Japan</span>
                         </div>
@@ -193,7 +193,7 @@
                     </div>
                     <div class="card-style-2 hover-up">
                       <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img5.png" alt="jobBox"></div>
+                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img5.png" alt="PortailTN"></div>
                         <div class="card-title"> 
                           <h6>Director, Product Design - Creator</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Ha Noi, Vietnam</span>
                         </div>
@@ -221,22 +221,22 @@
                   </div>
                   <div class="panel-body">
                     <div class="card-style-3 hover-up">
-                      <div class="card-image online"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="jobBox"></div>
+                      <div class="card-image online"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="PortailTN"></div>
                       <div class="card-title"> 
                         <h6>Iheb</h6><span class="job-position">UI Designer</span>
                       </div>
                       <div class="card-location ml-5"> <span class="">Sfax, TN</span></div>
-                      <div class="card-rating"><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                      <div class="card-rating"><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                            </span></div>
                     </div>
                     
                     <div class="card-style-3 hover-up">
-                      <div class="card-image online"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="jobBox"></div>
+                      <div class="card-image online"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="PortailTN"></div>
                       <div class="card-title"> 
                         <h6>Karim</h6><span class="job-position">UI Designer</span>
                       </div>
                       <div class="card-location ml-5"> <span class="">Sfax, TN</span></div>
-                      <div class="card-rating"><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                      <div class="card-rating"><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                            </span></div>
                     </div>
                   </div>
@@ -260,9 +260,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Robert Fox</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Robert Fox</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -272,9 +272,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata2.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata2.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Cody Fisher</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Cody Fisher</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -284,9 +284,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata3.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata3.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Jane Cooper</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Jane Cooper</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -296,9 +296,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata4.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata4.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Jerome Bell</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Jerome Bell</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -308,9 +308,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata5.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata5.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Floyd Miles</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Floyd Miles</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -320,9 +320,9 @@
                       <div class="col-lg-6 col-md-6 pr-5 pl-5">
                         <div class="card-style-4 hover-up">
                           <div class="d-flex">
-                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="jobBox"></div>
+                            <div class="card-image"><img src="assets/dashboard/imgs/page/dashboard/avata1.png" alt="PortailTN"></div>
                             <div class="card-title"> 
-                              <h6>Devon Lane</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="jobBox"> <span class="font-xs color-text-mutted">
+                              <h6>Devon Lane</h6><img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <img src="assets/dashboard/imgs/page/dashboard/star-none.svg" alt="PortailTN"> <span class="font-xs color-text-mutted">
                                  (65)</span>
                             </div>
                           </div>
@@ -437,16 +437,16 @@
                 <div class="box-swiper">
                   <div class="swiper-container swiper-group-10">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/microsoft.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/acer.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/nokia.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/asus.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/casio.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/dell.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/panasonic.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/vaio.svg" alt="jobBox"></div>
-                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="jobBox"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/microsoft.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/acer.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/nokia.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/asus.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/casio.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/dell.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/panasonic.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/vaio.svg" alt="PortailTN"></div>
+                      <div class="swiper-slide"> <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN"></div>
                     </div>
                   </div>
                 </div>
@@ -459,7 +459,7 @@
             <div class="box-footer">
               <div class="row">
                 <div class="col-md-6 col-sm-12 mb-25 text-center text-md-start">
-                  <p class="font-sm color-text-paragraph-2">© 2022 - <a class="color-brand-2" href="https://themeforest.net/item/jobbox-job-portal-html-bootstrap-5-template/39217891" target="_blank">JobBox </a>Dashboard <span> Made by  </span><a class="color-brand-2" href="http://alithemes.com/" target="_blank"> AliThemes</a></p>
+                  <p class="font-sm color-text-paragraph-2">© 2022 - <a class="color-brand-2" href="https://themeforest.net/item/PortailTN-job-portal-html-bootstrap-5-template/39217891" target="_blank">PortailTN </a>Dashboard <span> Made by  </span><a class="color-brand-2" href="http://alithemes.com/" target="_blank"> AliThemes</a></p>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center text-md-end mb-25">
                   <ul class="menu-footer">

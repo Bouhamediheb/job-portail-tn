@@ -4,10 +4,7 @@
       <div class="main-header">
         <div class="header-left">
           <div class="header-logo">
-            <router-link to="/"
-              ><img
-                alt="PortailTN"
-                src="assets/home/imgs/template/jobhub-logo.svg"
+            <router-link to="/"><img alt="PortailTN" src="assets/home/imgs/template/jobhub-logo.svg"
             /></router-link>
           </div>
         </div>
@@ -17,24 +14,24 @@
               <li>
                 <router-link to="/">Accueil</router-link>
               </li>
-              <li>
-                <a href="jobs-grid.html">Liste des Offres</a>
+              <li class="has-children">
+                <a href="">Liste des Offres</a>
                 <ul class="sub-menu">
-                  <li><a href="jobs-grid.html">Stages</a></li>
-                  <li><a href="jobs-list.html">Travail</a></li>
+                  <li><a href="">Stages</a></li>
+                  <li><a href="">Travail</a></li>
                 </ul>
               </li>
-              <li><a href="companies-grid.html">Sociétés</a></li>
+              <li><a href="">Sociétés</a></li>
               <li>
-                <a href="candidates-grid.html">Annonces Featured</a>
+                <a href="l">Annonces Featured</a>
                 <ul class="sub-menu">
-                  <li><a href="candidates-grid.html">Nos stages</a></li>
+                  <li><a href="">Nos stages</a></li>
                   <li>
-                    <a href="candidate-details.html">Nos offres de travail</a>
+                    <a href="">Nos offres de travail</a>
                   </li>
                 </ul>
               </li>
-              <li class=""><a href="blog-grid.html">Notre Blog</a></li>
+              <li class=""><a href="">Notre Blog</a></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white">
@@ -124,3 +121,9 @@ const logout = async () => {
   }
 };
 </script>
+
+<style lang="css">
+  .main-menu {
+  overflow: hidden; /* Prevent overflow */
+}
+</style>

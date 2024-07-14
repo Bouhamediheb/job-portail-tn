@@ -9,7 +9,7 @@
                         </form>
                     </div>
                     <div class="mobile-menu-wrap mobile-header-border">
-                        <!-- mobile menu start-->
+
                         <nav>
                             <ul class="mobile-menu font-heading">
                                 <li class="has-children"><a class="active" href="index.html">Home</a>
@@ -154,7 +154,7 @@
                             <li><a href="page-signin.html">Sign Out</a></li>
                         </ul>
                     </div>
-                    <div class="site-copyright">Copyright 2022 &copy; PortailTN. <br>Designed by AliThemes.</div>
+                    <div class="site-copyright">Copyright 2022 &copy; PortailTN. </div>
                 </div>
             </div>
         </div>

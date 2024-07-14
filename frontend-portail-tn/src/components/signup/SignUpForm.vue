@@ -8,7 +8,7 @@
                 <p class="font-sm text-brand-2">Créez votre compte !</p>
                 <h2 class="mt-10 mb-5 text-brand-1">Inscription</h2>
                 <p class="font-sm text-muted mb-30">Créer un compte pour accéder à toutes les fonctionnalités.</p>
-                <button class="btn social-login hover-up mb-20"><img src="assets/imgs/template/icons/icon-google.svg" alt="jobbox"><strong>Continuez avec Google</strong></button>
+                <button class="btn social-login hover-up mb-20"><img src="assets/imgs/template/icons/icon-google.svg" alt="PortailTN"><strong>Continuez avec Google</strong></button>
                 <div class="divider-text-center"><span>Ou</span></div>
               </div>
               <form class="login-register text-start mt-20" @submit.prevent="register">
