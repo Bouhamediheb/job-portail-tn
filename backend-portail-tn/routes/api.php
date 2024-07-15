@@ -9,7 +9,6 @@ use App\Http\Controllers\OffreController;
 use App\Http\Controllers\SocieteController;
 
 Route::post('/register', [RegisterControllerUser::class, 'register']);
-
 Route::post('/login', [LoginControllerUser::class, 'login']);
 
 Route::post('/societe/register', [RegisterControllerSociete::class, 'register']);
