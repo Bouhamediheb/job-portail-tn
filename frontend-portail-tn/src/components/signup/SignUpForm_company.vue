@@ -8,17 +8,13 @@
                 <p class="font-sm text-brand-2">Créez votre compte !</p>
                 <h2 class="mt-10 mb-5 text-brand-1">Inscription</h2>
                 <p class="font-sm text-muted mb-30">Créer un compte pour accéder à toutes les fonctionnalités.</p>
-                <button class="btn social-login hover-up mb-20"><img src="assets/imgs/template/icons/icon-google.svg" alt="PortailTN"><strong>Continuez avec Google</strong></button>
+                <button class="btn social-login hover-up mb-20"><img src="assets/home/imgs/template/icons/icon-google.svg" alt="PortailTN"><strong>Continuez avec Google</strong></button>
                 <div class="divider-text-center"><span>Ou</span></div>
               </div>
               <form class="login-register text-start mt-20" @submit.prevent="register">
                 <div class="form-group">
-                  <label class="form-label" for="input-1">Nom *</label>
-                  <input class="form-control" id="input-1" type="text" v-model="firstName" required name="firstName" placeholder="Foulen">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="input-1">Prénom *</label>
-                  <input class="form-control" id="input-1" type="text" v-model="lastName" required name="lastName" placeholder="Ben Foulen">
+                  <label class="form-label" for="input-1">Nom de la société *</label>
+                  <input class="form-control" id="input-1" type="text" v-model="name" required name="firstName" placeholder="Foulen">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="input-2">Adresse Email *</label>
@@ -48,8 +44,14 @@
                   Vous avez déjà un compte ? 
                   <router-link to="/signin">Connectez-vous</router-link>
                 </div>
-                <div class="spacingbottom"></div>
-              </form>
+                <div class="spacingbottom-small"></div>
+
+                <div class="divider-text-center"></div>
+                <div class="spacingbottom-small"></div>
+            </form>
+              <button class="btn btn-brand-1 hover-up w-100"  @click="$emit('changeType', 0)">Vous êtes un candidat?</button>
+                <div class="spacingbottom-large"></div>
+              
               <sweet-modal icon="success" ref="createdAccount">
                 <div class="spacingtop">
                   Votre compte a été créé avec succès !
@@ -84,8 +86,7 @@ const router = useRouter()
 const createdAccount = ref(null);
 
 
-const firstName = ref('')
-const lastName = ref('')
+const name = ref('')
 const emailaddress = ref('')
 const password = ref('')
 const rePassword = ref('')
@@ -99,12 +100,10 @@ const register = async () => {
   }
 
   try {
-    const response = await axios.post('http://localhost:8000/api/register', {
-      firstname: firstName.value,
-      lastname: lastName.value,
+    const response = await axios.post('http://localhost:8000/api/societe/register', {
+        name: name.value,
       email: emailaddress.value,
       password: password.value,
-      password_confirmation: rePassword.value
     })
 
     console.log(response.data)
@@ -114,7 +113,7 @@ const register = async () => {
     }
 
     setTimeout(() => {
-          router.push("/");
+          router.push("/dashboard");
         }, 3000);
 
 

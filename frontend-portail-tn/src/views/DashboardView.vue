@@ -1,14 +1,22 @@
 <template>
-  <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
-  <Header @navigateToPostJob="updateViewMode" /> 
-  <main class="main">
-    <Menu @updateViewMode="updateViewMode" />
-    <Overview v-if="viewMode === 0" />
-    <MyPosts v-if="viewMode === 1" />
-    <UserProfile v-if="viewMode === 3" />
-    <PostJob v-if="viewMode === 10" />
-  </main>
+      <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
+
+  <div class="dashboard-container">
+    <Header @navigateToPostJob="updateViewMode" /> 
+    <main class="main">
+      <div class="menu-wrapper">
+        <Menu class="sticky-menu" @updateViewMode="updateViewMode" />
+      </div>
+      <div class="content-wrapper">
+        <Overview v-if="viewMode === 0" />
+        <MyPosts v-if="viewMode === 1" />
+        <UserProfile v-if="viewMode === 3" />
+        <PostJob v-if="viewMode === 10" />
+      </div>
+    </main>
+  </div>
 </template>
+
 <script>
 import Header from "@/components/dashboard/Header.vue";
 import Menu from "@/components/dashboard/Menu.vue";
@@ -72,3 +80,35 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure full viewport height */
+}
+
+.main {
+  display: flex;
+  flex: 1; /* Take up remaining vertical space */
+  overflow: hidden; /* Hide overflow initially */
+}
+
+.menu-wrapper {
+  flex: 0 0 auto; /* Non-flexible auto size for the menu */
+  position: sticky;
+  top: 0;
+  height: 100%; /* Full height of the viewport */
+  overflow-y: auto; /* Allow menu to scroll */
+  background-color: #fff; /* Optional: Set background color */
+  z-index: 1000; /* Ensure the menu stays above other content */
+  overflow: hidden; /* Disable scrolling */
+
+}
+
+.content-wrapper {
+  flex: 1; /* Take up remaining space */
+  padding: 20px; /* Adjust padding as needed */
+  overflow-y: auto; /* Allow content to scroll */
+}
+</style>
