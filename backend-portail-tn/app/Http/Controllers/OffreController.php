@@ -31,6 +31,8 @@ class OffreController extends Controller
             'employmentType',
             'yearsOfExperience',
             'hourlyWage',
+            'internshipMotivation',
+            'internshipDuration',
             'workplace' => 'required',
             'skills' => 'required',
             'description' => 'required',
@@ -49,6 +51,8 @@ class OffreController extends Controller
         $offre->minSalary = $request->minSalary;
         $offre->maxSalary = $request->maxSalary;
         $offre->hourlyWage = $request->hourlyWage;
+        $offre->internshipMotivation = $request->internshipMotivation;
+        $offre->internshipDuration = $request->internshipDuration;
         $offre->yearsOfExperience = $request->yearsOfExperience;
         $offre->workplace = $request->workplace;
         $offre->skills = $request->skills;
@@ -85,6 +89,8 @@ class OffreController extends Controller
             'employmentType',
             'yearsOfExperience',
             'hourlyWage',
+            'internshipMotivation',
+            'internshipDuration',
             'workplace' => 'required',
             'skills' => 'required',
             'description' => 'required',
@@ -103,6 +109,8 @@ class OffreController extends Controller
         $offre->minSalary = $request->minSalary;
         $offre->maxSalary = $request->maxSalary;
         $offre->hourlyWage = $request->hourlyWage;
+        $offre->internshipMotivation = $request->internshipMotivation;
+        $offre->internshipDuration = $request->internshipDuration;
         $offre->yearsOfExperience = $request->yearsOfExperience;
         $offre->workplace = $request->workplace;
         $offre->skills = $request->skills;

@@ -18,6 +18,8 @@ class Offre extends Model
         'minSalary',
         'maxSalary',
         'hourlyWage',
+        'internshipMotivation',
+        'internshipDuration',
         'yearsOfExperience',
         'city',
         'country',

@@ -14,18 +14,20 @@ return new class extends Migration
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('type');
-            $table->integer('employmentType');
+            $table->string('type');
+            $table->integer('employmentType')->nullable();
             $table->integer('workplace');
             $table->string('description');
             $table->double('minSalary')->nullable();
             $table->double('maxSalary')->nullable();
             $table->double('hourlyWage')->nullable();
+            $table->string('internshipMotivation')->nullable();
+            $table->integer('internshipDuration')->nullable();
             $table->integer('yearsOfExperience')->nullable();
             $table->string('city');
             $table->string('country');
             $table->string('address');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->unsignedBigInteger('societe_id');
             $table->foreign('societe_id')->references('id')->on('societes');
             $table->timestamps();
