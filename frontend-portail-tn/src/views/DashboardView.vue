@@ -11,6 +11,7 @@
         <Overview v-if="viewMode === 0" />
         <MyPosts v-if="viewMode === 1" />
         <UserProfile v-if="viewMode === 3" />
+        <CompanyProfile v-if="viewMode === 4" />
         <PostJob v-if="viewMode === 10" />
       </div>
     </main>
@@ -24,6 +25,7 @@ import Overview from "@/components/dashboard/Overview.vue";
 import MyPosts from "@/components/dashboard/MyPosts.vue";
 import PostJob from "@/components/dashboard/PostJob.vue";
 import UserProfile from "@/components/dashboard/User/UserProfile.vue";
+import CompanyProfile from "@/components/dashboard/Company/CompanyProfile.vue";
 
 export default {
   name: "DashboardView",
@@ -33,7 +35,8 @@ export default {
     Overview,
     MyPosts,
     PostJob, 
-    UserProfile
+    UserProfile,
+    CompanyProfile
   },
   mounted() {
     this.loadScripts();

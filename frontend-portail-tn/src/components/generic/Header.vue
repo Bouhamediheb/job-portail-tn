@@ -45,7 +45,9 @@
             <nav class="nav-main-menu">
               <ul class="main-menu">
                 <li>
-                  <a href="">Bonjour , {{ firstName }} {{ lastName }}</a>
+                  <a href="" v-if = "whoLoggedIn === 'user'">Bienvenue, {{ firstName }} {{ lastName }}</a>
+                  <a href="" v-else-if = "whoLoggedIn === 'company'">Bienvenue, {{ companyName }}</a>
+
                   <ul class="sub-menu">
                     <li><router-link to="/">Votre Profil</router-link></li>
                     <li><a href="#" @click.prevent="logout">Déconnexion</a></li>
@@ -81,13 +83,19 @@ import axios from "axios";
 const loggedIn = ref();
 const firstName = ref("");
 const lastName = ref("");
+
+const companyName = ref("");
+
+const whoLoggedIn = localStorage.getItem("type");
 const router = useRouter();
 
 loggedIn.value = localStorage.getItem("islogged");
 
-if (loggedIn.value) {
+if (loggedIn.value && whoLoggedIn === "user") {
   firstName.value = localStorage.getItem("firstName");
   lastName.value = localStorage.getItem("lastName");
+} else if (loggedIn.value && whoLoggedIn === "company") {
+  companyName.value = localStorage.getItem("companyName");
 }
 
 const axiosConfig = {

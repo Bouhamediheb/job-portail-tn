@@ -90,6 +90,8 @@
         localStorage.setItem('firstName', response.data.user.firstname)
         localStorage.setItem('lastName', response.data.user.lastname)
         localStorage.setItem('islogged', true)
+        localStorage.setItem('id', response.data.user.id)
+        localStorage.setItem('type', 'user')
         router.push('/')
       }
     } catch (error) {

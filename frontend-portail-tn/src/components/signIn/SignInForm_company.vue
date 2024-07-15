@@ -77,9 +77,11 @@
       if (response.data.status) {
         loggedIn.value = true
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.societe))
+        localStorage.setItem('societe', JSON.stringify(response.data.societe))
         localStorage.setItem('companyName', response.data.societe.name)
         localStorage.setItem('islogged', true)
+        localStorage.setItem('id', response.data.societe.id)
+        localStorage.setItem('type', 'company')
         router.push('/')
       }
     } catch (error) {

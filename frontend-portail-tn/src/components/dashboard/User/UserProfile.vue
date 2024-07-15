@@ -179,7 +179,7 @@
                     <div class="container">
                         <div class="panel-white">
                             <div class="panel-head">
-                                <h5>Social Network</h5><a class="menudrop" id="dropdownMenu3" type="button"
+                                <h5>Réseaux sociaux</h5><a class="menudrop" id="dropdownMenu3" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
                                 <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end"
                                     aria-labelledby="dropdownMenu3">
@@ -224,7 +224,7 @@
                     <div class="container">
                         <div class="panel-white">
                             <div class="panel-head">
-                                <h5>My Skills</h5>
+                                <h5>Compétences</h5>
                                 <a class="menudrop" id="dropdownMenu3" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" data-bs-display="static"></a>
                                 <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end"

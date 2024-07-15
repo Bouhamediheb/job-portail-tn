@@ -5,7 +5,7 @@
           <div class="header-left">
             <div class="header-logo"><a class='d-flex' 
               @click="changeViewMode(0, $event)"
-              ><img alt="PortailTN" src="assets/dashboard/imgs/page/dashboard/logo.svg"></a></div><span class="btn btn-grey-small ml-10">Admin area</span>
+              ><img alt="PortailTN" src="assets/dashboard/imgs/page/dashboard/logo.svg"></a></div>
           </div>
           <div class="header-search"> 
             <div class="box-search"> 
