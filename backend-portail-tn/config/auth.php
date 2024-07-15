@@ -70,7 +70,7 @@ return [
         ],
         'societe' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Societe::class,
+            'model' => env('AUTH_MODEL', App\Models\Societe::class),
         ],
 
         // 'users' => [
