@@ -144,4 +144,10 @@ class OffreController extends Controller
             'message' => 'Job Deleted Successfully',
         ], 200);
     }
+    
+    public function offreBySociete($id)
+    {
+        $offres = Offre::where('company_id', $id)->get();
+        return $offres;
+    }
 }
