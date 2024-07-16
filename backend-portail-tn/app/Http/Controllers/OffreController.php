@@ -38,7 +38,7 @@ class OffreController extends Controller
             'description' => 'required',
             'address' => 'required',
             'file' => 'file|mimes:jpeg,png,jpg,gif,svg,pdf|nullable',
-            'company_id' => 'required|exists:companies,id',
+            'societe_id' => 'required|exists:societes,id',
         ]);
 
         $offre = new Offre();
@@ -58,7 +58,7 @@ class OffreController extends Controller
         $offre->skills = $request->skills;
         $offre->description = $request->description;
         $offre->address = $request->address;
-        $offre->company_id = $request->company_id;
+        $offre->societe_id = $request->societe_id;
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -116,8 +116,7 @@ class OffreController extends Controller
         $offre->skills = $request->skills;
         $offre->description = $request->description;
         $offre->address = $request->address;
-        $offre->company_id = $request->company_id;
-
+        $offre->societe_id = $request->societe_id;
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = 'job_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
@@ -147,7 +146,38 @@ class OffreController extends Controller
     
     public function offreBySociete($id)
     {
-        $offres = Offre::where('company_id', $id)->get();
+        $offres = Offre::where('societe_id', $id)->get();
+        return $offres;
+    }
+
+    //return only intership
+    public function getAllInterships()
+    {
+        $offres = Offre::where('type', 'internship')->get();
+        return $offres;
+    }
+
+        //return only intership by societe id
+    public function getInternshipsBySociete($id)
+    {
+        $offres = Offre::where('type', 'internship')->where('societe_id', $id)->get();
+        return $offres;
+    }
+
+
+
+
+    //return only job
+    public function getAllJobs()
+    {
+        $offres = Offre::where('type', 'job')->get();
+        return $offres;
+    }
+
+    //return only job by societe id
+    public function getJobsBySociete($id)
+    {
+        $offres = Offre::where('type', 'job')->where('societe_id', $id)->get();
         return $offres;
     }
 }

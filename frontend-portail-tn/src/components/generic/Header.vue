@@ -21,9 +21,8 @@
                   <li><a href="">Travail</a></li>
                 </ul>
               </li>
-              <li><a href="">Sociétés</a></li>
               <li>
-                <a href="l">Annonces Featured</a>
+                <a href="">Annonces Featured</a>
                 <ul class="sub-menu">
                   <li><a href="">Nos stages</a></li>
                   <li>
@@ -32,6 +31,12 @@
                 </ul>
               </li>
               <li class=""><a href="">Notre Blog</a></li>
+              <!-- if logged add dashboard routerlink-->
+              <li v-if="loggedIn">
+                <router-link to="/dashboard">Dashboard</router-link>
+               
+                
+              </li>  
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white">
@@ -59,12 +64,14 @@
           <template v-else>
             <div class="block-signin">
               <router-link class="text-link-bd-btom hover-up" to="/signup"
-                >Register</router-link
+                >Inscription</router-link
               >
               <router-link
                 class="btn btn-default btn-shadow ml-40 hover-up"
                 to="/signin"
-                >Sign in</router-link
+                >
+                Connexion
+                </router-link
               >
             </div>
           </template>
@@ -132,6 +139,9 @@ const logout = async () => {
 
 <style lang="css">
   .main-menu {
-  overflow: hidden; /* Prevent overflow */
+  overflow: hidden;
+}
+.block-signin {
+  width:max-content;
 }
 </style>

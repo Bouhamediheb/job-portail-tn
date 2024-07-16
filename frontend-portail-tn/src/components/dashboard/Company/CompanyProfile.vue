@@ -23,45 +23,21 @@
                                 <div class="box-profile-image">
                                     <div class="img-profile">
                                         <label class="font-sm color-text-mutted mb-10">Logo *</label>
-
-                                        <img src="assets/dashboard/imgs/page/profile/img-profile.png" alt="Company Logo"></div>
-                                    <div class="info-profile"><a class="btn btn-default">Upload Logo</a><a class="btn btn-link">Supprimer</a></div>
+                                        <img :src="logo" alt="Company Logo">
+                                    </div>
+                                    <div class="info-profile">
+                                        <a class="btn btn-default">Upload Logo</a>
+                                        <a class="btn btn-link">Supprimer</a>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-6 col-md-6" v-for="(field, index) in profileFields" :key="index">
                                         <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Siége social *</label>
-                                            <input class="form-control" type="text" placeholder="Ex : Route la Marse , Immeuble xx , étage xx , appartement xx" v-model="address">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Numéro de téléphone</label>
-                                            <input class="form-control" type="text" placeholder="216 - 234 567 89" v-model="phoneNumber">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Fax</label>
-                                            <input class="form-control" type="text" placeholder="216 - 234 678 89" v-model="fax">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Ville</label>
-                                            <input class="form-control" type="text" placeholder="Ville" v-model="city">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Pays</label>
-                                            <input class="form-control" type="text" placeholder="Pays" v-model="country">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group mb-30">
-                                            <label class="font-sm color-text-mutted mb-10">Site web</label>
-                                            <input class="form-control" type="text" placeholder="https://growupagency.tn/" v-model="website">
+                                            <label class="font-sm color-text-mutted mb-10">{{ field.label }} *</label>
+                                            <input class="form-control" 
+                                                   type="text" 
+                                                   :placeholder="field.placeholder" 
+                                                   v-model="field.value">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-lg-end">
@@ -120,51 +96,93 @@
                             </div>
                         </div>
                     </div>
-                </div>
-              
-
+                </div>            
             </div>
+            <sweet-modal icon="success" ref="updatedProfile">
+                <div class="spacingtop">
+                  Votre profil a été mis à jour avec succès !
+                </div>
+              </sweet-modal>
         </div>
     </div>
 </template>
-<style>
-</style>
+
 <script setup>
 import axios from 'axios'
-import { ref } from 'vue'
-
-const id = ref()
-const address = ref()
-const phoneNumber = ref()
-const fax = ref()
-const city = ref()
-const country = ref()
-const website = ref()
+import { ref, onMounted } from 'vue'
+import { SweetModal, SweetModalTab } from 'sweet-modal-vue-3'
 
 
+const updatedProfile = ref(null);
+const id = ref(localStorage.getItem('id'));
+const profileFields = ref([
+    { label: 'Siège social', placeholder: 'Ex : Route la Marse', value: '' },
+    { label: 'Numéro de téléphone', placeholder: '216 - 234 567 89', value: '' },
+    { label: 'Fax', placeholder: '216 - 234 678 89', value: '' },
+    { label: 'Ville', placeholder: 'Ville', value: '' },
+    { label: 'Pays', placeholder: 'Pays', value: '' },
+    { label: 'Site web', placeholder: 'https://growupagency.tn/', value: '' },
+]);
+const logo = ref('assets/dashboard/imgs/page/profile/img-profile.png'); // Default logo
+
+const fetchProfile = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/societe/profile/${id.value}`);
+        const data = response.data;
+
+        console.log('Profile data:', data);
+        profileFields.value[0].value = data.address || '';
+        profileFields.value[1].value = data.phoneNumber || '';
+        profileFields.value[2].value = data.fax || '';
+        profileFields.value[3].value = data.city || '';
+        profileFields.value[4].value = data.country || '';
+        profileFields.value[5].value = data.website || '';
+        logo.value = data.logo || logo.value; // Update logo if available
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+    }
+};
 
 const saveProfile = async () => {
     const data = {
-        address: address.value,
-        phoneNumber: phoneNumber.value,
-        fax: fax.value,
-        city: city.value,
-        country: country.value,
-        website: website.value
-    }
+        address: profileFields.value[0].value,
+        phoneNumber: profileFields.value[1].value,
+        fax: profileFields.value[2].value,
+        city: profileFields.value[3].value,
+        country: profileFields.value[4].value,
+        website: profileFields.value[5].value
+    };
     try {
-        console.log(data);
-        id.value = localStorage.getItem('id');
-        console.log("id", id.value);
         const response = await axios.put(`http://localhost:8000/api/societe/profile/${id.value}`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(response);
+        console.log('Profile updated:', response.data);
+        if (updatedProfile.value) {
+            updatedProfile.value.open();
+    }
+        setTimeout(() => {
+            router.push("/dashboard");
+        }, 2000);
     } catch (error) {
-        console.error(error);
+        console.error('Error updating profile:', error);
     }
 };
-    
+
+onMounted(() => {
+    fetchProfile();
+    console.log('Company Profile mounted');
+});
 </script>
+
+<style>
+.spacingbottom
+{
+    padding-bottom: 100px;
+}
+.spacingtop
+{
+    padding-top: 30px;
+}
+</style>

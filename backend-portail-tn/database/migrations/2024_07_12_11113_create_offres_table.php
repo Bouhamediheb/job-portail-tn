@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('yearsOfExperience')->nullable();
             $table->string('city');
             $table->string('country');
+            $table->json('skills');
             $table->string('address');
             $table->string('file')->nullable();
             $table->unsignedBigInteger('societe_id');

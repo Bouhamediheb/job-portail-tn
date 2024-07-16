@@ -28,7 +28,7 @@ class Offre extends Model
         'societe_id',
     ];
 
-    public function company()
+    public function societe()
     {
         return $this->belongsTo(Societe::class);
     }

@@ -22,26 +22,38 @@
             <div class="panel-white mb-30">
               <div class="box-padding">
                 <div class="row display-list">
-                  <div class="col-lg-6" v-for="item in paginatedItems" :key="item.id">
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image">
-                          <img :src="item.image" alt="PortailTN" />
-                        </div>
-                        <div class="card-title">
-                          <h6>{{ item.title }}</h6>
-                          <span class="job-type">{{ item.type }}</span>
-                          <span class="time-post">{{ item.time }}</span>
-                          <span class="location">{{ item.location }}</span>
-                        </div>
-                      </div>
-                      <div class="card-tags">
-                        <a v-for="tag in item.tags" :key="tag" class="btn btn-tag">{{ tag }}</a>
-                      </div>
-                      <div class="card-price">
+                  <template v-if="loading">
+                    <div class="skeleton-loader" v-for="n in paginatedItems" :key="n">
+                      <div class="skeleton-card">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-info"></div>
                       </div>
                     </div>
-                  </div>
+                  </template>
+                  <template v-else>
+                    <div class="col-lg-6" v-for="item in paginatedItems" :key="item.id">
+                      <div class="card-style-2 hover-up">
+                        <div class="card-head">
+                          <div class="card-image">
+                            <img :src="item.image" alt="PortailTN" />
+                          </div>
+                          <div class="card-title">
+                            <h6>{{ item.title }}</h6>
+                            <span class="job-type">{{ item.type }}</span>
+                            <span class="time-post">Posté il y a {{ calculateDaysAgo(item.created_at) }} jours</span>
+                            <span class="location">{{ item.city }}, {{ item.country }}</span>
+                          </div>
+                        </div>
+                        <div class="card-tags">
+                          <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tag">{{ tag }}</a>
+                        </div>
+                        <div class="card-price">
+                          <span>Salaire: {{ item.minSalary }} - {{ item.maxSalary }} DT</span>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
                 </div>
                 <div class="paginations">
                   <ul class="pager">
@@ -66,23 +78,15 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       currentPage: 1,
       itemsPerPage: 4,
-      items: [
-        { id: 1, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',  image: 'assets/dashboard/imgs/page/dashboard/img1.png', tags: ['Figma', 'Adobe XD'] },
-        { id: 2, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img2.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 3, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img3.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 4, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img4.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 5, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img5.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 6, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img6.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 7, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img7.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 8, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img8.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 9, title: 'Senior Full Stack Engineer', type: 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img9.png', tags: ['Figma', 'Adobe XD', 'PSD'] },
-        { id: 10, title: 'Senior Full Stack Engineer', type : 'Full time', time: "Posté il y'a x jours", location: 'Tunis, Tunisie',   image: 'assets/dashboard/imgs/page/dashboard/img10.png', tags: ['Figma', 'Adobe XD', 'PSD'] }
-      ]
+      items: [],
+      loading: true, // Add loading state
     };
   },
   computed: {
@@ -95,6 +99,27 @@ export default {
     }
   },
   methods: {
+    async fetchOffers() {
+      const companyId = localStorage.getItem('id');
+      try {
+        const response = await axios.get(`http://localhost:8000/api/offre/societe/${companyId}`);
+        this.items = response.data;
+        
+        
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (error) {
+        console.error("Error fetching offers:", error.response ? error.response.data : error.message);
+      } finally {
+        this.loading = false; 
+      }
+    },
+    calculateDaysAgo(createdAt) {
+      const createdDate = new Date(createdAt);
+      const currentDate = new Date();
+      const timeDifference = currentDate - createdDate; // in milliseconds
+      const daysAgo = Math.floor(timeDifference / (1000 * 3600 * 24)); // convert to days
+      return daysAgo;
+    },
     setPage(page) {
       this.currentPage = page;
     },
@@ -108,6 +133,50 @@ export default {
         this.currentPage--;
       }
     }
+  },
+  mounted() {
+    this.fetchOffers();
   }
 }
 </script>
+
+<style scoped>
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+}
+.skeleton-card {
+  background: #e0e0e0; /* Placeholder color */
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  animation: pulse 1.5s infinite;
+}
+.skeleton-image {
+  height: 150px;
+  background: #c0c0c0; /* Placeholder for image */
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.skeleton-title {
+  height: 20px;
+  background: #c0c0c0; /* Placeholder for title */
+  margin-bottom: 5px;
+}
+.skeleton-info {
+  height: 15px;
+  background: #c0c0c0; /* Placeholder for additional info */
+  margin-bottom: 5px;
+}
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+</style>

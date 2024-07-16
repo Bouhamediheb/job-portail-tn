@@ -42,4 +42,10 @@ class SocieteController extends Controller
             'message' => 'Profile Created Successfully',
         ], 200);
     }
+
+    public function getProfile($id)
+    {
+        $societe = Societe::find($id);
+        return $societe;
+    }
 }

@@ -5,7 +5,9 @@
           <div class="header-left">
             <div class="header-logo"><a class='d-flex' 
               @click="changeViewMode(0, $event)"
-              ><img alt="PortailTN" src="assets/dashboard/imgs/page/dashboard/logo.svg"></a></div>
+              ><img alt="PortailTN" src="assets/dashboard/imgs/page/dashboard/logo.svg" 
+              title="PortailTN" />
+              ></a></div>
           </div>
           <div class="header-search"> 
             <div class="box-search"> 
@@ -27,13 +29,7 @@
             <div class="block-signin">
               <a class='btn btn-default icon-edit hover-up' @click="postJob(10)">Poster une annonce</a>
               
-        <div class="dropdown d-inline-block"><a class="btn btn-notify" id="dropdownNotify" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
-                <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownNotify">
-                  <li><a class="dropdown-item active" href="#">10 notifications</a></li>
-                  <li><a class="dropdown-item" href="#">12 messages</a></li>
-                  <li><a class="dropdown-item" href="#">20 replies</a></li>
-                </ul>
-              </div>
+       <span class="ml-30"> </span>
               <div class="member-login"><img alt="" src="assets/dashboard/imgs/page/dashboard/profile.png">
                 <div class="info-member"> <strong class="color-brand-1">Admin/RH</strong>
                   <div class="dropdown"><a class="font-xs color-text-paragraph-2 icon-down" id="dropdownProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">Super Admin</a>
@@ -64,37 +60,49 @@
     <ul class="main-menu">
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(1)">
-          <img src="assets/dashboard/imgs/page/dashboard/dashboard.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/dashboard.svg" alt="PortailTN"
+          title="dashboard"
+          >
           <span class="name">Dashboard</span>
         </a>
       </li>
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(2)">
-          <img src="assets/dashboard/imgs/page/dashboard/jobs.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/jobs.svg" 
+          title="jobs"
+          alt="PortailTN">
           <span class="name">Mes annonces</span>
         </a>
       </li>
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(3)">
-          <img src="assets/dashboard/imgs/page/dashboard/candidates.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/candidates.svg"
+          title="candidates"
+          alt="PortailTN">
           <span class="name">Mes candidats</span>
         </a>
       </li>
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(4)">
-          <img src="assets/dashboard/imgs/page/dashboard/profiles.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/profiles.svg" 
+          title="profiles"
+          alt="PortailTN">
           <span class="name">Mon profil</span>
         </a>
       </li>
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(5)">
-          <img src="assets/dashboard/imgs/page/dashboard/settings.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/settings.svg" 
+          title="settings"
+          alt="PortailTN">
           <span class="name">Paramètres</span>
         </a>
       </li>
       <li>
         <a class='dashboard2' href='#' @click.prevent="postJob(6)">
-          <img src="assets/dashboard/imgs/page/dashboard/logout.svg" alt="PortailTN">
+          <img src="assets/dashboard/imgs/page/dashboard/logout.svg" 
+          title="logout"
+          alt="PortailTN">
           <span class="name">Déconnexion</span>
         </a>
       </li>

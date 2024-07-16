@@ -1,5 +1,5 @@
 <template>
-      <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
+  <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
 
   <div class="dashboard-container">
     <Header @navigateToPostJob="updateViewMode" /> 
@@ -10,8 +10,8 @@
       <div class="content-wrapper">
         <Overview v-if="viewMode === 0" />
         <MyPosts v-if="viewMode === 1" />
-        <UserProfile v-if="viewMode === 3" />
-        <CompanyProfile v-if="viewMode === 4" />
+        <UserProfile v-if="viewMode === 3 && userType === 'user'" />
+        <CompanyProfile v-if="viewMode === 3 && userType === 'company'" />
         <PostJob v-if="viewMode === 10" />
       </div>
     </main>
@@ -38,14 +38,15 @@ export default {
     UserProfile,
     CompanyProfile
   },
-  mounted() {
-    this.loadScripts();
-    console.log(this.viewMode);
-  },
   data() {
     return {
       viewMode: 0,
+      userType: localStorage.getItem('type') || 'user' // Default to 'user' if not set
     };
+  },
+  mounted() {
+    this.loadScripts();
+    console.log(this.viewMode);
   },
   methods: {
     loadScripts() {
@@ -57,7 +58,6 @@ export default {
         "assets/dashboard/js/plugins/waypoints.js",
         "assets/dashboard/js/plugins/magnific-popup.js",
         "assets/dashboard/js/plugins/perfect-scrollbar.min.js",
-        "assets/dashboard/js/plugins/select2.min.js",
         "assets/dashboard/js/plugins/swiper-bundle.min.js",
         "assets/dashboard/js/plugins/jquery.circliful.js",
         "assets/dashboard/js/plugins/charts/index.js",
@@ -105,8 +105,6 @@ export default {
   overflow-y: auto; /* Allow menu to scroll */
   background-color: #fff; /* Optional: Set background color */
   z-index: 1000; /* Ensure the menu stays above other content */
-  overflow: hidden; /* Disable scrolling */
-
 }
 
 .content-wrapper {

@@ -23,96 +23,48 @@
                 <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6"> 
                   <div class="card-style-1 hover-up">
                     <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
+                  
                       <div class="card-title">
-                        <h3>1568<span class="font-sm status up">25<span>%</span></span>
+                        <h3>{{totalOffres}}
                         </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Interview Schedules</p>
+                      
+                      <p class="color-text-paragraph-2">Offres postées</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
+                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6"> 
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/bank.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN"></div>
+                  
                       <div class="card-title">
-                        <h3>284<span class="font-sm status up">5<span>%</span></span>
+                        <h3>{{totalJobs}}
                         </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Applied Jobs</p>
+                      
+                      <p class="color-text-paragraph-2">Offres d'emplois</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
+                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6"> 
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/lamp.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN"></div>
+                  
                       <div class="card-title">
-                        <h3>136<span class="font-sm status up">12<span>%</span></span>
+                        <h3>{{totalStages}}
                         </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Task Bids Won</p>
+                      
+                      <p class="color-text-paragraph-2">Offres de stages</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
+                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6"> 
                   <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/headphone.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
+                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN"></div>
+                  
                       <div class="card-title">
-                        <h3>985<span class="font-sm status up">5<span>%</span></span>
+                        <h3>{{ totalApplication }}
                         </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Application Sent</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
-                  <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/look.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
-                      <div class="card-title">
-                        <h3>165<span class="font-sm status up">15<span>%</span></span>
-                        </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Profile Viewed</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
-                  <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/open-file.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
-                      <div class="card-title">
-                        <h3>2356<span class="font-sm status down">- 2%</span>
-                        </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">New Messages</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
-                  <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/doc.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
-                      <div class="card-title">
-                        <h3>254<span class="font-sm status up">2<span>%</span></span>
-                        </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">Articles Added</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
-                  <div class="card-style-1 hover-up">
-                    <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/man.svg" alt="PortailTN"></div>
-                    <div class="card-info"> 
-                      <div class="card-title">
-                        <h3>548<span class="font-sm status up">48<span>%</span></span>
-                        </h3>
-                      </div>
-                      <p class="color-text-paragraph-2">CV Added</p>
+                      
+                      <p class="color-text-paragraph-2">Total candidats</p>
                     </div>
                   </div>
                 </div>
@@ -122,7 +74,7 @@
               <div class="container"> 
                 <div class="panel-white">
                   <div class="panel-head"> 
-                    <h5>Vacancy Stats</h5><a class="menudrop" id="dropdownMenu2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
+                    <h5>Votre activité par mois</h5><a class="menudrop" id="dropdownMenu2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"></a>
                     <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownMenu2">
                       <li><a class="dropdown-item active" href="#">Add new</a></li>
                       <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -130,8 +82,8 @@
                     </ul>
                   </div>
                   <div class="panel-body"> 
-                    <div id="chartdiv"></div>
-                  </div>
+          <canvas ref="chartRef" id="chartdiv"></canvas>
+        </div>
                 </div>
               </div>
             </div>
@@ -474,4 +426,111 @@
           </div>
         </footer>
       </div>
-</template>
+</template><script>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables); // Register Chart.js components
+
+export default {
+  setup() {
+    const company_id = ref(localStorage.getItem('id'));
+    const chartRef = ref(null);
+    const totalOffres = ref(0);
+    const totalJobs = ref(0);
+    const totalStages = ref(0);
+    const totalApplication = ref(0);
+
+
+    onMounted(async () => {
+      try {
+        const responseStages = await axios.get(`http://localhost:8000/api/offre/internship/societe/${company_id.value}`);
+        const responseJobs = await axios.get(`http://localhost:8000/api/offre/jobs/societe/${company_id.value}`);
+        
+        const totalStagesChartData = responseStages.data;
+        const totalJobsChartData = responseJobs.data;
+
+         totalStages.value = responseStages.data.length;
+         totalJobs.value = responseJobs.data.length;
+         totalOffres.value = totalStages.value + totalJobs.value;
+
+        console.log(totalStages, totalJobs);
+
+
+        const monthlyData = aggregateMonthlyData(totalStagesChartData, totalJobsChartData);
+        createChart(monthlyData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    });
+
+    const aggregateMonthlyData = (internships, jobs) => {
+      const months = Array(12).fill(0);
+      
+      const countByMonth = (items) => {
+        items.forEach(item => {
+          const month = new Date(item.created_at).getMonth(); // Use created_at field
+          months[month]++;
+        });
+      };
+
+      countByMonth(internships);
+      countByMonth(jobs);
+
+      return {
+        labels: [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ],
+        data: months
+      };
+    };
+
+    const createChart = (monthlyData) => {
+      const ctx = chartRef.value.getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: monthlyData.labels,
+          datasets: [{
+            label: "Nombre d'annonces",
+            data: monthlyData.data,
+            backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1
+
+            }
+          }
+        }
+      }
+      });
+    };
+
+    return {
+      chartRef,
+      totalOffres,
+      totalJobs,
+      totalStages,
+      totalApplication,
+
+    };
+  }
+};
+</script>
+
+<style>
+#chartdiv {
+  width: 100%;
+  height: 400px; /* Set a height for your chart */
+}
+</style>

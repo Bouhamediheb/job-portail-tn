@@ -119,10 +119,10 @@
                                 data-wow-delay=".1s">Chaque mois, plus de 3 millions de chercheurs d'emploi se tournent
                                 <br class="d-none d-lg-block">vers notre site dans leur recherche de travail.
                             </div>
-                            <div class="form-find mt-40 wow animate__animated animate__fadeIn" data-wow-delay=".2s">
+                            <div class="form-find mt-40 wow animate__animated animate__fadeIn no-border" data-wow-delay=".2s">
                                 <form>
 
-                                    <select class="form-input mr-10 select-active input-industry">
+                                    <select class="form-input mr-10 select-active input-industry no-border">
                                         <option value="0">Domaine</option>
                                         <option value="1">Software</option>
                                         <option value="2">Finance</option>
@@ -132,7 +132,7 @@
                                         <option value="6">Development</option>
                                     </select>
 
-                                    <select class="form-input mr-10 select-active input-location">
+                                    <select class="form-input mr-10 select-active input-location no-border">
                                         <option value="">Localisation</option>
                                         <option value="AX">Aland Islands</option>
                                         <option value="AF">Afghanistan</option>
@@ -403,3 +403,9 @@ export default {
     name: 'Heading',
 }
 </script>
+
+<style scoped>
+.no-border {
+    border: none !important; /* Remove border */
+}
+</style>

@@ -18,6 +18,21 @@ Route::post('/logout', [LoginControllerUser::class, 'logout'])->middleware('auth
 
 //OffreController
 Route::post('/offre', [OffreController::class, 'store']);
+//get all offers
+Route::get('/offre', [OffreController::class, 'index']);
+//offreBySociete id
+Route::get('/offre/societe/{id}', [OffreController::class, 'offreBySociete']);
+//getAllIntership
+Route::get('/offre/internship', [OffreController::class, 'getAllInterships']);
+//getAllJobs
+Route::get('/offre/jobs', [OffreController::class, 'getAllJobs']);
+//getInternshipBySociete
+Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getInternshipsBySociete']);
+//getJobsBySociete
+Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociete']);
+
+
 
 //SocieteController
 Route::put('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
+Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);

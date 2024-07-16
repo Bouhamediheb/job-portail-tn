@@ -84,9 +84,9 @@
                       >Type de lieu de travail *</label
                     >
                     <select class="form-control" v-model="jobDetails.workplace">
-                      <option value="remote">Teletravail</option>
-                      <option value="office">Bureau</option>
-                      <option value="hybrid">Hybride</option>
+                      <option value="0">Teletravail</option>
+                      <option value="1">Bureau</option>
+                      <option value="2">Hybride</option>
                     </select>
                   </div>
                   <div class="d-flex justify-content-between mb-30">
@@ -255,9 +255,9 @@
                       class="form-control"
                       v-model="internshipDetails.workplace"
                     >
-                      <option value="remote">Teletravail</option>
-                      <option value="office">Bureau</option>
-                      <option value="hybrid">Hybride</option>
+                      <option value="0">Teletravail</option>
+                      <option value="1">Bureau</option>
+                      <option value="2">Hybride</option>
                     </select>
                   </div>
                   <div class="d-flex justify-content-between mb-30">
@@ -367,17 +367,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group mt-10">
+                <div class="form-group mt-10 text-lg-end">
                   <button
                     @click="submitForm"
-                    class="btn btn-default btn-brand icon-tick"
+                    class="btn btn-default btn-brand icon-tick "
                   >
-                    Post New Offer
+                   Publier l'annonce
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          <sweet-modal icon="success" ref="postedJob">
+                <div class="spacingtop">
+                  Votre annonce a été publiée avec succès !
+                </div>
+              </sweet-modal>
         </div>
       </div>
     </div>
@@ -387,12 +392,21 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { onMounted } from "vue";
+import { SweetModal, SweetModalTab } from 'sweet-modal-vue-3'
 
+
+const postedJob = ref(null);
 const type = ref("job");
 const skillInput = ref("");
 const selectedSkills = ref([]);
 const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
 const filteredSkills = ref([]);
+const companyId = ref(localStorage.getItem('id'));
+
+onMounted(() => {
+  console.log("Company ID:", companyId.value);
+});
 
 const jobDetails = ref({
   title: "",
@@ -405,6 +419,7 @@ const jobDetails = ref({
   minSalary: "",
   maxSalary: "",
   file: null,
+  societe_id: companyId.value,
 });
 
 const internshipDetails = ref({
@@ -417,6 +432,7 @@ const internshipDetails = ref({
   country: "",
   motivation: "",
   file: null,
+  societe_id: companyId.value,
 });
 
 function resetFields() {
@@ -482,25 +498,40 @@ function handleFileUpload(event, type) {
   }
 }
 
-const submitForm = () => {
-  if (type.value === "job") {
-    var data = {
-      type: type.value,
-      skills: selectedSkills.value,
-      ...jobDetails.value,
-    };
+const submitForm = async () => {
+  try {
+    let data;
+    console.log("Id", companyId.value);
+    console.log("Job Details:", jobDetails.value);
+    console.log("Internship Details:", internshipDetails.value);
+    if (type.value === "job") {
+      data = {
+        societe_id: companyId.value,
+        type: type.value,
+        skills: JSON.stringify(selectedSkills.value),
+        ...jobDetails.value,
+      };
+    } else {
+      data = {
+        societe_id: companyId.value,
+        type: type.value,
+        skills: JSON.stringify(selectedSkills.value),
+        ...internshipDetails.value,
+      };
+    }
+
     console.log(data);
-    const response = axios.post("http://localhost:8000/api/offre", data);
-    console.log(response);
-  } else {
-    var data = {
-      type: type.value,
-      skills: selectedSkills.value,
-      ...internshipDetails.value,
-    };
-    console.log(data);
-    const response = axios.post("http://localhost:8000/api/offre", data);
-    console.log(response);
+    
+    const response = await axios.post("http://localhost:8000/api/offre", data);
+    console.log(response.data);
+    if (updatedProfile.value) {
+            updatedProfile.value.open();
+    }
+    setTimeout(() => {
+            router.push("/dashboard");
+        }, 2000);
+  } catch (error) {
+    console.error("Error posting offer:", error.response ? error.response.data : error.message);
   }
 };
 </script>
