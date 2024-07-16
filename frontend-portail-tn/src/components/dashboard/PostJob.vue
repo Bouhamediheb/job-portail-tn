@@ -198,11 +198,17 @@
                     >
                     <div class="form-group mb-30">
                       <div class="box-upload">
-                        <div class="add-file-upload">
-                          <input class="fileupload" type="file" name="file" />
+                        <div class="add-file-upload row">
+                          <input
+                            class="fileupload"
+                            type="file"
+                            name="file"
+                            @change="handleFileUpload"
+                          />
+                          <p class="ml-100" v-if="jobDetails.file">
+                            {{ jobDetails.file.name }}
+                          </p>
                         </div>
-
-                        <a class="btn btn-default">Upload File</a>
                       </div>
                     </div>
                   </div>
@@ -244,7 +250,7 @@
                       class="form-control"
                       type="number"
                       placeholder="Exemple : 3"
-                      v-model="internshipDetails.duration"
+                      v-model="internshipDetails.internshipDuration"
                     />
                   </div>
                   <div class="form-group mb-30">
@@ -304,7 +310,7 @@
                         class="form-control"
                         type="number"
                         placeholder="Exemple : 300DT "
-                        v-model="internshipDetails.motivation"
+                        v-model="internshipDetails.internshipMotivation"
                       />
                     </div>
                   </div>
@@ -358,11 +364,19 @@
                     >
                     <div class="form-group mb-30">
                       <div class="box-upload">
-                        <div class="add-file-upload">
-                          <input class="fileupload" type="file" name="file" />
+                        <div class="add-file-upload row">
+                          <!-- hide l input yar7am l weldin -->
+                          <input
+                            class="fileupload"
+                            type="file"
+                            name="file"
+                            @change="handleFileUpload"
+                            v-if="internshipDetails.file === null"
+                          />
+                          <p class="ml-100" v-if="internshipDetails.file">
+                            {{ internshipDetails.file.name }}
+                          </p>
                         </div>
-
-                        <a class="btn btn-default">Upload File</a>
                       </div>
                     </div>
                   </div>
@@ -370,19 +384,19 @@
                 <div class="form-group mt-10 text-lg-end">
                   <button
                     @click="submitForm"
-                    class="btn btn-default btn-brand icon-tick "
+                    class="btn btn-default btn-brand icon-tick"
                   >
-                   Publier l'annonce
+                    Publier l'annonce
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <sweet-modal icon="success" ref="postedJob">
-                <div class="spacingtop">
-                  Votre annonce a été publiée avec succès !
-                </div>
-              </sweet-modal>
+            <div class="spacingtop">
+              Votre annonce a été publiée avec succès !
+            </div>
+          </sweet-modal>
         </div>
       </div>
     </div>
@@ -393,8 +407,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { onMounted } from "vue";
-import { SweetModal, SweetModalTab } from 'sweet-modal-vue-3'
-
+import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
 
 const postedJob = ref(null);
 const type = ref("job");
@@ -402,7 +415,7 @@ const skillInput = ref("");
 const selectedSkills = ref([]);
 const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
 const filteredSkills = ref([]);
-const companyId = ref(localStorage.getItem('id'));
+const companyId = ref(localStorage.getItem("id"));
 
 onMounted(() => {
   console.log("Company ID:", companyId.value);
@@ -425,12 +438,12 @@ const jobDetails = ref({
 const internshipDetails = ref({
   title: "",
   description: "",
-  duration: "",
+  internshipDuration: "",
   workplace: "",
   address: "",
   city: "",
   country: "",
-  motivation: "",
+  internshipMotivation: "",
   file: null,
   societe_id: companyId.value,
 });
@@ -458,14 +471,14 @@ function resetFields() {
   internshipDetails.value = {
     title: "",
     description: "",
-    duration: "",
+    internshipDuration: "",
     workplace: "",
     location: {
       address: "",
       city: "",
       country: "",
     },
-    motivation: "",
+    internshipMotivation: "",
     file: null,
   };
 }
@@ -490,9 +503,10 @@ function removeSkill(skill) {
   selectedSkills.value = selectedSkills.value.filter((s) => s !== skill);
 }
 
-function handleFileUpload(event, type) {
-  if (type === "job") {
+function handleFileUpload(event) {
+  if (type.value == "job") {
     jobDetails.value.file = event.target.files[0];
+    console.log(jobDetails.value.file);
   } else {
     internshipDetails.value.file = event.target.files[0];
   }
@@ -521,17 +535,24 @@ const submitForm = async () => {
     }
 
     console.log(data);
-    
-    const response = await axios.post("http://localhost:8000/api/offre", data);
+
+    const response = await axios.post("http://localhost:8000/api/offre", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(response.data);
     if (updatedProfile.value) {
-            updatedProfile.value.open();
+      updatedProfile.value.open();
     }
     setTimeout(() => {
-            router.push("/dashboard");
-        }, 2000);
+      router.push("/dashboard");
+    }, 2000);
   } catch (error) {
-    console.error("Error posting offer:", error.response ? error.response.data : error.message);
+    console.error(
+      "Error posting offer:",
+      error.response ? error.response.data : error.message
+    );
   }
 };
 </script>

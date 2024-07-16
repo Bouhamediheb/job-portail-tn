@@ -31,6 +31,7 @@ class OffreController extends Controller
             'employmentType',
             'yearsOfExperience',
             'hourlyWage',
+            'domain' => 'required',
             'internshipMotivation',
             'internshipDuration',
             'workplace' => 'required',
@@ -51,6 +52,7 @@ class OffreController extends Controller
         $offre->minSalary = $request->minSalary;
         $offre->maxSalary = $request->maxSalary;
         $offre->hourlyWage = $request->hourlyWage;
+        $offre->domain = $request->domain;
         $offre->internshipMotivation = $request->internshipMotivation;
         $offre->internshipDuration = $request->internshipDuration;
         $offre->yearsOfExperience = $request->yearsOfExperience;
@@ -89,6 +91,7 @@ class OffreController extends Controller
             'employmentType',
             'yearsOfExperience',
             'hourlyWage',
+            'domain',
             'internshipMotivation',
             'internshipDuration',
             'workplace' => 'required',
@@ -109,6 +112,7 @@ class OffreController extends Controller
         $offre->minSalary = $request->minSalary;
         $offre->maxSalary = $request->maxSalary;
         $offre->hourlyWage = $request->hourlyWage;
+        $offre->domain = $request->domain;
         $offre->internshipMotivation = $request->internshipMotivation;
         $offre->internshipDuration = $request->internshipDuration;
         $offre->yearsOfExperience = $request->yearsOfExperience;
@@ -143,7 +147,7 @@ class OffreController extends Controller
             'message' => 'Job Deleted Successfully',
         ], 200);
     }
-    
+
     public function offreBySociete($id)
     {
         $offres = Offre::where('societe_id', $id)->get();
@@ -157,7 +161,7 @@ class OffreController extends Controller
         return $offres;
     }
 
-        //return only intership by societe id
+    //return only intership by societe id
     public function getInternshipsBySociete($id)
     {
         $offres = Offre::where('type', 'internship')->where('societe_id', $id)->get();
