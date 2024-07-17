@@ -68,16 +68,37 @@
                       ></textarea>
                     </div>
                   </div>
-                  <div class="col-lg-12">
-                  <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10">Domaine *</label>
-                      <select class="form-control" v-model="jobDetails.domain">
-                        <option value="Informatique">Informatique</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Mecanique">Mecanique</option>
-                      </select>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group mb-30">
+                        <label class="font-sm color-text-muted mb-10"
+                          >Domaine *</label
+                        >
+                        <select
+                          class="form-control"
+                          v-model="jobDetails.domain"
+                        >
+                          <option value="Informatique">Informatique</option>
+                          <option value="Finance">Finance</option>
+                          <option value="Mecanique">Mecanique</option>
+                        </select>
+                      </div>
                     </div>
+                    <div class="col-lg-6">
+                      <div class="form-group mb-30">
+                        <label class="font-sm color-text-muted mb-10"
+                          >Horaire *</label
+                        >
+                        <select
+                          class="form-control"
+                          v-model="jobDetails.employmentType"
+                        >
+                          <option value="0">Demi-Temps</option>
+                          <option value="1">Plein-Temps</option>
+                        </select>
+                      </div>
                     </div>
+                  </div>
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
                       >Expérience *</label
@@ -223,16 +244,23 @@
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
-  <div class="form-group mb-30">
-    <label class="font-sm color-text-muted mb-10">Offre mise en avant</label>
-    <div class="d-flex align-items-center">
-      <input type="checkbox" v-model="jobDetails.featured" class="me-2 custom-checkbox" />
-      <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant cette offre</span>
-    </div>
-  </div>
-</div>
-
-
+                    <div class="form-group mb-30">
+                      <label class="font-sm color-text-muted mb-10"
+                        >Offre mise en avant</label
+                      >
+                      <div class="d-flex align-items-center">
+                        <input
+                          type="checkbox"
+                          v-model="jobDetails.featured"
+                          class="me-2 custom-checkbox"
+                        />
+                        <span class="font-sm color-text-muted"
+                          >Cochez si vous souhaitez mettre en avant cette
+                          offre</span
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div v-else-if="type === 'internship'">
@@ -263,15 +291,20 @@
                     </div>
                   </div>
                   <div class="col-lg-12">
-                  <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10">Domaine *</label>
-                      <select class="form-control" v-model="internshipDetails.domain">
+                    <div class="form-group mb-30">
+                      <label class="font-sm color-text-muted mb-10"
+                        >Domaine *</label
+                      >
+                      <select
+                        class="form-control"
+                        v-model="internshipDetails.domain"
+                      >
                         <option value="Informatique">Informatique</option>
                         <option value="Finance">Finance</option>
                         <option value="Mecanique">Mecanique</option>
                       </select>
                     </div>
-                    </div>
+                  </div>
 
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
@@ -410,14 +443,23 @@
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
-  <div class="form-group mb-30">
-    <label class="font-sm color-text-muted mb-10">Offre mise en avant</label>
-    <div class="d-flex align-items-center">
-      <input type="checkbox" v-model="internshipDetails.featured" class="me-2 custom-checkbox" />
-      <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant cette offre</span>
-    </div>
-  </div>
-</div>
+                    <div class="form-group mb-30">
+                      <label class="font-sm color-text-muted mb-10"
+                        >Offre mise en avant</label
+                      >
+                      <div class="d-flex align-items-center">
+                        <input
+                          type="checkbox"
+                          v-model="internshipDetails.featured"
+                          class="me-2 custom-checkbox"
+                        />
+                        <span class="font-sm color-text-muted"
+                          >Cochez si vous souhaitez mettre en avant cette
+                          offre</span
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group mt-10 text-lg-end">
                   <button
@@ -464,13 +506,14 @@ const jobDetails = ref({
   description: "",
   yearsOfExperience: "",
   workplace: "",
+  employmentType: 0,
   city: "",
   country: "",
   address: "",
   minSalary: "",
   maxSalary: "",
   domain: "",
-  featured: 0, 
+  featured: 0,
   file: null,
 
   societe_id: companyId.value,
@@ -485,8 +528,8 @@ const internshipDetails = ref({
   city: "",
   country: "",
   internshipMotivation: "",
-  domain: "", 
-  featured: 0, 
+  domain: "",
+  featured: 0,
   file: null,
   societe_id: companyId.value,
 });
@@ -572,7 +615,6 @@ const submitForm = async () => {
         skills: JSON.stringify(selectedSkills.value),
         ...jobDetails.value,
         featured: jobDetails.value.featured ? 1 : 0, // Convert checkbox value
-
       };
     } else {
       data = {
@@ -633,8 +675,7 @@ const submitForm = async () => {
 .custom-checkbox {
   width: 16px;
   height: 16px;
-  margin-top: 3px; 
+  margin-top: 3px;
   margin-left: 10px;
 }
-
 </style>

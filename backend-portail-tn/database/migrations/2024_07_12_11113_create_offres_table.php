@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('workplace');
             $table->string('description');
             $table->string('domain');
+            $table->integer('hidden')->default(0);
             $table->integer('featured')->default(0);
             $table->double('minSalary')->nullable();
             $table->double('maxSalary')->nullable();
