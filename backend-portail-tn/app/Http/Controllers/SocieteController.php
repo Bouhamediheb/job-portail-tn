@@ -10,13 +10,13 @@ class SocieteController extends Controller
     public function createProfile($id, Request $request)
     {
         $request->validate([
-            'address' => 'required',
-            'phoneNumber' => 'required',
-            'fax' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'website' => 'required',
-            'logo' => 'file|mimes:jpeg,png,jpg,gif,svg,pdf|nullable',
+            'address',
+            'phoneNumber',
+            'fax',
+            'city',
+            'country',
+            'website',
+            'logo' => 'file|mimes:jpeg,png,jpg',
         ]);
 
         $societe = Societe::find($id);

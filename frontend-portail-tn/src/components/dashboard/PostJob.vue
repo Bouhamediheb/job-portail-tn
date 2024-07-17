@@ -628,7 +628,7 @@ const submitForm = async () => {
 
     console.log(data);
 
-    const response = await axios.post("http://localhost:8000/api/offre", data, {
+    const response = await axios.put("http://localhost:8000/api/offre", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

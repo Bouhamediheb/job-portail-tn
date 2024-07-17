@@ -34,5 +34,5 @@ Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociet
 
 
 //SocieteController
-Route::put('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
+Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
 Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);
