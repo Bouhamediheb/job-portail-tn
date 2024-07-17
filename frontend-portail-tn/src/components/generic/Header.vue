@@ -4,7 +4,10 @@
       <div class="main-header">
         <div class="header-left">
           <div class="header-logo">
-            <router-link to="/"><img alt="PortailTN" src="assets/home/imgs/template/jobhub-logo.svg"
+            <router-link to="/"
+              ><img
+                alt="PortailTN"
+                src="assets/home/imgs/template/jobhub-logo.svg"
             /></router-link>
           </div>
         </div>
@@ -34,9 +37,7 @@
               <!-- if logged add dashboard routerlink-->
               <li v-if="loggedIn">
                 <router-link to="/dashboard">Dashboard</router-link>
-               
-                
-              </li>  
+              </li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white">
@@ -50,8 +51,12 @@
             <nav class="nav-main-menu">
               <ul class="main-menu">
                 <li>
-                  <a href="" v-if = "whoLoggedIn === 'user'">Bienvenue, {{ firstName }} {{ lastName }}</a>
-                  <a href="" v-else-if = "whoLoggedIn === 'company'">Bienvenue, {{ companyName }}</a>
+                  <a href="" v-if="whoLoggedIn === 'user'"
+                    >Bienvenue, {{ firstName }} {{ lastName }}</a
+                  >
+                  <a href="" v-else-if="whoLoggedIn === 'company'"
+                    >Bienvenue, {{ companyName }}</a
+                  >
 
                   <ul class="sub-menu">
                     <li><router-link to="/">Votre Profil</router-link></li>
@@ -69,10 +74,9 @@
               <router-link
                 class="btn btn-default btn-shadow ml-40 hover-up"
                 to="/signin"
-                >
-                Connexion
-                </router-link
               >
+                Connexion
+              </router-link>
             </div>
           </template>
         </div>
@@ -138,10 +142,19 @@ const logout = async () => {
 </script>
 
 <style lang="css">
-  .main-menu {
+.main-menu {
   overflow: hidden;
 }
 .block-signin {
-  width:max-content;
+  width: max-content;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 </style>
