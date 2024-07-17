@@ -68,6 +68,16 @@
                       ></textarea>
                     </div>
                   </div>
+                  <div class="col-lg-12">
+                  <div class="form-group mb-30">
+                      <label class="font-sm color-text-muted mb-10">Domaine *</label>
+                      <select class="form-control" v-model="jobDetails.domain">
+                        <option value="Informatique">Informatique</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Mecanique">Mecanique</option>
+                      </select>
+                    </div>
+                    </div>
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
                       >Expérience *</label
@@ -212,9 +222,19 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-md-6">
+  <div class="form-group mb-30">
+    <label class="font-sm color-text-muted mb-10">Offre mise en avant</label>
+    <div class="d-flex align-items-center">
+      <input type="checkbox" v-model="jobDetails.featured" class="me-2 custom-checkbox" />
+      <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant cette offre</span>
+    </div>
+  </div>
+</div>
+
+
                 </div>
 
-                <!-- Internship -->
                 <div v-else-if="type === 'internship'">
                   <h5>Détails du stage</h5>
                   <div class="form-group mb-30">
@@ -242,6 +262,17 @@
                       ></textarea>
                     </div>
                   </div>
+                  <div class="col-lg-12">
+                  <div class="form-group mb-30">
+                      <label class="font-sm color-text-muted mb-10">Domaine *</label>
+                      <select class="form-control" v-model="internshipDetails.domain">
+                        <option value="Informatique">Informatique</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Mecanique">Mecanique</option>
+                      </select>
+                    </div>
+                    </div>
+
                   <div class="form-group mb-30">
                     <label class="font-sm color-text-muted mb-10"
                       >Durée du stage *</label
@@ -365,13 +396,11 @@
                     <div class="form-group mb-30">
                       <div class="box-upload">
                         <div class="add-file-upload row">
-                          <!-- hide l input yar7am l weldin -->
                           <input
                             class="fileupload"
                             type="file"
                             name="file"
                             @change="handleFileUpload"
-                            v-if="internshipDetails.file === null"
                           />
                           <p class="ml-100" v-if="internshipDetails.file">
                             {{ internshipDetails.file.name }}
@@ -380,6 +409,15 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-md-6">
+  <div class="form-group mb-30">
+    <label class="font-sm color-text-muted mb-10">Offre mise en avant</label>
+    <div class="d-flex align-items-center">
+      <input type="checkbox" v-model="internshipDetails.featured" class="me-2 custom-checkbox" />
+      <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant cette offre</span>
+    </div>
+  </div>
+</div>
                 </div>
                 <div class="form-group mt-10 text-lg-end">
                   <button
@@ -431,7 +469,10 @@ const jobDetails = ref({
   address: "",
   minSalary: "",
   maxSalary: "",
+  domain: "",
+  featured: 0, 
   file: null,
+
   societe_id: companyId.value,
 });
 
@@ -444,6 +485,8 @@ const internshipDetails = ref({
   city: "",
   country: "",
   internshipMotivation: "",
+  domain: "", 
+  featured: 0, 
   file: null,
   societe_id: companyId.value,
 });
@@ -462,6 +505,8 @@ function resetFields() {
       city: "",
       country: "",
     },
+    featured: 0,
+    domain: "",
     salary: {
       min: "",
       max: "",
@@ -478,6 +523,8 @@ function resetFields() {
       city: "",
       country: "",
     },
+    domain: "",
+    featured: 0,
     internshipMotivation: "",
     file: null,
   };
@@ -524,6 +571,8 @@ const submitForm = async () => {
         type: type.value,
         skills: JSON.stringify(selectedSkills.value),
         ...jobDetails.value,
+        featured: jobDetails.value.featured ? 1 : 0, // Convert checkbox value
+
       };
     } else {
       data = {
@@ -531,6 +580,7 @@ const submitForm = async () => {
         type: type.value,
         skills: JSON.stringify(selectedSkills.value),
         ...internshipDetails.value,
+        featured: internshipDetails.value.featured ? 1 : 0, // Convert checkbox value
       };
     }
 
@@ -579,4 +629,12 @@ const submitForm = async () => {
 .list-group-item:hover {
   background-color: #f0f0f0;
 }
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px; 
+  margin-left: 10px;
+}
+
 </style>

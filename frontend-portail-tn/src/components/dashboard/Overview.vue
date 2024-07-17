@@ -99,62 +99,27 @@
                     </ul>
                   </div>
                   <div class="panel-body">
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img1.png" alt="PortailTN"></div>
-                        <div class="card-title"> 
-                          <h6>Senior Full Stack Engineer, Creator Success</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">New York, US</span>
-                        </div>
-                      </div>
-                      <div class="card-tags"> <a class="btn btn-tag">Figma</a><a class="btn btn-tag">Adobe XD</a>
-                      </div>
-                      <div class="card-price"><strong>$300</strong><span class="hour">/Hour</span></div>
-                    </div>
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img2.png" alt="PortailTN"></div>
-                        <div class="card-title"> 
-                          <h6>Senior Full Stack Engineer, Creator Success</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Chicago, US</span>
-                        </div>
-                      </div>
-                      <div class="card-tags"> <a class="btn btn-tag">Figma</a><a class="btn btn-tag">Adobe XD</a><a class="btn btn-tag">PSD</a>
-                      </div>
-                      <div class="card-price"><strong>$650</strong><span class="hour">/Hour</span></div>
-                    </div>
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img3.png" alt="PortailTN"></div>
-                        <div class="card-title"> 
-                          <h6>Lead Product/UX/UI Designer Role</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Paris, France</span>
-                        </div>
-                      </div>
-                      <div class="card-tags"> <a class="btn btn-tag">Figma</a><a class="btn btn-tag">Adobe XD</a><a class="btn btn-tag">PSD</a>
-                      </div>
-                      <div class="card-price"><strong>$1200</strong><span class="hour">/Hour</span></div>
-                    </div>
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img4.png" alt="PortailTN"></div>
-                        <div class="card-title"> 
-                          <h6>Marketing Graphic Designer</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Tokyto, Japan</span>
-                        </div>
-                      </div>
-                      <div class="card-tags"> <a class="btn btn-tag">Figma</a><a class="btn btn-tag">Adobe XD</a><a class="btn btn-tag">PSD</a>
-                      </div>
-                      <div class="card-price"><strong>$580</strong><span class="hour">/Hour</span></div>
-                    </div>
-                    <div class="card-style-2 hover-up">
-                      <div class="card-head">
-                        <div class="card-image"> <img src="assets/dashboard/imgs/page/dashboard/img5.png" alt="PortailTN"></div>
-                        <div class="card-title"> 
-                          <h6>Director, Product Design - Creator</h6><span class="job-type">Full time</span><span class="time-post">3mins ago</span><span class="location">Ha Noi, Vietnam</span>
-                        </div>
-                      </div>
-                      <div class="card-tags"> <a class="btn btn-tag">Figma</a><a class="btn btn-tag">Adobe XD</a><a class="btn btn-tag">PSD</a>
-                      </div>
-                      <div class="card-price"><strong>$1500</strong><span class="hour">/Hour</span></div>
-                    </div>
-                  </div>
+  <div v-if="!lastOffers || lastOffers.length === 0" class="no-offers-message center-content">
+    <p>Aucune annonce disponible.</p>
+  </div>
+  <div v-else>
+    <div v-for="offer in lastOffers" :key="offer.id" class="card-style-2 hover-up">
+      <div class="card-head">
+        <div class="card-image"> <img :src="offer.imageUrl" alt="PortailTN"></div>
+        <div class="card-title"> 
+          <h6>{{ offer.title }}</h6>
+          <span class="job-type">{{ offer.jobType }}</span>
+          <span class="time-post">{{ offer.timePosted }}</span>
+          <span class="location">{{ offer.location }}</span>
+        </div>
+      </div>
+      <div class="card-tags">
+        <a v-for="tag in offer.tags" :key="tag" class="btn btn-tag">{{ tag }}</a>
+      </div>
+      <div class="card-price"><strong>{{ offer.price }}</strong><span class="hour">/Hour</span></div>
+    </div>
+  </div>
+</div>
                 </div>
               </div>
             </div>
@@ -411,14 +376,13 @@
             <div class="box-footer">
               <div class="row">
                 <div class="col-md-6 col-sm-12 mb-25 text-center text-md-start">
-                  <p class="font-sm color-text-paragraph-2">© 2022 - <a class="color-brand-2" href="https://themeforest.net/item/PortailTN-job-portal-html-bootstrap-5-template/39217891" target="_blank">PortailTN </a>Dashboard <span> Made by  </span><a class="color-brand-2" href="http://alithemes.com/" target="_blank"> AliThemes</a></p>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center text-md-end mb-25">
                   <ul class="menu-footer">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Policy</a></li>
+                    <li><a href="#">A propos de nous</a></li>
                     <li><a href="#">Contact</a></li>
+                    <li><a href="#">Termes et conditions</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
                   </ul>
                 </div>
               </div>
@@ -426,7 +390,8 @@
           </div>
         </footer>
       </div>
-</template><script>
+</template>
+<script>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';

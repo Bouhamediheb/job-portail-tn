@@ -68,7 +68,8 @@ export default {
     async fetchJobs() {
       try {
         const response = await axios.get('http://localhost:8000/api/offre');
-        this.jobs = response.data;
+        // Filter jobs to only include those that are featured
+        this.jobs = response.data.filter(job => job.featured === 1);
       } catch (error) {
         console.error("Error fetching jobs:", error);
       }
@@ -93,7 +94,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Add any custom styles here */
-</style>
