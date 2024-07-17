@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('profils', function (Blueprint $table) {
             $table->id();
-            $table->string('profilePicture');
-            $table->date('birthDate');
+            $table->string('profilePicture')->nullable();
             $table->text('bio');
             $table->string('gender');
             $table->string('city');
@@ -22,8 +21,9 @@ return new class extends Migration
             $table->string('phoneNumber');
             $table->string('website');
             $table->string('address');
-            $table->string('domain');
-            $table->string('cv');
+            $table->json('skills');
+            $table->json('languages');
+            $table->string('cv')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

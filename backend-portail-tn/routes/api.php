@@ -32,6 +32,9 @@ Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getIntern
 Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociete']);
 
 
+Route::get('/profil', [ProfilController::class, 'index']);
+Route::post('/profil', [ProfilController::class, 'store']);
+
 
 //SocieteController
 Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);

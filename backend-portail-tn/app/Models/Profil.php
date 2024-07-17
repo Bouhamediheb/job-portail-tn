@@ -19,6 +19,8 @@ class Profil extends Model
         'phoneNumber',
         'website',
         'address',
+        'skills',
+        'languages',
         'domain',
         'cv',
         'user_id',

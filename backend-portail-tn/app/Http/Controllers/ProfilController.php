@@ -23,24 +23,21 @@ class ProfilController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'profilePicture' => 'required',
-            'birthDate' => 'required',
+            'profilePicture',
             'bio' => 'required',
-            'gender' => 'required',
             'city' => 'required',
             'country' => 'required',
             'phoneNumber' => 'required',
-            'website' => 'required',
-            'address' => 'required',
-            'domain' => 'required',
-            'cv' => 'required|file|mimes:pdf',
+            'skills',
+            'languages',
+            'address' ,
+            'cv' => 'file|mimes:pdf',
             'user_id' => 'required|exists:users,id',
         ]);
 
         $profil = new Profil();
 
         $profil->profilePicture = $request->profilePicture;
-        $profil->birthDate = $request->birthDate;
         $profil->bio = $request->bio;
         $profil->gender = $request->gender;
         $profil->city = $request->city;
@@ -48,7 +45,8 @@ class ProfilController extends Controller
         $profil->phoneNumber = $request->phoneNumber;
         $profil->website = $request->website;
         $profil->address = $request->address;
-        $profil->domain = $request->domain;
+        $profil->skills = $request->skills;
+        $profil->languages = $request->languages;
         $profil->user_id = $request->user_id;
 
         if ($request->hasFile('cv')) {
