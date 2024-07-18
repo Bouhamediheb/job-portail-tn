@@ -9,9 +9,10 @@
       </div>
       <div class="content-wrapper">
         <Overview v-if="viewMode === 0" />
-        <MyPosts v-if="viewMode === 1" />
+        <MyPosts v-if="viewMode === 1" @viewJobDetail="handleViewJobDetail" />
         <UserProfile v-if="viewMode === 3 && userType === 'user'" />
         <CompanyProfile v-if="viewMode === 3 && userType === 'company'" />
+        <JobDetail v-if="viewMode === 4" :jobId="selectedJobId" />
         <PostJob v-if="viewMode === 10" />
       </div>
     </main>
@@ -26,6 +27,7 @@ import MyPosts from "@/components/dashboard/MyPosts.vue";
 import PostJob from "@/components/dashboard/PostJob.vue";
 import UserProfile from "@/components/dashboard/User/UserProfile.vue";
 import CompanyProfile from "@/components/dashboard/Company/CompanyProfile.vue";
+import JobDetail from "@/components/generic/JobDetail.vue";
 
 export default {
   name: "DashboardView",
@@ -36,12 +38,14 @@ export default {
     MyPosts,
     PostJob, 
     UserProfile,
-    CompanyProfile
+    CompanyProfile,
+    JobDetail,
   },
   data() {
     return {
       viewMode: 0,
-      userType: localStorage.getItem('type') || 'user' // Default to 'user' if not set
+      userType: localStorage.getItem('type') || 'user',
+      selectedJobId: null, 
     };
   },
   mounted() {
@@ -77,9 +81,11 @@ export default {
     
     updateViewMode(mode) {
       this.viewMode = mode;
-      console.log(this.viewMode); 
-    }
-  
+    },
+    handleViewJobDetail(jobId) {
+      this.selectedJobId = jobId;
+      this.viewMode = 4;
+    },
   },
 };
 </script>

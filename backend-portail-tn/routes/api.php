@@ -31,6 +31,9 @@ Route::get('/offre/jobs', [OffreController::class, 'getAllJobs']);
 Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getInternshipsBySociete']);
 //getJobsBySociete
 Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociete']);
+//getJobByID
+Route::get('/offre/job/{id}', [OffreController::class, 'getJobByID']);
+
 
 
 Route::get('/profil', [ProfilController::class, 'index']);

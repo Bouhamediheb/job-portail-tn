@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import SignInView from '../views/SignInView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import JobDetailView from '../views/JobDetailView.vue'
 
 
 
@@ -27,6 +28,7 @@ const routes = [
     name : 'dashboard',
     component : DashboardView
   },
+
 ]
 
 const router = createRouter({
