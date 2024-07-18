@@ -2,7 +2,7 @@
   <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
 
   <div class="dashboard-container">
-    <Header @navigateToPostJob="updateViewMode" /> 
+    <Header @navigateToPostJob="updateViewMode" />
     <main class="main">
       <div class="menu-wrapper">
         <Menu class="sticky-menu" @updateViewMode="updateViewMode" />
@@ -14,6 +14,9 @@
         <CompanyProfile v-if="viewMode === 3 && userType === 'company'" />
         <JobDetail v-if="viewMode === 4" :jobId="selectedJobId" />
         <PostJob v-if="viewMode === 10" />
+        <CandidateApplications
+          v-if="viewMode === 5 && userType === 'company'"
+        />
       </div>
     </main>
   </div>
@@ -28,6 +31,7 @@ import PostJob from "@/components/dashboard/PostJob.vue";
 import UserProfile from "@/components/dashboard/User/UserProfile.vue";
 import CompanyProfile from "@/components/dashboard/Company/CompanyProfile.vue";
 import JobDetail from "@/components/generic/JobDetail.vue";
+import CandidateApplications from "@/components/dashboard/Company/CandidateApplications.vue";
 
 export default {
   name: "DashboardView",
@@ -36,16 +40,17 @@ export default {
     Menu,
     Overview,
     MyPosts,
-    PostJob, 
+    PostJob,
     UserProfile,
     CompanyProfile,
     JobDetail,
+    CandidateApplications,
   },
   data() {
     return {
       viewMode: 0,
-      userType: localStorage.getItem('type') || 'user',
-      selectedJobId: null, 
+      userType: localStorage.getItem("type") || "user",
+      selectedJobId: null,
     };
   },
   mounted() {
@@ -78,7 +83,7 @@ export default {
         document.head.appendChild(script);
       });
     },
-    
+
     updateViewMode(mode) {
       this.viewMode = mode;
     },

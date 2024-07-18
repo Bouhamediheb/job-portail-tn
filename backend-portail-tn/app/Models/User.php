@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profil::class);
     }
+
+    public function postulations()
+    {
+        return $this->hasMany(Postulation::class);
+    }
 }
