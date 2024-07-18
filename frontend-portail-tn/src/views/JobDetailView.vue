@@ -2,28 +2,19 @@
     <link href="assets/home/css/stylecd4e.css" rel="stylesheet" />
   
     <Header />
-    <JobDetail />
+    <JobDetail :jobId="id" />
     <Footer />
   </template>
   
-  <script>
+  <script setup>
   import Header from '@/components/generic/Header.vue'
   import Footer from '@/components/generic/Footer.vue'
   import JobDetail from '@/components/generic/JobDetail.vue'
-
+  import { useRoute } from 'vue-router';
   
-  export default {
-    name: 'SignInView',
-    components: {
-      Header,
-      Footer,
-      JobDetail
+  const route = useRoute();
+  const id = route.params.id;
 
-    },
-    data() {
-      
-    },
-
-  }
+  console.log("route",route.params.id)
   </script>
   

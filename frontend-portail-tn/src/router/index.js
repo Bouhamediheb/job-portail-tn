@@ -28,6 +28,11 @@ const routes = [
     name : 'dashboard',
     component : DashboardView
   },
+  {
+    path: '/job/:id',
+    name: 'JobDetail',
+    component: JobDetailView
+  }
 
 ]
 
