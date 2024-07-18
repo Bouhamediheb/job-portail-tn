@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginControllerSociete;
 use App\Http\Controllers\Auth\RegisterControllerSociete;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\SocieteController;
+use App\Http\Controllers\ProfilController;
 
 Route::post('/register', [RegisterControllerUser::class, 'register']);
 Route::post('/login', [LoginControllerUser::class, 'login']);
