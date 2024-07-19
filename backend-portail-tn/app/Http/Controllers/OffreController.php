@@ -184,4 +184,11 @@ class OffreController extends Controller
         $offres = Offre::where('type', 'job')->where('societe_id', $id)->get();
         return $offres;
     }
+
+    //return job by id
+    public function getJobByID($id)
+    {
+        $offre = Offre::where('type', 'job')->where('id', $id)->get();
+        return $offre;
+    }
 }

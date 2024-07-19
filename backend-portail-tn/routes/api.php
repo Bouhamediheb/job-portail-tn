@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\LoginControllerSociete;
 use App\Http\Controllers\Auth\RegisterControllerSociete;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\SocieteController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PostulationController;
 
 Route::post('/register', [RegisterControllerUser::class, 'register']);
 Route::post('/login', [LoginControllerUser::class, 'login']);
@@ -30,6 +32,9 @@ Route::get('/offre/jobs', [OffreController::class, 'getAllJobs']);
 Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getInternshipsBySociete']);
 //getJobsBySociete
 Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociete']);
+//getJobByID
+Route::get('/offre/job/{id}', [OffreController::class, 'getJobByID']);
+
 
 
 Route::get('/profil', [ProfilController::class, 'index']);
@@ -39,3 +44,11 @@ Route::post('/profil', [ProfilController::class, 'store']);
 //SocieteController
 Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
 Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);
+
+
+//PostulationController
+Route::post('/postulation/{offreId}/{userId}', [PostulationController::class, 'store']);
+Route::get('/postulation', [PostulationController::class, 'index']);
+Route::delete('/postulation/{id}', [PostulationController::class, 'delete']);
+Route::get('/postulation/user/{userId}', [PostulationController::class, 'getPostulationsByUser']);
+Route::get('/postulation/societe/{societeId}', [PostulationController::class, 'getPosulationsBySociete']);

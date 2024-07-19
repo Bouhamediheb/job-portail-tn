@@ -24,7 +24,9 @@
                   </div>
                 </div>
                 <div class="card-block-info">
-                  <h5><a href="job-details.html">{{ item.title }}</a></h5>
+                  <h5>
+                    <router-link :to="{ name : 'JobDetail', params: { id: item.id } }">{{ item.title }}</router-link>
+                  </h5>
                   <div class="mt-5">
                     <span class="card-location mr-15">{{ item.city }}, {{ item.country }}</span>
                     <span class="card-time">Postée il y a {{ calculateDaysAgo(item.created_at) }} jours</span>

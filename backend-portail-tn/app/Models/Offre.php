@@ -35,4 +35,9 @@ class Offre extends Model
     {
         return $this->belongsTo(Societe::class);
     }
+
+    public function postulations()
+    {
+        return $this->hasMany(Postulation::class);
+    }
 }
