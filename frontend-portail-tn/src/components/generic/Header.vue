@@ -1,88 +1,134 @@
 <template>
-  <header class="header sticky-bar">
-    <div class="container">
-      <div class="main-header">
-        <div class="header-left">
-          <div class="header-logo">
-            <router-link to="/"
-              ><img
-                alt="PortailTN"
-                src="assets/home/imgs/template/jobhub-logo.svg"
-            /></router-link>
-          </div>
-        </div>
-        <div class="header-nav">
-          <nav class="nav-main-menu">
-            <ul class="main-menu">
-              <li>
-                <router-link to="/">Accueil</router-link>
-              </li>
-              <li class="has-children">
-                <a href="">Liste des Offres</a>
-                <ul class="sub-menu">
-                  <li><a href="">Stages</a></li>
-                  <li><a href="">Travail</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="">Annonces Featured</a>
-                <ul class="sub-menu">
-                  <li><a href="">Nos stages</a></li>
-                  <li>
-                    <a href="">Nos offres de travail</a>
-                  </li>
-                </ul>
-              </li>
-              <li class=""><a href="">Notre Blog</a></li>
-              <!-- if logged add dashboard routerlink-->
-              <li v-if="loggedIn">
-                <router-link to="/dashboard">Dashboard</router-link>
-              </li>
-            </ul>
-          </nav>
-          <div class="burger-icon burger-icon-white">
-            <span class="burger-icon-top"></span
-            ><span class="burger-icon-mid"></span
-            ><span class="burger-icon-bottom"></span>
-          </div>
-        </div>
-        <div class="header-right">
-          <template v-if="loggedIn">
-            <nav class="nav-main-menu">
-              <ul class="main-menu">
-                <li>
-                  <a href="" v-if="whoLoggedIn === 'user'"
-                    >Bienvenue, {{ firstName }} {{ lastName }}</a
-                  >
-                  <a href="" v-else-if="whoLoggedIn === 'company'"
-                    >Bienvenue, {{ companyName }}</a
-                  >
-
-                  <ul class="sub-menu">
-                    <li><router-link to="/">Votre Profil</router-link></li>
-                    <li><a href="#" @click.prevent="logout">Déconnexion</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </template>
-          <template v-else>
-            <div class="block-signin">
-              <router-link class="text-link-bd-btom hover-up" to="/signup"
-                >Inscription</router-link
-              >
-              <router-link
-                class="btn btn-default btn-shadow ml-40 hover-up"
-                to="/signin"
-              >
-                Connexion
-              </router-link>
+   <header class="header sticky-bar ">
+        <div class="container">
+            <div class="main-header">
+                <div class="header-left">
+                    <div class="header-logo">
+                      <a class="d-flex" href="index.html"><img alt="jobBox" src="/assets/home/imgs/template/jobhub-logo.svg"></a></div>
+                </div>
+                <div class="header-nav">
+                    <nav class="nav-main-menu">
+                        <ul class="main-menu">
+                            <li class="">
+                              <router-link to="/">Home</router-link>       
+                            </li>
+                            <li class="">
+                            <router-link to="/jobs">Emploi</router-link>                             
+                            </li>
+                            <li class="">
+                              <router-link to="/internships">Stages</router-link>                           
+                            </li>
+                            <li class="">
+                              <router-link to="/blog">Notre Blog</router-link>               
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+                </div>
+                <div class="header-right" style="display: flex;width: 100%;justify-content: flex-end;">
+                    <div class="block-signin">
+                      <router-link to="/register" class="btn btn-default icon-edit hover-up " v-if = "!loggedIn">Inscription</router-link>
+                      <router-link to="/login" class="btn btn-default icon-edit hover-up ml-20" v-if = "!loggedIn"
+                      >Connexion</router-link>
+                      <span class="ml-30 " v-if = "loggedIn && whoLoggedIn === 'user'
+                      "> Bienvenue , {{ firstName }} {{ lastName }} </span>
+                      <span class="ml-30 " v-if = "loggedIn && whoLoggedIn === 'company'
+                      "> Bienvenue , {{ companyName }} </span>
+                    </div>
+                </div>
             </div>
-          </template>
         </div>
-      </div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <form action="#">
+                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
+                        </form>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="mobile-menu font-heading">
+                              <li class="">
+                              <router-link to="/">Home</router-link>       
+                            </li>
+                            <li class="">
+                            <router-link to="/jobs">Emploi</router-link>                             
+                            </li>
+                            <li class="">
+                              <router-link to="/internships">Stages</router-link>                           
+                            </li>
+                            <li class="">
+                              <router-link to="/blog">Notre Blog</router-link>               
+                            </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-account">
+                        <h6 class="mb-10">Votre compte</h6>
+                        <ul class="mobile-menu font-heading">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Paramétres</a></li>
+                            <li><a href="#">Version payante</a></li>
+                          
+                              <li><a @click="logout" v-if = "loggedIn" href="#">Déconnexion</a></li>
+                            
+
+                        </ul>
+                    </div>
+                    <div class="site-copyright">Copyright 2024.</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <form action="#">
+                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
+                        </form>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                          <ul class="mobile-menu font-heading">
+                              <li class="">
+                              <router-link to="/">Home</router-link>       
+                            </li>
+                            <li class="">
+                            <router-link to="/jobs">Emploi</router-link>                             
+                            </li>
+                            <li class="">
+                              <router-link to="/internships">Stages</router-link>                           
+                            </li>
+                            <li class="">
+                              <router-link to="/blog">Notre Blog</router-link>               
+                            </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-account">
+                        <h6 class="mb-10">Votre compte</h6>
+                        <ul class="mobile-menu font-heading">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Paramétres</a></li>
+                            <li><a href="#">Version payante</a></li>
+                          
+                              <li><a @click="logout" v-if = "loggedIn" href="#">Déconnexion</a></li>
+                            
+
+                        </ul>
+                    </div>
+                    <div class="site-copyright">Copyright 2024.</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 
@@ -142,19 +188,5 @@ const logout = async () => {
 </script>
 
 <style lang="css">
-.main-menu {
-  overflow: hidden;
-}
-.block-signin {
-  width: max-content;
-}
 
-.sub-menu {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
 </style>

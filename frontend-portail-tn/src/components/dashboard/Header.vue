@@ -27,17 +27,15 @@
           </div>
           <div class="header-right">
             <div class="block-signin">
-              <a class='btn btn-default icon-edit hover-up' @click="postJob(10)">Poster une annonce</a>
+              <a class='btn btn-default icon-edit hover-up' @click="postJob(99)">Poster une annonce</a>
               
-       <span class="ml-30"> </span>
+       <span class="ml-30 "> </span>
               <div class="member-login"><img alt="" src="assets/dashboard/imgs/page/dashboard/profile.png">
-                <div class="info-member"> <strong class="color-brand-1">Admin/RH</strong>
-                  <div class="dropdown"><a class="font-xs color-text-paragraph-2 icon-down" id="dropdownProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">Super Admin</a>
-                    <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownProfile">
-                      <li><a class='dropdown-item' href=''>Profile</a></li>
-                      <li><a class='dropdown-item' href=''>Logout</a></li>
-                    </ul>
-                  </div>
+                <div class="info-member mt-5"> <strong class="color-brand-1">Bienvenue, 
+                  {{ displayUserName }}
+
+                </strong>
+
                 </div>
               </div>
             </div>
@@ -125,15 +123,34 @@
       </div>
     </div>
 </template>
-
 <script>
 export default {
+  
+  computed: {
+    displayUserName() {
+      if (typeof localStorage !== 'undefined') {
+        const userType = localStorage.getItem('type');
+        console.log(userType);
+        if (userType === 'user') {
+          // Assuming user details are available in localStorage
+          const userFirstName = localStorage.getItem('firstName')
+          const userLastName = localStorage.getItem('lastName')
+          return `${userFirstName} ${userLastName}`;
+        } else if (userType === 'company') {
+          return localStorage.getItem('companyName');
+        } else {
+          return ''; // Handle other cases or return default value
+        }
+      } else {
+        return ''; // Handle case where localStorage is not supported
+      }
+    }
+  },
   methods: {
     postJob(x) {
       console.log("xxx",x);
       this.$emit('navigateToPostJob', x);
     }
-  }
-}
+  },
+};
 </script>
-

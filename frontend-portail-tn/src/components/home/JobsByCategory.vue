@@ -23,7 +23,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/marketing.svg"
+                        src="/assets/home/imgs/page/homepage1/marketing.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -37,7 +37,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/customer.svg"
+                        src="/assets/home/imgs/page/homepage1/customer.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -53,7 +53,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/finance.svg"
+                        src="/assets/home/imgs/page/homepage1/finance.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -67,7 +67,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/lightning.svg"
+                        src="/assets/home/imgs/page/homepage1/lightning.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -83,7 +83,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/human.svg"
+                        src="/assets/home/imgs/page/homepage1/human.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -97,7 +97,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/management.svg"
+                        src="/assets/home/imgs/page/homepage1/management.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -113,7 +113,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/retail.svg"
+                        src="/assets/home/imgs/page/homepage1/retail.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -127,7 +127,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/security.svg"
+                        src="/assets/home/imgs/page/homepage1/security.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -143,7 +143,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/content.svg"
+                        src="/assets/home/imgs/page/homepage1/content.svg"
                       />
                     </div>
                     <div class="text-info-right">
@@ -157,7 +157,7 @@
                     <div class="image-left">
                       <img
                         alt="PortailTN"
-                        src="assets/home/imgs/page/homepage1/research.svg"
+                        src="/assets/home/imgs/page/homepage1/research.svg"
                       />
                     </div>
                     <div class="text-info-right">

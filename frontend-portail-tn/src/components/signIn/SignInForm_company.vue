@@ -82,7 +82,7 @@
         localStorage.setItem('islogged', true)
         localStorage.setItem('id', response.data.societe.id)
         localStorage.setItem('type', 'company')
-        router.push('/')
+        router.push('/dashboard')
       }
     } catch (error) {
       console.error(error)

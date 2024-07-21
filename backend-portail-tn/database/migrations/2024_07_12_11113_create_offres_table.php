@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->integer('employmentType')->nullable();
             $table->integer('workplace');
-            $table->string('description');
+            $table->text('description');
             $table->string('domain');
             $table->integer('hidden')->default(0);
             $table->integer('featured')->default(0);

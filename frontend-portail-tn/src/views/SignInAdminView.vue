@@ -2,24 +2,21 @@
   <link href="/assets/home/css/stylecd4e.css" rel="stylesheet" />
 
   <Header />
-  <SignInFormUser v-if="type === 0" @changeType="changeType" />
-  <SignInFormCompany v-else @changeType="changeType" />
+  <SignInFormAdmin  />
   <Footer />
 </template>
 
 <script>
 import Header from '@/components/generic/Header.vue'
 import Footer from '@/components/generic/Footer.vue'
-import SignInFormUser from '@/components/signIn/SignInForm_user.vue'
-import SignInFormCompany from '@/components/signIn/SignInForm_company.vue'
+import SignInFormAdmin from '@/components/signIn/SignInForm_admin.vue'
 
 export default {
   name: 'SignInView',
   components: {
     Header,
     Footer,
-    SignInFormUser,
-    SignInFormCompany
+    SignInFormAdmin,
   },
   data() {
     return {

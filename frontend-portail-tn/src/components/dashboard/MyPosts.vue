@@ -36,7 +36,7 @@
                       <p>Aucune annonce disponible.</p>
                     </div>
                     <div v-else>
-                      <div class="col-lg-6" v-for="item in paginatedItems" :key="item.id">
+                      <div class="col-lg-12" v-for="item in paginatedItems" :key="item.id">
                         <div class="card-style-2 hover-up">
                           <div class="card-head">
                             <div class="card-image">
@@ -153,7 +153,7 @@ export default {
   flex-direction: column;
 }
 .skeleton-card {
-  background: #e0e0e0; /* Placeholder color */
+  background: #ffffff; /* Placeholder color */
   margin: 10px 0;
   padding: 15px;
   border-radius: 5px;
@@ -161,18 +161,18 @@ export default {
 }
 .skeleton-image {
   height: 150px;
-  background: #c0c0c0; /* Placeholder for image */
+  background: #e5eaf0; /* Placeholder for image */
   border-radius: 5px;
   margin-bottom: 10px;
 }
 .skeleton-title {
   height: 20px;
-  background: #c0c0c0; /* Placeholder for title */
+  background: #e5eaf0; /* Placeholder for title */
   margin-bottom: 5px;
 }
 .skeleton-info {
   height: 15px;
-  background: #c0c0c0; /* Placeholder for additional info */
+  background: #e5eaf0; /* Placeholder for additional info */
   margin-bottom: 5px;
 }
 @keyframes pulse {

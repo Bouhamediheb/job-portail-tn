@@ -1,5 +1,5 @@
 <template>
-  <link href="assets/home/css/stylecd4e.css" rel="stylesheet" />
+  <link href="/assets/home/css/stylecd4e.css" rel="stylesheet" />
 
   <Header />
   <SignUpFormUser v-if="type === 0" @changeType="changeType" />

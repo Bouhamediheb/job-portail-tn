@@ -488,7 +488,9 @@ import { ref } from "vue";
 import axios from "axios";
 import { onMounted } from "vue";
 import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const postedJob = ref(null);
 const type = ref("job");
 const skillInput = ref("");
@@ -529,7 +531,7 @@ const internshipDetails = ref({
   country: "",
   internshipMotivation: "",
   domain: "",
-  featured: 0,
+  featured: false,
   file: null,
   societe_id: companyId.value,
 });
@@ -567,7 +569,7 @@ function resetFields() {
       country: "",
     },
     domain: "",
-    featured: 0,
+    featured: false,
     internshipMotivation: "",
     file: null,
   };
@@ -614,7 +616,7 @@ const submitForm = async () => {
         type: type.value,
         skills: JSON.stringify(selectedSkills.value),
         ...jobDetails.value,
-        featured: jobDetails.value.featured ? 1 : 0, // Convert checkbox value
+        featured: jobDetails.value.featured ? 1 : 0,
       };
     } else {
       data = {

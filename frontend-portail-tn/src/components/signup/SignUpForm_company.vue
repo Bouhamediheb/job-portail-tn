@@ -113,7 +113,7 @@ const register = async () => {
     }
 
     setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/singnin");
         }, 2000);
 
 

@@ -10,45 +10,50 @@
             Trouvez l'offre d'emploi ou de stage proposées par nos partenaires
             <br class="d-none d-lg-block" />qui vous convient.
           </p>
+          <div class="list-tabs list-tabs-2 mt-30">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li><a class="active" id="nav-tab-job-1" href="#tab-job-1" data-bs-toggle="tab" role="tab" aria-controls="tab-job-1" aria-selected="true"><img src="assets/home/imgs/page/homepage1/management.svg" alt="jobBox"> Management</a></li>
+                                <li><a id="nav-tab-job-2" href="#tab-job-2" data-bs-toggle="tab" role="tab" aria-controls="tab-job-2" aria-selected="false"><img src="assets/home/imgs/page/homepage1/marketing.svg" alt="jobBox"> Marketing &amp; Sale</a></li>
+                                <li><a id="nav-tab-job-3" href="#tab-job-3" data-bs-toggle="tab" role="tab" aria-controls="tab-job-3" aria-selected="false"><img src="assets/home/imgs/page/homepage1/finance.svg" alt="jobBox"> Finance</a></li>
+
+                            </ul>
+                        </div>
         </div>
         <div class="mt-10">
           <div class="row">
+            
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" v-for="item in jobs" :key="item.id">
               <div class="card-grid-2 grid-bd-16 hover-up">
-                <div class="card-grid-2-image">
-                  <span class="lbl-hot bg-green"><span>Emploi</span></span>
-                  <div class="image-box">
-                    <figure>
-                      <img :src="item.image || 'assets/home/imgs/page/homepage2/img1.png'" alt="PortailTN" />
-                    </figure>
-                  </div>
-                </div>
-                <div class="card-block-info">
-                  <h5>
-                    <router-link :to="{ name : 'JobDetail', params: { id: item.id } }">{{ item.title }}</router-link>
-                  </h5>
-                  <div class="mt-5">
-                    <span class="card-location mr-15">{{ item.city }}, {{ item.country }}</span>
-                    <span class="card-time">Postée il y a {{ calculateDaysAgo(item.created_at) }} jours</span>
-                    <span class="card-location">{{ getWorkplaceType(item.workplace) }}</span>
-                  </div>
-
-                  <div class="card-2-bottom mt-20">
-                    <div class="row">
-                      <div class="col-xl-7 col-md-7 mb-2">
-                        <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tags-sm mr-5">{{ tag }}</a>
-                      </div>
-                      <div class="col-xl-5 col-md-5 text-lg-end">
-                        <span class="card-text-price">{{ item.minSalary }} - {{ item.maxSalary }} DT</span>
-                      </div>
+                <div class="card-grid-2-inner">
+                  <div class="card-grid-2-image">
+                    <span class="lbl-hot bg-green"><span>Emploi</span></span>
+                    <div class="image-box">
+                      <figure>
+                        <img :src="item.image || 'assets/home/imgs/page/homepage2/img1.png'" alt="PortailTN" />
+                      </figure>
                     </div>
+                  </div>
+                  <div class="card-block-info">
+                    <h5 class="card-title">
+                      <router-link :to="{ name: 'JobDetail', params: { id: item.id } }">{{ item.title }}</router-link>
+                    </h5>
+                    <div class="card-details">
+                      <div class="card-location">{{ item.city }}, {{ item.country }}</div>
+                      <div class="card-time ml-10">Postée il y a {{ calculateDaysAgo(item.created_at) }} jours</div>
+                      <div class="card-location ml-10">{{getWorkplaceType(item.workplace) }}</div>
+                      
+                    </div>
+                    <div class="card-tags">
+                      <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tags-sm mr-5">{{ tag }}</a>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="text-center mt-10">
-            <a class="btn btn-brand-1 btn-icon-more hover-up">Voir plus </a>
+            <a class="btn btn-brand-1 btn-icon-more hover-up mt-20">Voir plus </a>
           </div>
         </div>
       </div>
@@ -96,3 +101,44 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+.card-grid-2 {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.card-grid-2 .card-grid-2-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-grid-2 .card-block-info {
+  flex: 1;
+  padding: 20px;
+}
+
+.card-grid-2 .card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-grid-2 .card-details {
+  margin-bottom: 10px;
+}
+
+.card-grid-2 .card-tags {
+  margin-bottom: 10px;
+}
+
+.card-grid-2 .card-salary {
+  margin-top: auto;
+  text-align: right;
+}
+</style>

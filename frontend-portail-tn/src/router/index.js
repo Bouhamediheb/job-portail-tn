@@ -2,8 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignInView from '../views/SignInView.vue'
 import SignUpView from '../views/SignUpView.vue'
+import SignInAdminView from '../views/SignInAdminView.vue'
+
 import DashboardView from '../views/DashboardView.vue'
 import JobDetailView from '../views/JobDetailView.vue'
+import JobListView from '../views/JobListView.vue'
+import InternshipListView from '@/views/InternshipListView.vue'
 
 
 
@@ -19,6 +23,12 @@ const routes = [
     component : SignInView
   },
   {
+    path : '/signin/admin',
+    name : 'signinadmin',
+    component : SignInAdminView
+  },
+
+  {
     path : '/signup',
     name : 'signup',
     component : SignUpView
@@ -26,13 +36,34 @@ const routes = [
     {
     path : '/dashboard',
     name : 'dashboard',
-    component : DashboardView
+    component : DashboardView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('islogged') === 'true') {
+        next(); 
+      } else {
+        next('/signin');
+      }
+    }
   },
   {
     path: '/job/:id',
     name: 'JobDetail',
-    component: JobDetailView
-  }
+    component: JobDetailView,  
+    props: true 
+
+  },
+  {
+    path: '/jobs',
+    name: 'JobList',
+    component: JobListView
+  },
+  {
+    path: '/internships',
+    name: 'InternshipList',
+    component: InternshipListView
+  },
+  
+  
 
 ]
 

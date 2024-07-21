@@ -120,7 +120,7 @@ const register = async () => {
     }
 
     setTimeout(() => {
-          router.push("/");
+          router.push("/signin");
         }, 3000);
 
 

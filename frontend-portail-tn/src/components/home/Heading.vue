@@ -1,110 +1,5 @@
 <template>
-    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
-        <div class="mobile-header-wrapper-inner">
-            <div class="mobile-header-content-area">
-                <div class="perfect-scroll">
-                    <div class="mobile-search mobile-header-border mb-30">
-                        <form action="#">
-                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
-                        </form>
-                    </div>
-                    <div class="mobile-menu-wrap mobile-header-border">
 
-                        <nav>
-                            <ul class="mobile-menu font-heading">
-                                <li class=""><a class="active" href="">Accueil</a>
-
-                                </li>
-                                <li class="has-children"><a href="jobs-grid.html">Liste des Offres</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Stages</a></li>
-                                        <li><a href="">Emploi</a></li>
-
-                                    </ul>
-                                </li>
-                                <li><a href="">Sociétés</a></li>
-                                <li>
-                                    <a href="">Annonces Featured</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Nos stages</a></li>
-                                        <li>
-                                            <a href="">Nos offres de travail</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class=""><a href="blog-grid.html">Blog</a>
-                                    
-                                </li>
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="mobile-account">
-                        <h6 class="mb-10">Votre compte</h6>
-                        <ul class="mobile-menu font-heading">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Paramétres</a></li>
-                            <li><a href="">Deconnexion</a></li>
-                        </ul>
-                    </div>
-                    <div class="site-copyright">Copyright 2024 &copy; PortailTN.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
-        <div class="mobile-header-wrapper-inner">
-            <div class="mobile-header-content-area">
-                <div class="perfect-scroll">
-                    <div class="mobile-search mobile-header-border mb-30">
-                        <form action="#">
-                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
-                        </form>
-                    </div>
-                    <div class="mobile-menu-wrap mobile-header-border">
-                        <!-- mobile menu start-->
-                        <nav>
-                            <ul class="mobile-menu font-heading">
-                                <li class=""><a class="active" href="">Accueil</a>
-
-                                </li>
-                                <li class="has-children"><a href="jobs-grid.html">Liste des Offres</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Stages</a></li>
-                                        <li><a href="">Emploi</a></li>
-
-                                    </ul>
-                                </li>
-                                <li><a href="">Sociétés</a></li>
-                                <li>
-                                    <a href="">Annonces Featured</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Nos stages</a></li>
-                                        <li>
-                                            <a href="">Nos offres de travail</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class=""><a href="blog-grid.html">Blog</a>
-                                    
-                                </li>
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="mobile-account">
-                        <h6 class="mb-10">Votre compte</h6>
-                        <ul class="mobile-menu font-heading">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Paramétres</a></li>
-                            <li><a href="">Deconnexion</a></li>
-                        </ul>
-                    </div>
-                    <div class="site-copyright">Copyright 2024 &copy; PortailTN. </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="bg-homepage4"></div>
     <section class="section-box">
         <div class="banner-hero hero-1 banner-homepage4">
@@ -116,10 +11,10 @@
                                     class="color-brand-2">travail/stage</span><br class="d-none d-lg-block">de vos rêves
                             </h1>
                             <div class="banner-description mt-20 wow animate__animated animate__fadeInUp"
-                                data-wow-delay=".1s">Chaque mois, plus de 3 millions de chercheurs d'emploi se tournent
+                                 >Chaque mois, plus de 3 millions de chercheurs d'emploi se tournent
                                 <br class="d-none d-lg-block">vers notre site dans leur recherche de travail.
                             </div>
-                            <div class="form-find mt-40 wow animate__animated animate__fadeIn no-border" data-wow-delay=".2s">
+                            <div class="form-find mt-40 wow animate__animated animate__fadeIn no-border"  >
                                 <form>
 
                                     <select class="form-input mr-10 select-active input-industry no-border">
@@ -389,7 +284,7 @@
                     <div class="col-xl-5 col-lg-12 d-none d-xl-block col-md-6">
                         <div class="banner-imgs">
                             <div class="block-1 shape-1"><img class="img-responsive" alt="PortailTN"
-                                    src="assets/home/imgs/page/homepage4/banner.png"></div>
+                                    src="/assets/home/imgs/page/homepage4/banner.png"></div>
                         </div>
                     </div>
                 </div>

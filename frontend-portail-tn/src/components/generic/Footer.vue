@@ -6,7 +6,7 @@
           <a href="index.html"
             ><img
               alt="PortailTN"
-              src="assets/home/imgs/template/jobhub-logo.svg"
+              src="/assets/home/imgs/template/jobhub-logo.svg"
           /></a>
           <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
             PortailTN est le cœur de la communauté de design et la meilleure
@@ -64,11 +64,11 @@
           <div class="mt-15">
             <a class="mr-5" href="#"
               ><img
-                src="assets/home/imgs/template/icons/app-store.png"
+                src="/assets/home/imgs/template/icons/app-store.png"
                 alt="joxBox" /></a
             ><a href="#"
               ><img
-                src="assets/home/imgs/template/icons/android.png"
+                src="/assets/home/imgs/template/icons/android.png"
                 alt="joxBox"
             /></a>
           </div>

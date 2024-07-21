@@ -1,26 +1,21 @@
 <template>
-  <link href="assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
-
+  <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
   <div class="dashboard-container">
     <Header @navigateToPostJob="updateViewMode" />
     <main class="main">
       <div class="menu-wrapper">
-        <Menu class="sticky-menu" @updateViewMode="updateViewMode" />
+        <Menu class="sticky-menu" :userType="userType" @updateViewMode="updateViewMode" />
       </div>
       <div class="content-wrapper">
-        <Overview v-if="viewMode === 0" />
-        <MyPosts v-if="viewMode === 1" @viewJobDetail="handleViewJobDetail" />
-        <UserProfile v-if="viewMode === 3 && userType === 'user'" />
-        <CompanyProfile v-if="viewMode === 3 && userType === 'company'" />
-        <JobDetail v-if="viewMode === 4" :jobId="selectedJobId" />
-        <PostJob v-if="viewMode === 10" />
-        <CandidateApplications
-          v-if="viewMode === 5 && userType === 'company'"
-        />
+        <div v-if="currentViewComponent">
+          <component :is="currentViewComponent" @viewJobDetail="handleViewJobDetail" />
+        </div>
+
       </div>
     </main>
   </div>
 </template>
+
 
 <script>
 import Header from "@/components/dashboard/Header.vue";
@@ -32,6 +27,7 @@ import UserProfile from "@/components/dashboard/User/UserProfile.vue";
 import CompanyProfile from "@/components/dashboard/Company/CompanyProfile.vue";
 import JobDetail from "@/components/generic/JobDetail.vue";
 import CandidateApplications from "@/components/dashboard/Company/CandidateApplications.vue";
+import PendingJobPosts from "@/components/dashboard/Admin/PendingJobPosts.vue";
 
 export default {
   name: "DashboardView",
@@ -45,55 +41,74 @@ export default {
     CompanyProfile,
     JobDetail,
     CandidateApplications,
+    PendingJobPosts,
   },
   data() {
     return {
-      viewMode: 0,
       userType: localStorage.getItem("type") || "user",
-      selectedJobId: null,
+    viewMode: 0, 
+    selectedJobId: null,
     };
   },
-  mounted() {
-    this.loadScripts();
-    console.log(this.viewMode);
+  computed: {
+    currentViewComponent() {
+      if(this.userType === 'user')
+      {
+      switch (this.viewMode) {
+        case 0:
+          return 'Overview';
+        case 1:
+          return 'UserProfile';
+        case 6:
+          return 'Deconnexion';
+      }
+    }
+    else if(this.userType === 'company')
+    {
+      switch (this.viewMode) {
+        case 0:
+          return 'Overview';
+        case 1:
+          return 'CompanyProfile';
+        case 2:
+          return 'MyPosts';
+        case 3:
+          return 'CandidateApplications';
+        case 4:
+          return 'PendingJobPosts';
+        case 5:
+          return 'PostJob';
+        case 6:
+          return 'Deconnexion';
+      }
+    }
+    else if(this.userType === 'admin')
+    {
+      switch (this.viewMode) {
+        case 0:
+          return 'Overview';
+        case 1:
+          return 'MyPosts';
+        case 2:
+          return 'PendingJobPosts';
+        case 6:
+          return 'Deconnexion';
+      }
+    }
+    },
   },
   methods: {
-    loadScripts() {
-      const scripts = [
-        "assets/dashboard/js/vendor/jquery-3.6.0.min.js",
-        "assets/dashboard/js/vendor/modernizr-3.6.0.min.js",
-        "assets/dashboard/js/vendor/jquery-migrate-3.3.0.min.js",
-        "assets/dashboard/js/vendor/bootstrap.bundle.min.js",
-        "assets/dashboard/js/plugins/waypoints.js",
-        "assets/dashboard/js/plugins/magnific-popup.js",
-        "assets/dashboard/js/plugins/perfect-scrollbar.min.js",
-        "assets/dashboard/js/plugins/swiper-bundle.min.js",
-        "assets/dashboard/js/plugins/jquery.circliful.js",
-        "assets/dashboard/js/plugins/charts/index.js",
-        "assets/dashboard/js/plugins/charts/xy.js",
-        "assets/dashboard/js/plugins/charts/Animated.js",
-        "assets/dashboard/js/plugins/armcharts5-script.js",
-        "assets/dashboard/js/mainDashboard.js",
-      ];
-
-      scripts.forEach((src) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = false;
-        document.head.appendChild(script);
-      });
-    },
-
     updateViewMode(mode) {
       this.viewMode = mode;
     },
     handleViewJobDetail(jobId) {
       this.selectedJobId = jobId;
-      this.viewMode = 4;
+      this.viewMode = 99; 
     },
   },
 };
 </script>
+
 
 <style scoped>
 .dashboard-container {

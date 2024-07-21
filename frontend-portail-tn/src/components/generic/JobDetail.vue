@@ -1,8 +1,17 @@
 <template>
-  <div v-if="job">
+  <div v-if="loading" class="skeleton-loading">
+      <div class="banner-hero skeleton-banner"></div>
+      <div class="skeleton-info"></div>
+      <div class="skeleton-placeholder"></div>
+      <div class="skeleton-placeholder"></div>
+      <div class="skeleton-placeholder"></div>
+      <div class="skeleton-placeholder"></div>
+      <div class="skeleton-placeholder"></div>
+    </div>
+    <div v-else>
     <section class="section-box-2">
       <div class="container">
-        <div class="banner-hero banner-image-single"><img src="assets/home/imgs/page/job-single/thumb.png" alt="jobBox">
+        <div class="banner-hero banner-image-single"><img src="/assets/home/imgs/page/job-single/thumb.png" alt="jobBox">
         </div>
         <div class="row mt-10">
           <div class="col-lg-8 col-md-12">
@@ -25,13 +34,13 @@
               <h5 class="border-bottom pb-15 mb-30">Informations :</h5>
               <div class="row">
                 <div class="col-md-6 d-flex">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/industry.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/industry.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span class="text-description industry-icon mb-10">Domaine
                     </span><strong class="small-heading"> {{ job.domain }}</strong></div>
                 </div>
                 <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/job-level.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/job-level.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span
                       class="text-description joblevel-icon mb-10">Type</span><strong class="small-heading">
@@ -41,7 +50,7 @@
               </div>
               <div class="row mt-25">
                 <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/salary.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/salary.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span
                       class="text-description salary-icon mb-10">Salary</span><strong class="small-heading">
@@ -50,7 +59,7 @@
                     </strong></div>
                 </div>
                 <div class="col-md-6 d-flex">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/experience.svg"
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/experience.svg"
                       alt="jobBox"></div>
                   <div class="sidebar-text-info ml-10"><span
                       class="text-description experience-icon mb-10">Expérience</span><strong class="small-heading">{{
@@ -59,7 +68,7 @@
               </div>
               <div class="row mt-25">
                 <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/job-type.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/job-type.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span
                       class="text-description jobtype-icon mb-10">Emplacement:</span><strong class="small-heading">
@@ -68,7 +77,7 @@
                 </div>
 
                 <div class="col-md-6 d-flex mt-sm-15" v-if="job.type == 'stage'">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/deadline.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/deadline.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span class="text-description mb-10">Durée</span><strong
                       class="small-heading">{{ job.internshipDuration }}</strong></div>
@@ -77,7 +86,7 @@
 
               <div class="row mt-25">
                 <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item"><img src="assets/home/imgs/page/job-single/location.svg" alt="jobBox">
+                  <div class="sidebar-icon-item"><img src="/assets/home/imgs/page/job-single/location.svg" alt="jobBox">
                   </div>
                   <div class="sidebar-text-info ml-10"><span class="text-description mb-10">Location</span><strong
                       class="small-heading">{{ job.city }} , {{ job.country }}</strong></div>
@@ -91,35 +100,45 @@
             </div>
             <div class="content-single">
               <h4>Compétences requises:</h4>
-              <!--itérate         "skills": "[\"Python\", \"JavaScript\"]", job.skills (json)-->
               <ul class="ul-disc">
                 <li class="ml-20" v-for="skill in JSON.parse(job.skills)" :key="skill">{{ skill }}</li>
               </ul>
+              <p class="ml-20" v-if="JSON.parse(job.skills).length === 0">Aucune compétence requise</p>
+              
+
             </div>
 
-            <div class="single-apply-jobs">
-              <div class="row align-items-center">
-                <div class="col-md-6">
-  <a class="btn btn-default mr-15" href="#" @click="postuler(job.id, getUserIdFromLocalStorage())">Postuler !</a>
-</div>                
-              </div>
-            </div>
+            <div class="single-apply-jobs" v-if="isItaUser()">
+      <div class="row align-items-center">
+        <div class="col-md-6" v-if="!alreadyApplied()">
+          <a class="btn btn-default mr-15" href="#" @click="postuler(job.id, userId)">Postuler !</a>
+        </div>
+        <div class="col-md-6" v-else>
+        <button class="btn btn-default mr-15" style="background-color: grey;" disabled>Connectez-vous pour postuler</button>
+      </div>
+        <div class="col-md-6" v-if="alreadyApplied()">
+          <button class="btn btn-default mr-15" style="background-color: grey;" disabled>Déjà postulé</button>
+        </div>
+        
+        <div class="col-md-6" v-if="isAdmin()">
+          <button class="btn btn-default mr-15" style="background-color: grey;" disabled>Cacher cette annonce</button>
+
+      </div>
+     
+    </div>
+    </div>
           </div>
           <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">
             <div class="sidebar-border">
               <div class="sidebar-heading">
                 <div class="avatar-sidebar">
-                  <figure><img alt="jobBox" src="assets/home/imgs/page/job-single/avatar.png"></figure>
+                  <figure><img alt="jobBox" src="/assets/home/imgs/page/job-single/avatar.png"></figure>
                   <div class="sidebar-info"><span class="sidebar-company">{{ company?.name }}</span><span
                       class="card-location">{{ company?.city }},{{ company?.country }}</span></div>
                 </div>
               </div>
               <div class="sidebar-list-job">
-                <div class="box-map">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.3150609575905!2d-87.6235655!3d41.886080899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2ca8b34afe61%3A0x6caeb5f721ca846!2s205%20N%20Michigan%20Ave%20Suit%20810%2C%20Chicago%2C%20IL%2060601%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1658551322537!5m2!1svi!2s"
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+              
                 <ul class="ul-disc">
                   <li>{{ company?.address }} </li>
                   <li>{{ company?.phoneNumber }}</li>
@@ -130,19 +149,23 @@
 
           </div>
         </div>
+        <sweet-modal icon="success" ref="submitted">
+            <div class="spacingtop">
+              Votre candidature a été envoyée avec succès !
+            </div>
+          </sweet-modal>
       </div>
     </section>
   </div>
 
-  <!-- Loading State -->
-  <div v-else>
-    <p>Loading job details...</p>
-  </div>
+
 </template>
 
 <script setup>
 import axios from 'axios';
-import { ref, onMounted, defineProps } from 'vue';
+import { ref, onMounted } from 'vue';
+import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   jobId: {
@@ -151,8 +174,16 @@ const props = defineProps({
   }
 });
 
-let job = ref();
-let company = ref();
+const loading = ref(true);
+const submitted = ref(null);
+const job = ref(null);
+const company = ref(null);
+const userId = ref(null);
+const applications = ref([]);
+const router = useRouter();
+
+const jobId = localStorage.getItem('jobId') ? Number(localStorage.getItem('jobId')) : props.jobId;
+
 
 const fetchJobDetail = async (jobId) => {
   try {
@@ -169,27 +200,86 @@ const fetchJobDetail = async (jobId) => {
   }
 };
 
-const postuler = async (offreId, userId) => {
+const postuler = async (offreId) => {
+  console.log("Postuler:", offreId, userId.value);
   try {
-    // Assuming getUserIdFromLocalStorage() is a function that retrieves the userId from local storage
-    const response = await axios.post(`http://localhost:8000/api/postulation/${offreId}/${userId}`);
+    const response = await axios.post(`http://localhost:8000/api/postulation/${offreId}/${userId.value}`);
     console.log("Postulation response:", response.data);
-
-    // Optionally, you can handle success scenarios here (e.g., show a success message)
+    if (submitted.value) {
+      submitted.value.open();
+    }
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   } catch (error) {
     console.error("Error posting application:", error.response ? error.response.data : error.message);
-    // Handle error scenarios here (e.g., show an error message to the user)
   }
 };
 
-const getUserIdFromLocalStorage = () => {
-  // Replace with your logic to retrieve userId from localStorage
-  return localStorage.getItem('id');
+const isAdmin = () => {
+  return localStorage.getItem('type') === 'admin';
 };
 
-// Hook to fetch job details when component is mounted
+const isItaUser = () => {
+  return localStorage.getItem('type') === 'user';
+};
+
+const getUserIdFromLocalStorage = () => {
+  userId.value = localStorage.getItem('id');
+};
+
+const fetchUserApplications = async () => {
+  try {
+    const response = await axios.get(`http://localhost:8000/api/postulation/user/${userId.value}`);
+    applications.value = response.data;
+    console.log('User applications:', applications.value);
+  } catch (error) {
+    console.error('Error fetching user applications:', error);
+  }
+};
+
+const alreadyApplied = () => {
+  return applications.value.some(application => application.offre_id === props.jobId);
+};
+
+localStorage.setItem('jobId', jobId);
+
 onMounted(() => {
-  fetchJobDetail(props.jobId);
-  console.log(props.jobId);
+  fetchJobDetail(jobId);
+  getUserIdFromLocalStorage();
+  fetchUserApplications();
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
 });
+
+
 </script>
+
+<style scoped>
+.skeleton-loading {
+  background-color: #e0e6ec;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.skeleton-banner {
+  height: 300px; 
+  background-color: #f1f0f0;
+  border-radius: 8px;
+}
+
+.skeleton-info {
+  height: 50vh; 
+  background-color: #f1f0f0;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.skeleton-placeholder {
+  height: 20px; 
+  background-color: #f1f0f0;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+</style>
