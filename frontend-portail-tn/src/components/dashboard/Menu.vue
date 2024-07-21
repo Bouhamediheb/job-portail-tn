@@ -45,7 +45,7 @@ export default {
           viewMode: {
             admin: 3,
             user: 1,
-            company: 3,
+            company: 1,
           },
         },
         {
@@ -55,7 +55,7 @@ export default {
           viewMode: {
             admin: 1,
             user: null,
-            company: 1,
+            company: 2,
           },
         },
         {
@@ -65,7 +65,7 @@ export default {
           viewMode: {
             admin: 2,
             user: null,
-            company: 2,
+            company: 3,
           },
         },
         
