@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="section-box">
-          <div class="container box-padding panel-white mb-30">
+          <div class="container box-padding panel-white mb-30 row">
             <div class="col-lg-6">
               <h5 class="mb-30">Vos Offres</h5>
               <div v-if="loading">
@@ -74,6 +74,9 @@
                 </div>
               </div>
             </div>
+            <div class="col-lg-5">
+              <h5 class="mb-30">Vos candidatures</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -86,6 +89,7 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const offres = ref({});
+const candidates = ref({});
 const loading = ref(true);
 onMounted(() => {
   getOffres();
@@ -98,6 +102,8 @@ const calculateDaysAgo = (createdAt) => {
   const daysAgo = Math.floor(timeDifference / (1000 * 3600 * 24)); // convert to days
   return daysAgo;
 };
+
+const getCandidatesByOffres = () => {};
 
 const getOffres = async () => {
   const id = localStorage.getItem("id");

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterControllerAdmin;
+use App\Http\Controllers\Auth\LoginControllerAdmin;
 use App\Http\Controllers\Auth\RegisterControllerUser;
 use App\Http\Controllers\Auth\LoginControllerUser;
 use App\Http\Controllers\Auth\LoginControllerSociete;
@@ -10,11 +12,15 @@ use App\Http\Controllers\SocieteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PostulationController;
 
+
 Route::post('/register', [RegisterControllerUser::class, 'register']);
 Route::post('/login', [LoginControllerUser::class, 'login']);
 
 Route::post('/societe/register', [RegisterControllerSociete::class, 'register']);
 Route::post('/societe/login', [LoginControllerSociete::class, 'login']);
+
+Route::post('/admin/login', [LoginControllerAdmin::class, 'login']);
+Route::post('/admin/register', [RegisterControllerAdmin::class, 'register']);
 
 Route::post('/logout', [LoginControllerUser::class, 'logout'])->middleware('auth:sanctum');
 
