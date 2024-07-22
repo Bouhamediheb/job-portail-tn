@@ -1,5 +1,5 @@
 <template>
-  <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
+    <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
   <div class="dashboard-container">
     <Header @navigateToPostJob="updateViewMode" />
     <main class="main">
@@ -8,14 +8,12 @@
       </div>
       <div class="content-wrapper">
         <div v-if="currentViewComponent">
-          <component :is="currentViewComponent" @viewJobDetail="handleViewJobDetail" />
+          <component :is="currentViewComponent" :jobId="selectedJobId" @viewJobDetail="handleViewJobDetail" @editJob="handleEditJob" />
         </div>
-
       </div>
     </main>
   </div>
 </template>
-
 
 <script>
 import Header from "@/components/dashboard/Header.vue";
@@ -46,55 +44,52 @@ export default {
   data() {
     return {
       userType: localStorage.getItem("type") || "user",
-    viewMode: 0, 
-    selectedJobId: null,
+      viewMode: 0, 
+      selectedJobId: 3,
     };
   },
   computed: {
     currentViewComponent() {
-      if(this.userType === 'user')
-      {
-      switch (this.viewMode) {
-        case 0:
-          return 'Overview';
-        case 1:
-          return 'UserProfile';
-        case 6:
-          return 'Deconnexion';
+      if (this.userType === 'user') {
+        switch (this.viewMode) {
+          case 0:
+            return 'Overview';
+          case 1:
+            return 'UserProfile';
+          case 6:
+            return 'Deconnexion';
+        }
+      } else if (this.userType === 'company') {
+        switch (this.viewMode) {
+          case 0:
+            return 'Overview';
+          case 1:
+            return 'CompanyProfile';
+          case 2:
+            return 'MyPosts';
+          case 3:
+            return 'CandidateApplications';
+          case 4:
+            return 'PendingJobPosts';
+          case 98:
+            return 'JobDetail';
+          case 99:
+            return 'PostJob';
+          case 6:
+            return 'Deconnexion';
+        }
+      } else if (this.userType === 'admin') {
+        switch (this.viewMode) {
+          case 0:
+            return 'Overview';
+          case 1:
+            return 'MyPosts';
+          case 2:
+            return 'PendingJobPosts';
+          case 6:
+            return 'Deconnexion';
+        }
       }
-    }
-    else if(this.userType === 'company')
-    {
-      switch (this.viewMode) {
-        case 0:
-          return 'Overview';
-        case 1:
-          return 'CompanyProfile';
-        case 2:
-          return 'MyPosts';
-        case 3:
-          return 'CandidateApplications';
-        case 4:
-          return 'PendingJobPosts';
-        case 5:
-          return 'PostJob';
-        case 6:
-          return 'Deconnexion';
-      }
-    }
-    else if(this.userType === 'admin')
-    {
-      switch (this.viewMode) {
-        case 0:
-          return 'Overview';
-        case 1:
-          return 'MyPosts';
-        case 2:
-          return 'PendingJobPosts';
-        case 6:
-          return 'Deconnexion';
-      }
-    }
     },
   },
   methods: {
@@ -103,11 +98,16 @@ export default {
     },
     handleViewJobDetail(jobId) {
       this.selectedJobId = jobId;
+      this.viewMode = 98; 
+    },
+    handleEditJob(jobId) {
+      this.selectedJobId = jobId;
       this.viewMode = 99; 
     },
   },
 };
 </script>
+
 
 
 <style scoped>

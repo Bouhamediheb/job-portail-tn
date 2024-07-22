@@ -55,6 +55,11 @@
                           <div class="card-price">
                             <span>Salaire: {{ item.minSalary }} - {{ item.maxSalary }} DT</span>
                           </div>
+                          <div class="card-tags">
+                            <!-- button goToJobEdit-->
+                            <a @click="goToEditJob(item.id)" class="btn btn-tag">Modifier</a>
+                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -140,6 +145,9 @@ export default {
     goToJobDetail(jobId) {
       this.$emit('viewJobDetail', jobId);
     },
+    goToEditJob(jobId) {
+    this.$emit('editJob', jobId); // Emit jobId to parent component
+  }
   },
   mounted() {
     this.fetchOffers();

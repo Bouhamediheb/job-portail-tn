@@ -37,12 +37,6 @@ class LoginControllerUser extends Controller
 
     public function logout(Request $request)
     {
-        if (!$request->user()) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-    
         $request->user()->tokens()->delete();
         return response()->json([
             'message' => 'Successfully logged out'

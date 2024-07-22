@@ -2,17 +2,15 @@
   <div class="box-content">
     <div class="box-heading">
       <div class="box-title">
-        <h3 class="mb-35">Publier une offre</h3>
+        <h3 class="mb-35">{{ jobId ? 'Modifier une offre' : 'Publier une offre' }}</h3>
       </div>
       <div class="box-breadcrumb">
         <div class="breadcrumbs">
           <ul>
             <li>
-              <router-link class="icon-home" to="/dashboard"
-                >Dashboard</router-link
-              >
+              <router-link class="icon-home" to="/dashboard">Dashboard</router-link>
             </li>
-            <li><span>Publier une annonce</span></li>
+            <li><span>{{ jobId ? 'Modifier une annonce' : 'Publier une annonce' }}</span></li>
           </ul>
         </div>
       </div>
@@ -24,13 +22,10 @@
             <div class="panel-white mb-30">
               <div class="box-padding bg-postjob">
                 <h5 class="icon-edu">
-                  Veuillez remplir les informations de votre offre
+                  {{ jobId ? 'Modifier les informations de votre offre' : 'Veuillez remplir les informations de votre offre' }}
                 </h5>
                 <div class="form-group mb-30">
-                  <label class="font-sm color-text-muted mb-10 mt-2"
-                    >Type d'offre *</label
-                  >
-
+                  <label class="font-sm color-text-muted mb-10 mt-2">Type d'offre *</label>
                   <select
                     v-model="type"
                     class="form-control"
@@ -41,12 +36,11 @@
                   </select>
                 </div>
 
+                <!-- Job-specific fields -->
                 <div v-if="type === 'job'">
                   <h5>Détails de l'offre d'emploi</h5>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10 mt-2"
-                      >Titre de l'offre *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10 mt-2">Titre de l'offre *</label>
                     <input
                       class="form-control"
                       type="text"
@@ -56,9 +50,7 @@
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10 mt-2"
-                        >Description de l'offre *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10 mt-2">Description de l'offre *</label>
                       <textarea
                         class="form-control"
                         name="message"
@@ -71,13 +63,8 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group mb-30">
-                        <label class="font-sm color-text-muted mb-10"
-                          >Domaine *</label
-                        >
-                        <select
-                          class="form-control"
-                          v-model="jobDetails.domain"
-                        >
+                        <label class="font-sm color-text-muted mb-10">Domaine *</label>
+                        <select class="form-control" v-model="jobDetails.domain">
                           <option value="Informatique">Informatique</option>
                           <option value="Finance">Finance</option>
                           <option value="Mecanique">Mecanique</option>
@@ -86,13 +73,8 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group mb-30">
-                        <label class="font-sm color-text-muted mb-10"
-                          >Horaire *</label
-                        >
-                        <select
-                          class="form-control"
-                          v-model="jobDetails.employmentType"
-                        >
+                        <label class="font-sm color-text-muted mb-10">Horaire *</label>
+                        <select class="form-control" v-model="jobDetails.employmentType">
                           <option value="0">Demi-Temps</option>
                           <option value="1">Plein-Temps</option>
                         </select>
@@ -100,9 +82,7 @@
                     </div>
                   </div>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Expérience *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Expérience *</label>
                     <input
                       class="form-control"
                       type="number"
@@ -111,20 +91,16 @@
                     />
                   </div>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Type de lieu de travail *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Type de lieu de travail *</label>
                     <select class="form-control" v-model="jobDetails.workplace">
-                      <option value="0">Teletravail</option>
+                      <option value="0">Télétravail</option>
                       <option value="1">Bureau</option>
                       <option value="2">Hybride</option>
                     </select>
                   </div>
                   <div class="d-flex justify-content-between mb-30">
                     <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Lieu (siége) *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Lieu (siège) *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -133,9 +109,7 @@
                       />
                     </div>
                     <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Ville *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Ville *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -144,9 +118,7 @@
                       />
                     </div>
                     <div class="flex-grow-1">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Pays *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Pays *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -157,20 +129,16 @@
                   </div>
                   <div class="d-flex justify-content-between mb-30">
                     <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Salaire Min *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Salaire Min *</label>
                       <input
                         class="form-control"
                         type="number"
-                        placeholder="Exemple : 1200DT "
+                        placeholder="Exemple : 1200DT"
                         v-model="jobDetails.minSalary"
                       />
                     </div>
                     <div class="flex-grow-1">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Salaire Max *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Salaire Max *</label>
                       <input
                         class="form-control"
                         type="number"
@@ -180,9 +148,7 @@
                     </div>
                   </div>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Skills *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Skills *</label>
                     <div class="input-group position-relative">
                       <input
                         type="text"
@@ -191,10 +157,7 @@
                         class="form-control"
                         placeholder="Type to search skills..."
                       />
-                      <div
-                        v-if="filteredSkills.length"
-                        class="dropdown-menu show"
-                      >
+                      <div v-if="filteredSkills.length" class="dropdown-menu show">
                         <ul class="list-group">
                           <li
                             v-for="skill in filteredSkills"
@@ -214,19 +177,12 @@
                         class="badge bg-secondary me-1"
                       >
                         {{ skill }}
-                        <span
-                          @click="removeSkill(skill)"
-                          class="close"
-                          aria-label="Close"
-                          >&times;</span
-                        >
+                        <span @click="removeSkill(skill)" class="close" aria-label="Close">&times;</span>
                       </span>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Fichier *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Fichier *</label>
                     <div class="form-group mb-30">
                       <div class="box-upload">
                         <div class="add-file-upload row">
@@ -236,39 +192,31 @@
                             name="file"
                             @change="handleFileUpload"
                           />
-                          <p class="ml-100" v-if="jobDetails.file">
-                            {{ jobDetails.file.name }}
-                          </p>
+                          <p class="ml-100" v-if="jobDetails.file">{{ jobDetails.file.name }}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
                     <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Offre mise en avant</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Offre mise en avant</label>
                       <div class="d-flex align-items-center">
                         <input
                           type="checkbox"
                           v-model="jobDetails.featured"
                           class="me-2 custom-checkbox"
                         />
-                        <span class="font-sm color-text-muted"
-                          >Cochez si vous souhaitez mettre en avant cette
-                          offre</span
-                        >
+                        <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant cette offre</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
+                <!-- Internship-specific fields -->
                 <div v-else-if="type === 'internship'">
                   <h5>Détails du stage</h5>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10 mt-2"
-                      >Titre du stage *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10 mt-2">Titre du stage *</label>
                     <input
                       class="form-control"
                       type="text"
@@ -278,63 +226,36 @@
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10 mt-2"
-                        >Description du stage *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10 mt-2">Description du stage *</label>
                       <textarea
                         class="form-control"
                         name="message"
                         rows="8"
-                        placeholder="Exemple : Nous recherchons un stagiaire en développement web pour rejoindre notre équipe de développement."
+                        placeholder="Exemple : Nous recherchons un stagiaire en développement web pour travailler sur divers projets."
                         v-model="internshipDetails.description"
                       ></textarea>
                     </div>
                   </div>
-                  <div class="col-lg-12">
-                    <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Domaine *</label
-                      >
-                      <select
-                        class="form-control"
-                        v-model="internshipDetails.domain"
-                      >
-                        <option value="Informatique">Informatique</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Mecanique">Mecanique</option>
-                      </select>
-                    </div>
-                  </div>
-
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Durée du stage *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Domaine *</label>
+                    <select class="form-control" v-model="internshipDetails.domain">
+                      <option value="Informatique">Informatique</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Mecanique">Mecanique</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-30">
+                    <label class="font-sm color-text-muted mb-10">Durée du stage *</label>
                     <input
                       class="form-control"
-                      type="number"
-                      placeholder="Exemple : 3"
+                      type="text"
+                      placeholder="Exemple : 6 mois"
                       v-model="internshipDetails.internshipDuration"
                     />
                   </div>
-                  <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Type de lieu de travail *</label
-                    >
-                    <select
-                      class="form-control"
-                      v-model="internshipDetails.workplace"
-                    >
-                      <option value="0">Teletravail</option>
-                      <option value="1">Bureau</option>
-                      <option value="2">Hybride</option>
-                    </select>
-                  </div>
                   <div class="d-flex justify-content-between mb-30">
                     <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Lieu (siége) *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Lieu (siège) *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -343,9 +264,7 @@
                       />
                     </div>
                     <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Ville *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Ville *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -354,9 +273,7 @@
                       />
                     </div>
                     <div class="flex-grow-1">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Pays *</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Pays *</label>
                       <input
                         class="form-control"
                         type="text"
@@ -365,23 +282,18 @@
                       />
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between mb-30">
-                    <div class="flex-grow-1 me-2">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Motivation *</label
-                      >
-                      <input
-                        class="form-control"
-                        type="number"
-                        placeholder="Exemple : 300DT "
-                        v-model="internshipDetails.internshipMotivation"
-                      />
-                    </div>
+                  <div class="form-group mb-30">
+                    <label class="font-sm color-text-muted mb-10">Motivation du stage *</label>
+                    <textarea
+                      class="form-control"
+                      name="motivation"
+                      rows="4"
+                      placeholder="Exemple : Nous recherchons un stagiaire motivé pour participer à des projets stimulants."
+                      v-model="internshipDetails.internshipMotivation"
+                    ></textarea>
                   </div>
                   <div class="form-group mb-30">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Skills *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Skills *</label>
                     <div class="input-group position-relative">
                       <input
                         type="text"
@@ -390,10 +302,7 @@
                         class="form-control"
                         placeholder="Type to search skills..."
                       />
-                      <div
-                        v-if="filteredSkills.length"
-                        class="dropdown-menu show"
-                      >
+                      <div v-if="filteredSkills.length" class="dropdown-menu show">
                         <ul class="list-group">
                           <li
                             v-for="skill in filteredSkills"
@@ -413,19 +322,12 @@
                         class="badge bg-secondary me-1"
                       >
                         {{ skill }}
-                        <span
-                          @click="removeSkill(skill)"
-                          class="close"
-                          aria-label="Close"
-                          >&times;</span
-                        >
+                        <span @click="removeSkill(skill)" class="close" aria-label="Close">&times;</span>
                       </span>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
-                    <label class="font-sm color-text-muted mb-10"
-                      >Fichier *</label
-                    >
+                    <label class="font-sm color-text-muted mb-10">Fichier *</label>
                     <div class="form-group mb-30">
                       <div class="box-upload">
                         <div class="add-file-upload row">
@@ -435,38 +337,32 @@
                             name="file"
                             @change="handleFileUpload"
                           />
-                          <p class="ml-100" v-if="internshipDetails.file">
-                            {{ internshipDetails.file.name }}
-                          </p>
+                          <p class="ml-100" v-if="internshipDetails.file">{{ internshipDetails.file.name }}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
                     <div class="form-group mb-30">
-                      <label class="font-sm color-text-muted mb-10"
-                        >Offre mise en avant</label
-                      >
+                      <label class="font-sm color-text-muted mb-10">Stage mis en avant</label>
                       <div class="d-flex align-items-center">
                         <input
                           type="checkbox"
                           v-model="internshipDetails.featured"
                           class="me-2 custom-checkbox"
                         />
-                        <span class="font-sm color-text-muted"
-                          >Cochez si vous souhaitez mettre en avant cette
-                          offre</span
-                        >
+                        <span class="font-sm color-text-muted">Cochez si vous souhaitez mettre en avant ce stage</span>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <div class="form-group mt-10 text-lg-end">
                   <button
                     @click="submitForm"
                     class="btn btn-default btn-brand icon-tick"
                   >
-                    Publier l'annonce
+                    {{ jobId ? 'Mettre à jour l\'annonce' : 'Publier l\'annonce' }}
                   </button>
                 </div>
               </div>
@@ -474,7 +370,7 @@
           </div>
           <sweet-modal icon="success" ref="postedJob">
             <div class="spacingtop">
-              Votre annonce a été publiée avec succès !
+              Votre annonce a été {{ jobId ? 'mise à jour' : 'publiée' }} avec succès !
             </div>
           </sweet-modal>
         </div>
@@ -483,173 +379,175 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import axios from "axios";
-import { onMounted } from "vue";
-import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
-import { useRouter } from "vue-router";
+<script>
+import axios from 'axios';
 
-const router = useRouter();
-const postedJob = ref(null);
-const type = ref("job");
-const skillInput = ref("");
-const selectedSkills = ref([]);
-const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
-const filteredSkills = ref([]);
-const companyId = ref(localStorage.getItem("id"));
-
-onMounted(() => {
-  console.log("Company ID:", companyId.value);
-});
-
-const jobDetails = ref({
-  title: "",
-  description: "",
-  yearsOfExperience: "",
-  workplace: "",
-  employmentType: 0,
-  city: "",
-  country: "",
-  address: "",
-  minSalary: "",
-  maxSalary: "",
-  domain: "",
-  featured: 0,
-  file: null,
-
-  societe_id: companyId.value,
-});
-
-const internshipDetails = ref({
-  title: "",
-  description: "",
-  internshipDuration: "",
-  workplace: "",
-  address: "",
-  city: "",
-  country: "",
-  internshipMotivation: "",
-  domain: "",
-  featured: false,
-  file: null,
-  societe_id: companyId.value,
-});
-
-function resetFields() {
-  selectedSkills.value = [];
-  skillInput.value = "";
-  filteredSkills.value = [];
-  jobDetails.value = {
-    title: "",
-    description: "",
-    yearsOfExperience: "",
-    workplace: "",
-    location: {
-      address: "",
-      city: "",
-      country: "",
-    },
-    featured: 0,
-    domain: "",
-    salary: {
-      min: "",
-      max: "",
-    },
-    file: null,
-  };
-  internshipDetails.value = {
-    title: "",
-    description: "",
-    internshipDuration: "",
-    workplace: "",
-    location: {
-      address: "",
-      city: "",
-      country: "",
-    },
-    domain: "",
-    featured: false,
-    internshipMotivation: "",
-    file: null,
-  };
-}
-
-function filterSkills() {
-  filteredSkills.value = skills.filter(
-    (skill) =>
-      skill.toLowerCase().includes(skillInput.value.toLowerCase()) &&
-      !selectedSkills.value.includes(skill)
-  );
-}
-
-function addSkill(skill) {
-  if (!selectedSkills.value.includes(skill)) {
-    selectedSkills.value.push(skill);
-    skillInput.value = "";
-    filteredSkills.value = [];
-  }
-}
-
-function removeSkill(skill) {
-  selectedSkills.value = selectedSkills.value.filter((s) => s !== skill);
-}
-
-function handleFileUpload(event) {
-  if (type.value == "job") {
-    jobDetails.value.file = event.target.files[0];
-    console.log(jobDetails.value.file);
-  } else {
-    internshipDetails.value.file = event.target.files[0];
-  }
-}
-
-const submitForm = async () => {
-  try {
-    let data;
-    console.log("Id", companyId.value);
-    console.log("Job Details:", jobDetails.value);
-    console.log("Internship Details:", internshipDetails.value);
-    if (type.value === "job") {
-      data = {
-        societe_id: companyId.value,
-        type: type.value,
-        skills: JSON.stringify(selectedSkills.value),
-        ...jobDetails.value,
-        featured: jobDetails.value.featured ? 1 : 0,
-      };
-    } else {
-      data = {
-        societe_id: companyId.value,
-        type: type.value,
-        skills: JSON.stringify(selectedSkills.value),
-        ...internshipDetails.value,
-        featured: internshipDetails.value.featured ? 1 : 0, // Convert checkbox value
-      };
+export default {
+  props: {
+    jobId: {
+      type: Number,
+      default: null
     }
-
-    console.log(data);
-
-    const response = await axios.post("http://localhost:8000/api/offre", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+  },
+  data() {
+    return {
+      type: 'job', // Default to 'job', you might want to adjust based on your use case
+      jobDetails: {
+        title: '',
+        description: '',
+        domain: '',
+        employmentType: '',
+        yearsOfExperience: '',
+        workplace: '',
+        address: '',
+        city: '',
+        country: '',
+        minSalary: '',
+        maxSalary: '',
+        skills: [],
+        file: null,
+        featured: false
       },
-    });
-    console.log(response.data);
-    if (postedJob.value) {
-      postedJob.value.open();
+      internshipDetails: {
+        title: '',
+        description: '',
+        domain: '',
+        internshipDuration: '',
+        workplace: '',
+        address: '',
+        city: '',
+        country: '',
+        internshipMotivation: '',
+        skills: [],
+        file: null,
+        featured: false
+      },
+      skillInput: '',
+      filteredSkills: [],
+      selectedSkills: []
+    };
+  },
+  mounted() {
+    if (this.jobId) {
+      this.fetchJobDetails();
     }
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 2000);
-  } catch (error) {
-    console.error(
-      "Error posting offer:",
-      error.response ? error.response.data : error.message
-    );
+  },
+  methods: {
+    async fetchJobDetails() {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/offre/job/${this.jobId}`);
+        const data = response.data[0];
+        console.log("FETCHED DATA",data);
+        // Populate jobDetails or internshipDetails based on the type
+        if (data.type === 'job') {
+          this.type = 'job';
+          this.jobDetails = { ...data };
+          console.log("FETCHED JOB",this.jobDetails);
+        } else if (data.type === 'internship') {
+          this.type = 'internship';
+          this.internshipDetails = { ...data };
+          console.log("FETCHED INTERNSHIP",this.internshipDetails);
+        }
+        // Populate skills
+        this.selectedSkills = data.skills || [];
+      } catch (error) {
+        console.error('Error fetching job details:', error);
+      }
+    },
+    resetFields() {
+      // Reset form fields based on selected type
+      if (this.type === 'job') {
+        this.jobDetails = {
+          title: '',
+          description: '',
+          domain: '',
+          employmentType: '',
+          yearsOfExperience: '',
+          workplace: '',
+          address: '',
+          city: '',
+          country: '',
+          minSalary: '',
+          maxSalary: '',
+          skills: [],
+          file: null,
+          featured: false
+        };
+      } else if (this.type === 'internship') {
+        this.internshipDetails = {
+          title: '',
+          description: '',
+          domain: '',
+          internshipDuration: '',
+          workplace: '',
+          address: '',
+          city: '',
+          country: '',
+          internshipMotivation: '',
+          skills: [],
+          file: null,
+          featured: false
+        };
+      }
+      this.skillInput = '';
+      this.filteredSkills = [];
+      this.selectedSkills = [];
+    },
+    submitForm() {
+      if (this.jobId) {
+        // Update existing job
+        axios.put(`http://localhost:8000/api/offre/job/${this.jobId}`, this.prepareData())
+          .then(() => {
+            this.$refs.postedJob.show();
+          })
+          .catch(error => {
+            console.error('Error updating job:', error);
+          });
+      } else {
+        // Create new job
+        axios.post('http://localhost:8000/api/offre/job', this.prepareData())
+          .then(() => {
+            this.$refs.postedJob.show();
+          })
+          .catch(error => {
+            console.error('Error creating job:', error);
+          });
+      }
+    },
+    prepareData() {
+      const commonData = {
+        type: this.type,
+        skills: this.selectedSkills,
+        file: this.jobDetails.file || this.internshipDetails.file,
+        featured: this.jobDetails.featured || this.internshipDetails.featured
+      };
+      if (this.type === 'job') {
+        return { ...commonData, ...this.jobDetails };
+      } else if (this.type === 'internship') {
+        return { ...commonData, ...this.internshipDetails };
+      }
+    },
+    filterSkills() {
+      // Filtering logic
+    },
+    addSkill(skill) {
+      if (!this.selectedSkills.includes(skill)) {
+        this.selectedSkills.push(skill);
+      }
+      this.skillInput = '';
+      this.filteredSkills = [];
+    },
+    removeSkill(skill) {
+      this.selectedSkills = this.selectedSkills.filter(s => s !== skill);
+    },
+    handleFileUpload(event) {
+      this.jobDetails.file = event.target.files[0];
+    }
   }
 };
 </script>
+
+
 
 <style scoped>
 .dropdown-menu {
