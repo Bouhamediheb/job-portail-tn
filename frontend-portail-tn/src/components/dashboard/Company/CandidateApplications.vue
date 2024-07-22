@@ -38,14 +38,24 @@
                     Aucune offre disponible. Commencez par publier une offre.
                   </p>
                 </div>
-                <div v-else v-for="offre in offres" :key="offre.id">
-                  <div class="card-style-2 hover-up">
+                <div
+                  v-else
+                  v-for="offre in offres"
+                  :key="offre.id"
+                  class="col-lg-12"
+                >
+                  <div
+                    class="card-style-2 hover-up"
+                    @click="getCandidatesByOffres(offre.id)"
+                  >
                     <div class="card-head">
                       <div class="card-image">
                         <img :src="offre.image" alt="PortailTN" />
                       </div>
                       <div class="card-title">
-                        <h6>{{ offre.title }}</h6>
+                        <h6>
+                          {{ offre.title }}
+                        </h6>
                         <span class="job-type">{{ offre.type }}</span>
                         <span class="time-post"
                           >Posté il y a
@@ -75,7 +85,44 @@
               </div>
             </div>
             <div class="col-lg-5">
-              <h5 class="mb-30">Vos candidatures</h5>
+              <h5 class="mb-30">Vos candidats</h5>
+              <div v-if="selectedOffre === false">
+                <p>Selectionner une offre.</p>
+              </div>
+              <div v-else v-for="candidat in candidates" :key="candidat.id">
+                <div
+                  class="card-style-2 hover-up col-lg-12"
+                  v-if="candidat.user.profil !== null"
+                >
+                  <div class="card-head">
+                    <div class="card-image">
+                      <img
+                        :src="candidat.user.profil.profilePicture"
+                        alt="PortailTN"
+                      />
+                    </div>
+                    <div class="card-title">
+                      <h6>
+                        {{ candidat.user.firstname }}
+                        {{ candidat.user.lastname }}
+                      </h6>
+                      <span class="location"
+                        >{{ candidat.user.profil.city }},
+                        {{ candidat.user.profil.country }}</span
+                      >
+                    </div>
+                    <div class="card-tags">
+                      <p
+                        v-for="tag in JSON.parse(candidat.user.profil.skills)"
+                        :key="tag"
+                        class="btn btn-tag"
+                      >
+                        {{ tag }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -88,8 +135,9 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
+const selectedOffre = ref(false);
 const offres = ref({});
-const candidates = ref({});
+const candidates = ref([]);
 const loading = ref(true);
 onMounted(() => {
   getOffres();
@@ -103,7 +151,14 @@ const calculateDaysAgo = (createdAt) => {
   return daysAgo;
 };
 
-const getCandidatesByOffres = () => {};
+const getCandidatesByOffres = async (id) => {
+  selectedOffre.value = true;
+  const response = await axios.get(
+    `http://localhost:8000/api/postulation/offre/${id}`
+  );
+  candidates.value = response.data;
+  console.log(candidates.value);
+};
 
 const getOffres = async () => {
   const id = localStorage.getItem("id");

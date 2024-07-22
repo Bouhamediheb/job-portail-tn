@@ -53,4 +53,10 @@ class PostulationController extends Controller
         })->with('offre')->get();
         return $postulations;
     }
+
+    public function getPostulationByOffre($offreId)
+    {
+        $offres = Postulation::where('offre_id', $offreId)->with('user', 'user.profil')->get();
+        return $offres;
+    }
 }

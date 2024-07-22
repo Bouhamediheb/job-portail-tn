@@ -30,7 +30,7 @@ class ProfilController extends Controller
             'phoneNumber' => 'required',
             'skills',
             'languages',
-            'address' ,
+            'address',
             'cv' => 'file|mimes:pdf',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -49,10 +49,17 @@ class ProfilController extends Controller
         $profil->languages = $request->languages;
         $profil->user_id = $request->user_id;
 
+        if ($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
+            $filename = 'profile_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
+            $file->move(public_path('images/profil'), $filename);
+            $profil->profilePicture = $filename;
+        }
+
         if ($request->hasFile('cv')) {
             $file = $request->file('cv');
             $filename = 'cv_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
-            $file->move(public_path('images/profil'), $filename);
+            $file->move(public_path('files/cv'), $filename);
             $profil->cv = $filename;
         }
 
