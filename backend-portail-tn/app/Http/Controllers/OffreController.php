@@ -88,21 +88,20 @@ class OffreController extends Controller
             'type' => 'required',
             'city' => 'required',
             'country' => 'required',
+            'employmentType',
             'minSalary',
             'maxSalary',
-            'employmentType',
-            'yearsOfExperience',
             'hourlyWage',
-            'featured',
-            'domain',
+            'domain' => 'required',
             'internshipMotivation',
             'internshipDuration',
+            'yearsOfExperience',
             'workplace' => 'required',
+            'featured',
             'skills' => 'required',
             'description' => 'required',
             'address' => 'required',
             'file' => 'file|mimes:jpeg,png,jpg,gif,svg,pdf|nullable',
-            'societe_id' => 'required|exists:societes,id',
         ]);
 
         $offre = Offre::find($id);
@@ -124,7 +123,7 @@ class OffreController extends Controller
         $offre->skills = $request->skills;
         $offre->description = $request->description;
         $offre->address = $request->address;
-        $offre->societe_id = $request->societe_id;
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = 'job_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
@@ -136,7 +135,7 @@ class OffreController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Job Created Successfully',
+            'message' => 'Job updated Successfully',
         ], 200);
     }
 

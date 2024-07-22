@@ -45,7 +45,7 @@ export default {
     return {
       userType: localStorage.getItem("type") || "user",
       viewMode: 0, 
-      selectedJobId: 3,
+      selectedJobId: null,
     };
   },
   computed: {

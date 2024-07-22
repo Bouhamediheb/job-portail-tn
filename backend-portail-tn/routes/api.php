@@ -28,6 +28,9 @@ Route::post('/logout', [LoginControllerUser::class, 'logout'])->middleware('auth
 Route::post('/offre', [OffreController::class, 'store']);
 //get all offers
 Route::get('/offre', [OffreController::class, 'index']);
+//update offer
+Route::put('/offre/{id}', [OffreController::class, 'update']);
+
 //offreBySociete id
 Route::get('/offre/societe/{id}', [OffreController::class, 'offreBySociete']);
 //getAllIntership

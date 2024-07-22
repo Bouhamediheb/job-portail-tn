@@ -368,19 +368,20 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
           <sweet-modal icon="success" ref="postedJob">
             <div class="spacingtop">
               Votre annonce a été {{ jobId ? 'mise à jour' : 'publiée' }} avec succès !
             </div>
           </sweet-modal>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
 
 export default {
   props: {
@@ -391,7 +392,7 @@ export default {
   },
   data() {
     return {
-      type: 'job', // Default to 'job', you might want to adjust based on your use case
+      type: 'job', // Default to 'job', adjust based on your needs
       jobDetails: {
         title: '',
         description: '',
@@ -424,8 +425,10 @@ export default {
       },
       skillInput: '',
       filteredSkills: [],
-      selectedSkills: []
+      selectedSkills: [], 
+      postedJob: null
     };
+   
   },
   mounted() {
     if (this.jobId) {
@@ -437,25 +440,35 @@ export default {
       try {
         const response = await axios.get(`http://localhost:8000/api/offre/job/${this.jobId}`);
         const data = response.data[0];
-        console.log("FETCHED DATA",data);
-        // Populate jobDetails or internshipDetails based on the type
+        console.log("FETCHED DATA", data);
+
         if (data.type === 'job') {
           this.type = 'job';
           this.jobDetails = { ...data };
-          console.log("FETCHED JOB",this.jobDetails);
+
+          if (typeof this.jobDetails.skills === 'string') {
+            this.jobDetails.skills = JSON.parse(this.jobDetails.skills);
+          }
+          this.selectedSkills = this.jobDetails.skills || [];
+
         } else if (data.type === 'internship') {
           this.type = 'internship';
           this.internshipDetails = { ...data };
-          console.log("FETCHED INTERNSHIP",this.internshipDetails);
+
+          if (typeof this.internshipDetails.skills === 'string') {
+            this.internshipDetails.skills = JSON.parse(this.internshipDetails.skills);
+          }
+          this.selectedSkills = this.internshipDetails.skills || [];
+
+
         }
-        // Populate skills
-        this.selectedSkills = data.skills || [];
+        this.jobDetails.file = null;
+
       } catch (error) {
         console.error('Error fetching job details:', error);
       }
     },
     resetFields() {
-      // Reset form fields based on selected type
       if (this.type === 'job') {
         this.jobDetails = {
           title: '',
@@ -495,19 +508,24 @@ export default {
     },
     submitForm() {
       if (this.jobId) {
-        // Update existing job
-        axios.put(`http://localhost:8000/api/offre/job/${this.jobId}`, this.prepareData())
+        
+        axios.put(`http://localhost:8000/api/offre/${this.jobId}`, this.prepareData())
           .then(() => {
-            this.$refs.postedJob.show();
+            if( this.postedJob)
+            {
+              this.postedJob.open();
+            }
           })
           .catch(error => {
             console.error('Error updating job:', error);
           });
       } else {
-        // Create new job
         axios.post('http://localhost:8000/api/offre/job', this.prepareData())
           .then(() => {
-            this.$refs.postedJob.show();
+            if( this.postedJob)
+            {
+              this.postedJob.open();
+            }
           })
           .catch(error => {
             console.error('Error creating job:', error);
@@ -528,7 +546,14 @@ export default {
       }
     },
     filterSkills() {
-      // Filtering logic
+      if (this.skillInput) {
+        const allSkills = ['JavaScript', 'Vue.js', 'Laravel', 'React', 'CSS', 'HTML']; // Example skills
+        this.filteredSkills = allSkills.filter(skill =>
+          skill.toLowerCase().includes(this.skillInput.toLowerCase())
+        );
+      } else {
+        this.filteredSkills = [];
+      }
     },
     addSkill(skill) {
       if (!this.selectedSkills.includes(skill)) {
@@ -546,7 +571,6 @@ export default {
   }
 };
 </script>
-
 
 
 <style scoped>
