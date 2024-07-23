@@ -160,7 +160,7 @@ const getCandidatesByOffres = async (id) => {
     `http://localhost:8000/api/postulation/offre/${id}`
   );
   candidates.value = response.data;
-  console.log(candidates.value);
+  console.log("haw candidat",candidates.value)
 };
 
 const getOffres = async () => {

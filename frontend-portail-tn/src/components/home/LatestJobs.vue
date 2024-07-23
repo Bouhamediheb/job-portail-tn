@@ -12,9 +12,9 @@
           </p>
           <div class="list-tabs list-tabs-2 mt-30">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li><a class="active" id="nav-tab-job-1" href="#tab-job-1" data-bs-toggle="tab" role="tab" aria-controls="tab-job-1" aria-selected="true"><img src="assets/home/imgs/page/homepage1/management.svg" alt="jobBox"> Management</a></li>
-                                <li><a id="nav-tab-job-2" href="#tab-job-2" data-bs-toggle="tab" role="tab" aria-controls="tab-job-2" aria-selected="false"><img src="assets/home/imgs/page/homepage1/marketing.svg" alt="jobBox"> Marketing &amp; Sale</a></li>
-                                <li><a id="nav-tab-job-3" href="#tab-job-3" data-bs-toggle="tab" role="tab" aria-controls="tab-job-3" aria-selected="false"><img src="assets/home/imgs/page/homepage1/finance.svg" alt="jobBox"> Finance</a></li>
+                                <li><a class="active" id="nav-tab-job-1" href="#tab-job-1" data-bs-toggle="tab" role="tab" aria-controls="tab-job-1" aria-selected="true"><img src="assets/home/imgs/page/homepage1/management.svg" alt="PortailTN"> Management</a></li>
+                                <li><a id="nav-tab-job-2" href="#tab-job-2" data-bs-toggle="tab" role="tab" aria-controls="tab-job-2" aria-selected="false"><img src="assets/home/imgs/page/homepage1/marketing.svg" alt="PortailTN"> Marketing &amp; Sale</a></li>
+                                <li><a id="nav-tab-job-3" href="#tab-job-3" data-bs-toggle="tab" role="tab" aria-controls="tab-job-3" aria-selected="false"><img src="assets/home/imgs/page/homepage1/finance.svg" alt="PortailTN"> Finance</a></li>
 
                             </ul>
                         </div>

@@ -379,199 +379,210 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
-import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import { ref, onMounted } from 'vue';
+import { SweetModal } from 'sweet-modal-vue-3';
 
-export default {
-  props: {
-    jobId: {
-      type: Number,
-      default: null
+const props = defineProps({
+  jobId: {
+    type: Number,
+    default: null
+  }
+});
+
+const type = ref('job');
+
+const jobDetails = ref({
+  title: '',
+  description: '',
+  domain: '',
+  employmentType: '',
+  yearsOfExperience: '',
+  workplace: '',
+  address: '',
+  city: '',
+  country: '',
+  minSalary: '',
+  maxSalary: '',
+  skills: [],
+  file: null,
+  featured: false
+});
+
+const internshipDetails = ref({
+  title: '',
+  description: '',
+  domain: '',
+  internshipDuration: '',
+  workplace: '',
+  address: '',
+  city: '',
+  country: '',
+  internshipMotivation: '',
+  skills: [],
+  file: null,
+  featured: false
+});
+
+const skillInput = ref('');
+const filteredSkills = ref([]);
+const selectedSkills = ref([]);
+const postedJob = ref(null);
+
+const fetchJobDetails = async () => {
+  try {
+    const response = await axios.get(`http://localhost:8000/api/offre/job/${props.jobId}`);
+    const data = response.data[0];
+    console.log("FETCHED DATA", data);
+
+    if (data.type === 'job') {
+      type.value = 'job';
+      jobDetails.value = { ...data };
+
+      // Parse skills if stored as a string in the database
+      if (typeof jobDetails.value.skills === 'string') {
+        jobDetails.value.skills = JSON.parse(jobDetails.value.skills);
+      }
+      selectedSkills.value = jobDetails.value.skills || [];
+
+    } else if (data.type === 'internship') {
+      type.value = 'internship';
+      internshipDetails.value = { ...data };
+
+      // Parse skills if stored as a string in the database
+      if (typeof internshipDetails.value.skills === 'string') {
+        internshipDetails.value.skills = JSON.parse(internshipDetails.value.skills);
+      }
+      selectedSkills.value = internshipDetails.value.skills || [];
     }
-  },
-  data() {
-    return {
-      type: 'job', // Default to 'job', adjust based on your needs
-      jobDetails: {
-        title: '',
-        description: '',
-        domain: '',
-        employmentType: '',
-        yearsOfExperience: '',
-        workplace: '',
-        address: '',
-        city: '',
-        country: '',
-        minSalary: '',
-        maxSalary: '',
-        skills: [],
-        file: null,
-        featured: false
-      },
-      internshipDetails: {
-        title: '',
-        description: '',
-        domain: '',
-        internshipDuration: '',
-        workplace: '',
-        address: '',
-        city: '',
-        country: '',
-        internshipMotivation: '',
-        skills: [],
-        file: null,
-        featured: false
-      },
-      skillInput: '',
-      filteredSkills: [],
-      selectedSkills: [], 
-      postedJob: null
+    jobDetails.value.file = null;
+
+  } catch (error) {
+    console.error('Error fetching job details:', error);
+  }
+};
+
+const resetFields = () => {
+  if (type.value === 'job') {
+    jobDetails.value = {
+      title: '',
+      description: '',
+      domain: '',
+      employmentType: '',
+      yearsOfExperience: '',
+      workplace: '',
+      address: '',
+      city: '',
+      country: '',
+      minSalary: '',
+      maxSalary: '',
+      skills: [],
+      file: null,
+      featured: false
     };
-   
-  },
-  mounted() {
-    if (this.jobId) {
-      this.fetchJobDetails();
-    }
-  },
-  methods: {
-    async fetchJobDetails() {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/offre/job/${this.jobId}`);
-        const data = response.data[0];
-        console.log("FETCHED DATA", data);
+  } else if (type.value === 'internship') {
+    internshipDetails.value = {
+      title: '',
+      description: '',
+      domain: '',
+      internshipDuration: '',
+      workplace: '',
+      address: '',
+      city: '',
+      country: '',
+      internshipMotivation: '',
+      skills: [],
+      file: null,
+      featured: false
+    };
+  }
+  skillInput.value = '';
+  filteredSkills.value = [];
+  selectedSkills.value = [];
+};
 
-        if (data.type === 'job') {
-          this.type = 'job';
-          this.jobDetails = { ...data };
+const submitForm = () => {
+  const data = prepareData();
 
-          if (typeof this.jobDetails.skills === 'string') {
-            this.jobDetails.skills = JSON.parse(this.jobDetails.skills);
-          }
-          this.selectedSkills = this.jobDetails.skills || [];
-
-        } else if (data.type === 'internship') {
-          this.type = 'internship';
-          this.internshipDetails = { ...data };
-
-          if (typeof this.internshipDetails.skills === 'string') {
-            this.internshipDetails.skills = JSON.parse(this.internshipDetails.skills);
-          }
-          this.selectedSkills = this.internshipDetails.skills || [];
-
-
+  if (props.jobId) {
+    axios.put(`http://localhost:8000/api/offre/${props.jobId}`, data)
+      .then(() => {
+        if (postedJob.value) {
+          postedJob.value.open();
         }
-        this.jobDetails.file = null;
+      })
+      .catch(error => {
+        console.error('Error updating job:', error);
+      });
+  } else {
+    console.log("Data to be sent:", data); // Log data just before sending
+    axios.post('http://localhost:8000/api/offre/', data)
+      .then(() => {
+        if (postedJob.value) {
+          postedJob.value.open();
+        }
+      })
+      .catch(error => {
+        console.error('Error creating job:', error);
+      });
+  }
+};
 
-      } catch (error) {
-        console.error('Error fetching job details:', error);
-      }
-    },
-    resetFields() {
-      if (this.type === 'job') {
-        this.jobDetails = {
-          title: '',
-          description: '',
-          domain: '',
-          employmentType: '',
-          yearsOfExperience: '',
-          workplace: '',
-          address: '',
-          city: '',
-          country: '',
-          minSalary: '',
-          maxSalary: '',
-          skills: [],
-          file: null,
-          featured: false
-        };
-      } else if (this.type === 'internship') {
-        this.internshipDetails = {
-          title: '',
-          description: '',
-          domain: '',
-          internshipDuration: '',
-          workplace: '',
-          address: '',
-          city: '',
-          country: '',
-          internshipMotivation: '',
-          skills: [],
-          file: null,
-          featured: false
-        };
-      }
-      this.skillInput = '';
-      this.filteredSkills = [];
-      this.selectedSkills = [];
-    },
-    submitForm() {
-      if (this.jobId) {
-        
-        axios.put(`http://localhost:8000/api/offre/${this.jobId}`, this.prepareData())
-          .then(() => {
-            if( this.postedJob)
-            {
-              this.postedJob.open();
-            }
-          })
-          .catch(error => {
-            console.error('Error updating job:', error);
-          });
-      } else {
-        axios.post('http://localhost:8000/api/offre/job', this.prepareData())
-          .then(() => {
-            if( this.postedJob)
-            {
-              this.postedJob.open();
-            }
-          })
-          .catch(error => {
-            console.error('Error creating job:', error);
-          });
-      }
-    },
-    prepareData() {
-      const commonData = {
-        type: this.type,
-        skills: this.selectedSkills,
-        file: this.jobDetails.file || this.internshipDetails.file,
-        featured: this.jobDetails.featured || this.internshipDetails.featured
-      };
-      if (this.type === 'job') {
-        return { ...commonData, ...this.jobDetails };
-      } else if (this.type === 'internship') {
-        return { ...commonData, ...this.internshipDetails };
-      }
-    },
-    filterSkills() {
-      if (this.skillInput) {
-        const allSkills = ['JavaScript', 'Vue.js', 'Laravel', 'React', 'CSS', 'HTML']; // Example skills
-        this.filteredSkills = allSkills.filter(skill =>
-          skill.toLowerCase().includes(this.skillInput.toLowerCase())
-        );
-      } else {
-        this.filteredSkills = [];
-      }
-    },
-    addSkill(skill) {
-      if (!this.selectedSkills.includes(skill)) {
-        this.selectedSkills.push(skill);
-      }
-      this.skillInput = '';
-      this.filteredSkills = [];
-    },
-    removeSkill(skill) {
-      this.selectedSkills = this.selectedSkills.filter(s => s !== skill);
-    },
-    handleFileUpload(event) {
-      this.jobDetails.file = event.target.files[0];
+const prepareData = () => {
+  let details = type.value === 'job' ? jobDetails.value : internshipDetails.value;
+  const commonData = {
+    type: type.value,
+    skills: JSON.stringify(selectedSkills.value),
+    file: details.file,
+    featured: details.featured
+  };
+
+  console.log("Skills in prepareData:", selectedSkills.value); // Check selectedSkills here
+  return { ...commonData, ...details };
+};
+
+const filterSkills = () => {
+  if (skillInput.value) {
+    const allSkills = ['JavaScript', 'Vue.js', 'Laravel', 'React', 'CSS', 'HTML']; // Example skills
+    filteredSkills.value = allSkills.filter(skill =>
+      skill.toLowerCase().includes(skillInput.value.toLowerCase())
+    );
+  } else {
+    filteredSkills.value = [];
+  }
+};
+
+const addSkill = (skill) => {
+  if (!selectedSkills.value.includes(skill)) {
+    selectedSkills.value.push(skill);
+  }
+  skillInput.value = '';
+  filteredSkills.value = [];
+};
+
+const removeSkill = (skill) => {
+  selectedSkills.value = selectedSkills.value.filter(s => s !== skill);
+};
+
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    if (type.value === 'job') {
+      jobDetails.value.file = file;
+    } else if (type.value === 'internship') {
+      internshipDetails.value.file = file;
     }
   }
 };
-</script>
 
+onMounted(() => {
+  if (props.jobId) {
+    fetchJobDetails();
+  }
+});
+
+</script>
 
 <style scoped>
 .dropdown-menu {

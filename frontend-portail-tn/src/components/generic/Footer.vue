@@ -6,7 +6,7 @@
           <a href="index.html"
             ><img
               alt="PortailTN"
-              src="/assets/home/imgs/template/jobhub-logo.svg"
+              src="/assets/home/imgs/template/jobhub-logo.png"
           /></a>
           <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
             PortailTN est le cœur de la communauté de design et la meilleure

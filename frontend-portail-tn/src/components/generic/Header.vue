@@ -4,7 +4,7 @@
             <div class="main-header">
                 <div class="header-left">
                     <div class="header-logo">
-                      <a class="d-flex" href="index.html"><img alt="jobBox" src="/assets/home/imgs/template/jobhub-logo.svg"></a></div>
+                      <a class="d-flex" href=""><img alt="PortailTN" src="/assets/home/imgs/template/jobhub-logo.png"></a></div>
                 </div>
                 <div class="header-nav">
                     <nav class="nav-main-menu">
@@ -27,8 +27,8 @@
                 </div>
                 <div class="header-right" style="display: flex;width: 100%;justify-content: flex-end;">
                     <div class="block-signin">
-                      <router-link to="/register" class="btn btn-default icon-edit hover-up " v-if = "!loggedIn">Inscription</router-link>
-                      <router-link to="/login" class="btn btn-default icon-edit hover-up ml-20" v-if = "!loggedIn"
+                      <router-link to="/signup" class="btn btn-default icon-edit hover-up " v-if = "!loggedIn">Inscription</router-link>
+                      <router-link to="/signin" class="btn btn-default icon-edit hover-up ml-20" v-if = "!loggedIn"
                       >Connexion</router-link>
                       <span class="ml-30 " v-if = "loggedIn && whoLoggedIn === 'user'
                       "> Bienvenue , {{ firstName }} {{ lastName }} </span>
@@ -137,22 +137,26 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
-const loggedIn = ref();
+const loggedIn = ref(false); // Initialize loggedIn as false
 const firstName = ref("");
 const lastName = ref("");
-
 const companyName = ref("");
 
 const whoLoggedIn = localStorage.getItem("type");
 const router = useRouter();
 
-loggedIn.value = localStorage.getItem("islogged");
-
-if (loggedIn.value && whoLoggedIn === "user") {
-  firstName.value = localStorage.getItem("firstName");
-  lastName.value = localStorage.getItem("lastName");
-} else if (loggedIn.value && whoLoggedIn === "company") {
-  companyName.value = localStorage.getItem("companyName");
+// Check if user or company is logged in
+if (whoLoggedIn === "user") {
+  loggedIn.value = localStorage.getItem("islogged") === "true";
+  if (loggedIn.value) {
+    firstName.value = localStorage.getItem("firstName") || "";
+    lastName.value = localStorage.getItem("lastName") || "";
+  }
+} else if (whoLoggedIn === "company") {
+  loggedIn.value = localStorage.getItem("islogged") === "true";
+  if (loggedIn.value) {
+    companyName.value = localStorage.getItem("companyName") || "";
+  }
 }
 
 const axiosConfig = {
@@ -171,12 +175,19 @@ const logout = async () => {
 
     console.log(response.data);
     if (response.data.message === "Successfully logged out") {
+      // Clear local storage based on whoLoggedIn type
+      if (whoLoggedIn === "user") {
+        localStorage.removeItem("firstName");
+        localStorage.removeItem("lastName");
+      } else if (whoLoggedIn === "company") {
+        localStorage.removeItem("companyName");
+      }
+      
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       localStorage.removeItem("islogged");
-      localStorage.removeItem("firstName");
-      localStorage.removeItem("lastName");
-      loggedIn.value = false;
+
+      loggedIn.value = false; // Set loggedIn to false
       router.push("/");
     } else {
       console.error("Logout failed");

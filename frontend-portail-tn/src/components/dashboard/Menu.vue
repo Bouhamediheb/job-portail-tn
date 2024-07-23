@@ -43,7 +43,7 @@ export default {
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/profiles.svg",
           viewMode: {
-            admin: 3,
+            admin: 1,
             user: 1,
             company: 1,
           },
@@ -53,7 +53,7 @@ export default {
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/jobs.svg",
           viewMode: {
-            admin: 1,
+            admin: null,
             user: null,
             company: 2,
           },
@@ -63,9 +63,19 @@ export default {
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/candidates.svg",
           viewMode: {
-            admin: 2,
+            admin: null,
             user: null,
             company: 3,
+          },
+        },
+        {
+          name: "Mes Candidatures",
+          href: "",
+          img: "assets/dashboard/imgs/page/dashboard/candidates.svg",
+          viewMode: {
+            admin: null,
+            user: 4,
+            company: null,
           },
         },
         
@@ -74,18 +84,8 @@ export default {
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/settings.svg",
           viewMode: {
-            admin: 4,
-            user: 5,
-            company: 4,
-          },
-        },
-        {
-          name: "Deconnexion",
-          href: "",
-          img: "assets/dashboard/imgs/page/dashboard/logout.svg",
-          viewMode: {
             admin: 5,
-            user: 6,
+            user: 5,
             company: 5,
           },
         },
@@ -97,6 +97,16 @@ export default {
             admin: 6,
             user: null,
             company: null,
+          },
+        },
+        {
+          name: "Deconnexion",
+          href: "",
+          img: "assets/dashboard/imgs/page/dashboard/logout.svg",
+          viewMode: {
+            admin: 7,
+            user: 7,
+            company: 7,
           },
         },
       ],
@@ -112,9 +122,10 @@ export default {
   methods: {
     handleMenuItemClick(item, event) {
       event.preventDefault();
-      this.selectedMenuIndex = this.menuItems.indexOf(item);
+      this.selectedMenuIndex = this.filteredMenuItems.indexOf(item); // Update based on filteredMenuItems
       this.$emit("updateViewMode", item.viewMode[this.userType]);
     },
+    
   },
 };
 </script>

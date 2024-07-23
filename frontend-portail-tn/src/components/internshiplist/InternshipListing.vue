@@ -68,7 +68,7 @@
                           <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="card-grid-2-image-left">
                               <div class="image-box">
-                                <img src="/assets/home/imgs/brands/brand-1.png" alt="jobBox" />
+                                <img src="/assets/home/imgs/brands/brand-1.png" alt="PortailTN" />
                               </div>
                               <div class="right-info">
                                 <span class="name-job">{{ getCompanyName(job.societe_id) }}</span>

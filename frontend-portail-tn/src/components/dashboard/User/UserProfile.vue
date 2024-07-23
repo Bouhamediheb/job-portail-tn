@@ -369,23 +369,26 @@
                 </div>
               </div>
               <div class="panel-footer">
-                <p class="font-sm mb-0 color-text-paragraph">
-                  Add at least one of your social network accounts links to show
-                  in your profile.
-                </p>
+               
               </div>
             </div>
           </div>
         </div>
+        <sweet-modal icon="success" ref="profileCreated">
+            <div class="spacingtop">
+              Votre profil a été mis à jour avec succés !
+            </div>
+          </sweet-modal>
       </div>
     </div>
   </div>
 </template>
   
   
-  <script setup>
-import { ref, reactive } from "vue";
-import axios from "axios";
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios';
+import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
 
 const selectedProfilePicture = ref(null);
 const profilePicture = ref(null);
@@ -394,6 +397,8 @@ const skillInput = ref("");
 const selectedSkills = ref([]);
 const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
 const filteredSkills = ref([]);
+
+const profileCreated = ref(null);
 
 const logo = ref("assets/dashboard/imgs/page/profile/img-profile.png"); // Default logo
 
@@ -411,6 +416,7 @@ const formData = ref({
   address: "",
   website: "",
   cv: null,
+  selectedProfilePicture : null,
 });
 
 const handlePPUpload = (event) => {
@@ -431,7 +437,7 @@ const handleCVUpload = (event) => {
 };
 
 const addAcademicEntry = () => {
-  formData.academicEntries.push({
+  formData.value.academicEntries.push({
     institute: "",
     degree: "",
     graduationYear: "",
@@ -439,11 +445,11 @@ const addAcademicEntry = () => {
 };
 
 const removeAcademicEntry = (index) => {
-  formData.academicEntries.splice(index, 1);
+  formData.value.academicEntries.splice(index, 1);
 };
 
 const addProfessionalEntry = () => {
-  formData.professionalEntries.push({
+  formData.value.professionalEntries.push({
     company: "",
     startYear: "",
     endYear: "",
@@ -451,7 +457,7 @@ const addProfessionalEntry = () => {
 };
 
 const removeProfessionalEntry = (index) => {
-  formData.professionalEntries.splice(index, 1);
+  formData.value.professionalEntries.splice(index, 1);
 };
 
 function filterSkills() {
@@ -476,17 +482,29 @@ function removeSkill(skill) {
 
 const postFormData = () => {
   const data = {
-    ...formData,
+    ...formData.value,
     profilePicture: profilePicture.value,
-    languages: JSON.stringify(formData.languages.split(",")),
+    languages: JSON.stringify(formData.value.languages.split(",")),
     user_id: localStorage.getItem("id"),
     skills: JSON.stringify(selectedSkills.value),
+    
   };
 
+  console.log(data);
+
   axios
-    .post("http://localhost:8000/api/profil", data)
+    .post("http://localhost:8000/api/profil", data,
+    {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
     .then((response) => {
       console.log(response.data);
+      if (profileCreated.value) {
+        profileCreated.value.open();
+    }
+
     })
     .catch((error) => {
       console.error(error);
@@ -494,7 +512,7 @@ const postFormData = () => {
 };
 </script>
 
-<style>
+<style scoped>
 .dropdown-menu {
   position: absolute;
   z-index: 1000;

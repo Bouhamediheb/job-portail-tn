@@ -3,11 +3,12 @@
     <div class="container">
       <div class="main-header">
         <div class="header-left">
-          <div class="header-logo">
-            <a class="d-flex" @click="changeViewMode(0, $event)"
+          <div class="header-jobhub-logo">
+            <a class="d-flex" href="/"
               ><img
+                
                 alt="PortailTN"
-                src="assets/dashboard/imgs/page/dashboard/logo.svg"
+                src="/assets/home/imgs/template/jobhub-logo.png"
                 title="PortailTN"
               />
             </a>
@@ -34,8 +35,11 @@
           </ul>
         </div>
         <div class="header-right">
-          <div class="block-signin">
-            <a class="btn btn-default icon-edit hover-up" @click="postJob(99)"
+          <div class="block-signin" >
+            <a
+              class="btn btn-default icon-edit hover-up"
+              @click="postJob(99)"
+              v-if="isCompany"
               >Poster une annonce</a
             >
 
@@ -130,8 +134,8 @@
                 <li>
                   <a class="dashboard2" href="#" @click.prevent="postJob(6)">
                     <img
-                      src="assets/dashboard/imgs/page/dashboard/logout.svg"
-                      title="logout"
+                      src="assets/dashboard/imgs/page/dashboard/jobhub-logout.svg"
+                      title="jobhub-logout"
                       alt="PortailTN"
                     />
                     <span class="name">Déconnexion</span>
@@ -147,7 +151,7 @@
               <li><a href="#">Profile</a></li>
               <li><a href="">Deconnexion</a></li>
             </ul>
-            <div class="mb-15 mt-15">
+            <div class="mb-15 mt-15" v-if="isCompany">
               <a class="btn btn-default icon-edit hover-up" @click="postJob"
                 >Poster une annonce</a
               >
@@ -160,6 +164,7 @@
   </div>
 </template>
 <script>
+
 export default {
   computed: {
     displayUserName() {
@@ -179,6 +184,9 @@ export default {
       } else {
         return ""; // Handle case where localStorage is not supported
       }
+    },
+    isCompany() {
+      return localStorage.getItem("type") === "company";
     },
   },
   methods: {

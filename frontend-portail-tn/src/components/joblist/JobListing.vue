@@ -82,7 +82,7 @@
                                   'http://localhost:8000/api/societe/logo/' +
                                   job.societe_id
                                 "
-                                alt="jobBox"
+                                alt="PortailTN"
                                 style="height: 80px"
                               />
                             </div>

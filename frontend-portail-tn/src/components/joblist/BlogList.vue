@@ -16,7 +16,7 @@
                   <div class="card-grid-3 hover-up wow animate__animated animate__fadeIn">
                     <div class="text-center card-grid-3-image">
                       <a :href="'blog-details.html?id=' + post.id">
-                        <figure><img alt="jobBox" :src="post.image" /></figure>
+                        <figure><img alt="PortailTN" :src="post.image" /></figure>
                       </a>
                     </div>
                     <div class="card-block-info">
@@ -27,7 +27,7 @@
                         <div class="row">
                           <div class="col-lg-6 col-6">
                             <div class="d-flex">
-                              <img class="img-rounded" :src="post.authorImage" alt="jobBox" />
+                              <img class="img-rounded" :src="post.authorImage" alt="PortailTN" />
                               <div class="info-right-img">
                                 <span class="font-sm font-bold color-brand-1 op-70">{{ post.author }}</span><br />
                                 <span class="font-xs color-text-paragraph-2">{{ post.published }}</span>
@@ -47,7 +47,7 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
           </div>
-          <div class="text-center"><a class="btn btn-brand-1 btn-icon-load mt--30 hover-up" href="blog-grid.html">Load More Posts</a></div>
+          <div class="text-center"><a class="btn btn-brand-1 btn-icon-load mt--30 hover-up" href="blog-grid.html">Afficher plus Posts</a></div>
         </div>
       </div>
     </section>
