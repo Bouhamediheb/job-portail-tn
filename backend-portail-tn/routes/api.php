@@ -49,11 +49,13 @@ Route::get('/offre/job/{id}', [OffreController::class, 'getJobByID']);
 
 Route::get('/profil', [ProfilController::class, 'index']);
 Route::post('/profil', [ProfilController::class, 'store']);
+Route::get('/profil/image/{id}', [ProfilController::class, 'getProfilePicture']);
 
 
 //SocieteController
 Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
 Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);
+Route::get('/societe/logo/{id}', [SocieteController::class, 'getLogo']);
 
 
 //PostulationController
@@ -63,3 +65,4 @@ Route::delete('/postulation/{id}', [PostulationController::class, 'delete']);
 Route::get('/postulation/user/{userId}', [PostulationController::class, 'getPostulationsByUser']);
 Route::get('/postulation/societe/{societeId}', [PostulationController::class, 'getPosulationsBySociete']);
 Route::get('/postulation/offre/{offreId}', [PostulationController::class, 'getPostulationByOffre']);
+Route::get('/postulation/societe/{societeId}/latest', [PostulationController::class, 'getLatestCandidates']);

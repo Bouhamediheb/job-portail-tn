@@ -97,7 +97,10 @@
                   <div class="card-head">
                     <div class="card-image">
                       <img
-                        :src="candidat.user.profil.profilePicture"
+                        :src="
+                          'http://localhost:8000/api/profil/image/' +
+                          candidat.user.profil.id
+                        "
                         alt="PortailTN"
                       />
                     </div>

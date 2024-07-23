@@ -50,7 +50,7 @@ class PostulationController extends Controller
     {
         $postulations = Postulation::whereHas('offre', function ($query) use ($societeId) {
             $query->where('societe_id', $societeId);
-        })->with('offre')->get();
+        })->with('user', 'user.profil')->get();
         return $postulations;
     }
 
@@ -58,5 +58,13 @@ class PostulationController extends Controller
     {
         $offres = Postulation::where('offre_id', $offreId)->with('user', 'user.profil')->get();
         return $offres;
+    }
+
+    public function getLatestCandidates($societeId)
+    {
+        $postulations = Postulation::whereHas('offre', function ($query) use ($societeId) {
+            $query->where('societe_id', $societeId);
+        })->with('user', 'user.profil')->latest()->take(5)->get();
+        return $postulations;
     }
 }

@@ -51,7 +51,7 @@ class ProfilController extends Controller
 
         if ($request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture');
-            $filename = 'profile_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
+            $filename = 'profil_' . hexdec(uniqid()) . '.' . strtolower($file->getClientOriginalExtension());
             $file->move(public_path('images/profil'), $filename);
             $profil->profilePicture = $filename;
         }
@@ -74,5 +74,11 @@ class ProfilController extends Controller
             'status' => true,
             'message' => 'Profile Deleted Successfully',
         ], 200);
+    }
+
+    public function getProfilePicture($id)
+    {
+        $profil = Profil::find($id);
+        return response()->file('images/profil/' . $profil->profilePicture);
     }
 }

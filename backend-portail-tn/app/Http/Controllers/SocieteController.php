@@ -48,4 +48,10 @@ class SocieteController extends Controller
         $societe = Societe::find($id);
         return $societe;
     }
+
+    public function getLogo($id)
+    {
+        $societe = Societe::find($id);
+        return response()->file('images/societe/' . $societe->logo);
+    }
 }
