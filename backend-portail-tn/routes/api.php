@@ -30,6 +30,7 @@ Route::post('/offre', [OffreController::class, 'store']);
 Route::get('/offre', [OffreController::class, 'index']);
 //update offer
 Route::put('/offre/{id}', [OffreController::class, 'update']);
+Route::get ('/offre/{id}', [OffreController::class, 'show']);
 
 //offreBySociete id
 Route::get('/offre/societe/{id}', [OffreController::class, 'offreBySociete']);
@@ -46,11 +47,11 @@ Route::get('/offre/job/{id}', [OffreController::class, 'getJobByID']);
 
 
 
-
+//profile
 Route::get('/profil', [ProfilController::class, 'index']);
 Route::post('/profil', [ProfilController::class, 'store']);
 Route::get('/profil/image/{id}', [ProfilController::class, 'getProfilePicture']);
-
+Route::get('/profil/{id}', [ProfilController::class, 'show']);
 
 //SocieteController
 Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);

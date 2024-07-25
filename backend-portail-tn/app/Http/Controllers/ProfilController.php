@@ -81,4 +81,11 @@ class ProfilController extends Controller
         $profil = Profil::find($id);
         return response()->file('images/profil/' . $profil->profilePicture);
     }
+
+    //get profil by id 
+    public function getProfilById($id)
+    {
+        $profil = Profil::find($id);
+        return $profil;
+    }
 }

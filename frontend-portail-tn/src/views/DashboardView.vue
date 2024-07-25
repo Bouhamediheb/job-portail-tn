@@ -1,30 +1,35 @@
-<template>
-  <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
-<div class="dashboard-container">
-  <Header @navigateToPostJob="updateViewMode" />
-  <main class="main">
-    <div class="menu-wrapper">
-      <Menu class="sticky-menu" :userType="userType" @updateViewMode="updateViewMode" />
-    </div>
-    <div class="content-wrapper">
-      <div v-if="currentViewComponent">
-        <component :is="currentViewComponent" :jobId="selectedJobId" @viewJobDetail="handleViewJobDetail" @editJob="handleEditJob" />
+  <template>
+    <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
+  <div class="dashboard-container">
+    <Header @navigateToPostJob="updateViewMode" />
+    <main class="main">
+      <div class="menu-wrapper">
+        <Menu class="sticky-menu" :userType="userType" @updateViewMode="updateViewMode" />
       </div>
-    </div>
-  </main>
-</div>
+      <div class="content-wrapper">
+        <div v-if="currentViewComponent">
+          <!-- Pass selectedJobId to EditJob component -->
+          <component :is="currentViewComponent" :jobId="selectedJobId" @viewJobDetail="handleViewJobDetail" @editJob="handleEditJob" @showProfil="handleShowProfil" />
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
+
+
 <script>
 import Header from "@/components/dashboard/Header.vue";
 import Menu from "@/components/dashboard/Menu.vue";
 import Overview from "@/components/dashboard/Overview.vue";
 import MyPosts from "@/components/dashboard/MyPosts.vue";
 import PostJob from "@/components/dashboard/PostJob.vue";
-import UserProfile from "@/components/dashboard/User/UserProfile.vue";
+import EditJob from "@/components/dashboard/EditJob.vue";
+import UserProfile from "@/components/dashboard/User/CreateUserProfile.vue";
 import CompanyProfile from "@/components/dashboard/Company/CompanyProfile.vue";
 import JobDetail from "@/components/generic/JobDetail.vue";
 import CandidateApplications from "@/components/dashboard/Company/CandidateApplications.vue";
 import PendingJobPosts from "@/components/dashboard/Admin/PendingJobPosts.vue";
+import ShowUserProfile from "@/components/dashboard/Company/ShowUserProfile.vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -33,11 +38,13 @@ export default {
     Header,
     Menu,
     Overview,
+    EditJob,
     MyPosts,
     PostJob,
     UserProfile,
     CompanyProfile,
     JobDetail,
+    ShowUserProfile,
     CandidateApplications,
     PendingJobPosts,
   },
@@ -75,6 +82,10 @@ export default {
             return 'CandidateApplications';
           case 4:
             return 'PendingJobPosts';
+          case 96:
+            return 'ShowUserProfile';
+          case 97:
+            return 'EditJob';
           case 98:
             return 'JobDetail';
           case 99:
@@ -103,15 +114,19 @@ export default {
     handleViewJobDetail(jobId) {
       this.selectedJobId = jobId;
       this.viewMode = 98;
-    },
+    },   
     handleEditJob(jobId) {
       this.selectedJobId = jobId;
-      this.viewMode = 99;
+      console.log("selectedJobId", this.selectedJobId);
+      this.viewMode = 97; 
+    },
+    handleShowProfil(userId) {
+      this.selectedUserId = userId;
+      this.viewMode = 96;
     },
     logout() {
-      const router = useRouter(); // Get the router instance
+      const router = useRouter(); 
 
-      // Handle logout based on user type
       if (localStorage.getItem('type') === 'user') {
         localStorage.removeItem("token");
         localStorage.removeItem("user");

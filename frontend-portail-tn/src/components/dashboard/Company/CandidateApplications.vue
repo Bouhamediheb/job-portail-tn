@@ -65,14 +65,7 @@
                           >{{ offre.city }}, {{ offre.country }}</span
                         >
                       </div>
-                      <div class="card-tags">
-                        <a
-                          v-for="tag in JSON.parse(offre.skills)"
-                          :key="tag"
-                          class="btn btn-tag"
-                          >{{ tag }}</a
-                        >
-                      </div>
+                     
                       <div class="card-price">
                         <span
                           >Salaire: {{ offre.minSalary }} -
@@ -84,7 +77,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-5">
+            
+            <div class="col-lg-6">
               <h5 class="mb-30">Vos candidats</h5>
               <div v-if="selectedOffre === false">
                 <p>Selectionner une offre.</p>
@@ -109,21 +103,15 @@
                         {{ candidat.user.firstname }}
                         {{ candidat.user.lastname }}
                       </h6>
-                      <span class="location"
-                        >{{ candidat.user.profil.city }},
-                        {{ candidat.user.profil.country }}</span
-                      >
-                    </div>
-                    <div class="card-tags">
-                      <p
-                        v-for="tag in JSON.parse(candidat.user.profil.skills)"
-                        :key="tag"
-                        class="btn btn-tag"
-                      >
-                        {{ tag }}
-                      </p>
                     </div>
                   </div>
+                  <!-- show user profil button -->
+                  <div class="">
+                    <a @click="goToShowProfil(candidat.user.id)
+                      
+                      " class="btn btn-tag">Consulter</a>
+
+                  </div>  
                 </div>
               </div>
             </div>
@@ -135,9 +123,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, getCurrentInstance } from "vue";
 import axios from "axios";
 
+
+const ctx = getCurrentInstance(); // Get current instance context
 const selectedOffre = ref(false);
 const offres = ref({});
 const candidates = ref([]);
@@ -171,6 +161,13 @@ const getOffres = async () => {
   offres.value = response.data;
   loading.value = false;
 };
+
+const goToShowProfil = (id) => {
+  console.log("haw id", id);
+  ctx.emit('showProfil', id); // Emit 'showProfil' event with profile ID
+};
+
+
 </script>
 
 <style scoped>

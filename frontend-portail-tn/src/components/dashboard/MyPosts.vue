@@ -146,7 +146,8 @@ export default {
       this.$emit('viewJobDetail', jobId);
     },
     goToEditJob(jobId) {
-    this.$emit('editJob', jobId); // Emit jobId to parent component
+    this.$emit('editJob', jobId);
+    console.log("jobId",jobId)
   }
   },
   mounted() {

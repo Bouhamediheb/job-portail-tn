@@ -22,7 +22,7 @@
             <div v-if="isCompany" class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
               <div class="card-style-1 hover-up">
                 <div class="card-image">
-                  <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
+                  <img src="/assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
                 </div>
                 <div class="card-title">
                   <h3>{{ totalOffres }}</h3>
@@ -33,7 +33,7 @@
             <div v-if="isCompany" class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
               <div class="card-style-1 hover-up">
                 <div class="card-image">
-                  <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
+                  <img src="/assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
                 </div>
                 <div class="card-title">
                   <h3>{{ totalJobs }}</h3>
@@ -44,7 +44,7 @@
             <div v-if="isCompany" class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
               <div class="card-style-1 hover-up">
                 <div class="card-image">
-                  <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
+                  <img src="/assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
                 </div>
                 <div class="card-title">
                   <h3>{{ totalStages }}</h3>
@@ -55,7 +55,7 @@
             <div v-if="isCompany" class="col-xxl-3 col-xl-6 col-lg-6 col-md-4 col-sm-6">
               <div class="card-style-1 hover-up">
                 <div class="card-image">
-                  <img src="assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
+                  <img src="/assets/dashboard/imgs/page/dashboard/computer.svg" alt="PortailTN" />
                 </div>
                 <div class="card-title">
                   <h3>{{ totalApplication }}</h3>
@@ -185,34 +185,34 @@
               <div class="swiper-container swiper-group-10">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/microsoft.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/microsoft.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/acer.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/acer.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/nokia.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/nokia.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/asus.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/asus.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/casio.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/casio.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/dell.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/dell.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/panasonic.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/panasonic.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/vaio.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/vaio.svg" alt="PortailTN" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN" />
+                    <img src="/assets/dashboard/imgs/page/dashboard/sony.svg" alt="PortailTN" />
                   </div>
                 </div>
               </div>
