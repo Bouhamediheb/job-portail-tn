@@ -85,7 +85,7 @@ class ProfilController extends Controller
     //get profil by id 
     public function getProfilById($id)
     {
-        $profil = Profil::find($id);
+        $profil = Profil::find($id)->with('professionalExperiences', 'academicExperiences')->get();
         return $profil;
     }
 }

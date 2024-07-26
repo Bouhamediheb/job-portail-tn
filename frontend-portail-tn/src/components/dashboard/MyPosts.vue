@@ -8,7 +8,9 @@
         <div class="breadcrumbs">
           <ul>
             <li>
-              <router-link class="icon-home" to="/dashboard">Dashboard</router-link>
+              <router-link class="icon-home" to="/dashboard"
+                >Dashboard</router-link
+              >
             </li>
             <li><span>Mes annonces</span></li>
           </ul>
@@ -23,7 +25,11 @@
               <div class="box-padding">
                 <div class="row display-list">
                   <template v-if="loading">
-                    <div class="skeleton-loader" v-for="n in itemsPerPage" :key="n">
+                    <div
+                      class="skeleton-loader"
+                      v-for="n in itemsPerPage"
+                      :key="n"
+                    >
                       <div class="skeleton-card">
                         <div class="skeleton-image"></div>
                         <div class="skeleton-title"></div>
@@ -32,34 +38,64 @@
                     </div>
                   </template>
                   <template v-else>
-                    <div v-if="paginatedItems.length === 0" class="no-offers-message">
+                    <div
+                      v-if="paginatedItems.length === 0"
+                      class="no-offers-message"
+                    >
                       <p>Aucune annonce disponible.</p>
                     </div>
                     <div v-else>
-                      <div class="col-lg-12" v-for="item in paginatedItems" :key="item.id">
+                      <div
+                        class="col-lg-12"
+                        v-for="item in paginatedItems"
+                        :key="item.id"
+                      >
                         <div class="card-style-2 hover-up">
                           <div class="card-head">
                             <div class="card-image">
-                              <img :src="item.image" alt="PortailTN" />
+                              <img
+                                :src="
+                                  'http://localhost:8000/api/societe/logo/' +
+                                  item.societe_id
+                                "
+                                alt="PortailTN"
+                              />
                             </div>
                             <div class="card-title">
-                              <h6 @click="goToJobDetail(item.id)">{{ item.title }}</h6>
+                              <h6 @click="goToJobDetail(item.id)">
+                                {{ item.title }}
+                              </h6>
                               <span class="job-type">{{ item.type }}</span>
-                              <span class="time-post">Posté il y a {{ calculateDaysAgo(item.created_at) }} jours</span>
-                              <span class="location">{{ item.city }}, {{ item.country }}</span>
+                              <span class="time-post"
+                                >Posté il y a
+                                {{ calculateDaysAgo(item.created_at) }}
+                                jours</span
+                              >
+                              <span class="location"
+                                >{{ item.city }}, {{ item.country }}</span
+                              >
                             </div>
                           </div>
                           <div class="card-tags">
-                            <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tag">{{ tag }}</a>
+                            <a
+                              v-for="tag in JSON.parse(item.skills)"
+                              :key="tag"
+                              class="btn btn-tag"
+                              >{{ tag }}</a
+                            >
                           </div>
                           <div class="card-price">
-                            <span>Salaire: {{ item.minSalary }} - {{ item.maxSalary }} DT</span>
+                            <span
+                              >Salaire: {{ item.minSalary }} -
+                              {{ item.maxSalary }} DT</span
+                            >
                           </div>
                           <div class="card-tags">
                             <!-- button goToJobEdit-->
-                            <a @click="goToEditJob(item.id)" class="btn btn-tag">Modifier</a>
+                            <a @click="goToEditJob(item.id)" class="btn btn-tag"
+                              >Modifier</a
+                            >
                           </div>
-                          
                         </div>
                       </div>
                     </div>
@@ -67,13 +103,30 @@
                 </div>
                 <div class="paginations" v-if="paginatedItems.length > 0">
                   <ul class="pager">
-                    <li @click="prevPage" :class="{ disabled: currentPage === 1 }">
+                    <li
+                      @click="prevPage"
+                      :class="{ disabled: currentPage === 1 }"
+                    >
                       <a class="pager-prev" href="#"></a>
                     </li>
-                    <li v-for="page in totalPages" :key="page" @click="setPage(page)">
-                      <a :class="['pager-number', { active: currentPage === page }]" href="#">{{ page }}</a>
+                    <li
+                      v-for="page in totalPages"
+                      :key="page"
+                      @click="setPage(page)"
+                    >
+                      <a
+                        :class="[
+                          'pager-number',
+                          { active: currentPage === page },
+                        ]"
+                        href="#"
+                        >{{ page }}</a
+                      >
                     </li>
-                    <li @click="nextPage" :class="{ disabled: currentPage === totalPages }">
+                    <li
+                      @click="nextPage"
+                      :class="{ disabled: currentPage === totalPages }"
+                    >
                       <a class="pager-next" href="#"></a>
                     </li>
                   </ul>
@@ -88,7 +141,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -106,20 +159,25 @@ export default {
     paginatedItems() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       return this.items.slice(start, start + this.itemsPerPage);
-    }
+    },
   },
   methods: {
     async fetchOffers() {
-      const companyId = localStorage.getItem('id');
+      const companyId = localStorage.getItem("id");
       try {
-        const response = await axios.get(`http://localhost:8000/api/offre/societe/${companyId}`);
+        const response = await axios.get(
+          `http://localhost:8000/api/offre/societe/${companyId}`
+        );
         this.items = response.data;
-        
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay for loading
+
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay for loading
       } catch (error) {
-        console.error("Error fetching offers:", error.response ? error.response.data : error.message);
+        console.error(
+          "Error fetching offers:",
+          error.response ? error.response.data : error.message
+        );
       } finally {
-        this.loading = false; 
+        this.loading = false;
       }
     },
     calculateDaysAgo(createdAt) {
@@ -143,17 +201,17 @@ export default {
       }
     },
     goToJobDetail(jobId) {
-      this.$emit('viewJobDetail', jobId);
+      this.$emit("viewJobDetail", jobId);
     },
     goToEditJob(jobId) {
-    this.$emit('editJob', jobId);
-    console.log("jobId",jobId)
-  }
+      this.$emit("editJob", jobId);
+      console.log("jobId", jobId);
+    },
   },
   mounted() {
     this.fetchOffers();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

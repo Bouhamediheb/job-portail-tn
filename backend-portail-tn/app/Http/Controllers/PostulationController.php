@@ -42,7 +42,7 @@ class PostulationController extends Controller
 
     public function getPostulationsByUser($userId)
     {
-        $postulations = Postulation::where('user_id', $userId)->get();
+        $postulations = Postulation::where('user_id', $userId)->with('offre')->get();
         return $postulations;
     }
 

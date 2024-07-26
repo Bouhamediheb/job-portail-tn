@@ -6,30 +6,50 @@
           <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
             <div class="text-center">
               <p class="font-sm text-brand-2">Bienvenue !</p>
-              <h2 class="mt-10 mb-5 text-brand-1">Authentification pour administrateurs</h2>
-              <p class="font-sm text-muted mb-30">Connectez-vous pour accéder à votre dashboard.</p>
-              
+              <h2 class="mt-10 mb-5 text-brand-1">
+                Authentification pour administrateurs
+              </h2>
+              <p class="font-sm text-muted mb-30">
+                Connectez-vous pour accéder à votre dashboard.
+              </p>
             </div>
-            <form class="login-register text-start mt-20" @submit.prevent="login">
+            <form
+              class="login-register text-start mt-20"
+              @submit.prevent="login"
+            >
               <div class="form-group">
                 <label class="form-label" for="input-1">Adresse Email *</label>
-                <input class="form-control" id="input-1" type="email" v-model="email" required
-                  placeholder="Foulenbenfoulen@gmail.com">
+                <input
+                  class="form-control"
+                  id="input-1"
+                  type="email"
+                  v-model="crendentials.email"
+                  required
+                  placeholder="Foulenbenfoulen@gmail.com"
+                />
               </div>
               <div class="form-group">
                 <label class="form-label" for="input-4">Mot de passe *</label>
-                <input class="form-control" id="input-4" type="password" v-model="password" required
-                  placeholder="************">
+                <input
+                  class="form-control"
+                  id="input-4"
+                  type="password"
+                  v-model="crendentials.password"
+                  required
+                  placeholder="************"
+                />
               </div>
-             
-              <div class="form-group mt-30 mb-50" >
-                <button class="btn btn-brand-1 hover-up w-100" type="submit" name="login">Se
-                  connecter</button>
+
+              <div class="form-group mt-30 mb-50">
+                <button
+                  class="btn btn-brand-1 hover-up w-100"
+                  type="submit"
+                  name="login"
+                >
+                  Se connecter
+                </button>
               </div>
-              
-              
             </form>
-            
           </div>
         </div>
         <sweet-modal icon="error" ref="errorModal">
@@ -44,47 +64,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
+import { ref } from "vue";
+import axios from "axios";
 import { useRouter } from "vue-router";
-import { SweetModal, SweetModalTab } from 'sweet-modal-vue-3'
+import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
 
-const router = useRouter()
-const loggedIn = ref(false)
+const router = useRouter();
+const loggedIn = ref(false);
 const errorModal = ref(null);
 
-const email = ref('')
-const password = ref('')
+const crendentials = ref({
+  email: "",
+  password: "",
+});
 
 const login = async () => {
   try {
-    const response = await axios.post('http://localhost:8000/api/login', {
-      email: email.value,
-      password: password.value
-    })
-
+    console.log(crendentials.value);
+    const response = await axios.post(
+      "http://localhost:8000/api/admin/login",
+      crendentials.value
+    );
 
     if (response.data.status) {
-      loggedIn.value = true
-      localStorage.setItem('token', response.data.token)
-      console.log("token", response.data.token)
-      localStorage.setItem('adminName', response.data.user.firstname)
-      localStorage.setItem('islogged', true)
-      localStorage.setItem('type', 'admin')
-      router.push('/dashboard')
+      loggedIn.value = true;
+      localStorage.setItem("token", response.data.token);
+      console.log("token", response.data.token);
+      localStorage.setItem("adminName", response.data.user.firstname);
+      localStorage.setItem("islogged", true);
+      localStorage.setItem("type", "admin");
+      router.push("/dashboard");
     }
-  } catch (error) {
-    console.error(error);
-    if (errorModal.value) {
-      errorModal.value.open();
-    }
-    email.value = ''
-    password.value = ''
-    setTimeout(() => {
-      loggedIn.value = null;
-    }, 3000);
-  }
-}
+  } catch (error) {}
+};
 </script>
 
 <style>

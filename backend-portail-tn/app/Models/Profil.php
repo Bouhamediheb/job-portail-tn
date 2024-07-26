@@ -30,4 +30,14 @@ class Profil extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function professionalExperiences()
+    {
+        return $this->hasMany(ProfessionalExperience::class);
+    }
+
+    public function academicExperiences()
+    {
+        return $this->hasMany(AcademicExperience::class);
+    }
 }
