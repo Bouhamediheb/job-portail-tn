@@ -7,6 +7,7 @@
             ><img
               alt="PortailTN"
               src="/assets/home/imgs/template/jobhub-logo.png"
+              class="logo-img"
           /></a>
           <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
             PortailTN est le cœur de la communauté de design et la meilleure
@@ -101,3 +102,25 @@ export default {
   name: "Footer",
 };
 </script>
+
+
+<style scoped>
+
+.logo-img {
+  width: 250px; /* Adjust as needed */
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .logo-img {
+    width: 150px; /* Adjust as needed */
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 576px) {
+  .logo-img {
+    width: 200px; /* Adjust as needed */
+  }
+}
+</style>

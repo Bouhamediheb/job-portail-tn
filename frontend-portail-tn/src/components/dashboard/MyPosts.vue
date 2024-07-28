@@ -85,18 +85,15 @@
                             >
                           </div>
                           <div class="card-price">
-                            <span
-                              >Salaire: {{ item.minSalary }} -
-                              {{ item.maxSalary }} DT</span
-                            >
-                          </div>
-                          <div class="card-tags">
-                            <!-- button goToJobEdit-->
+                            
                             <a @click="goToEditJob(item.id)" class="btn btn-tag"
-                              >Modifier</a
-                            >
+                            >Modifier</a                  </div>
+
+                 
                           </div>
+                          
                         </div>
+                        
                       </div>
                     </div>
                   </template>

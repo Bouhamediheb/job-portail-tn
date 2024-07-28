@@ -8,9 +8,7 @@
         <div class="breadcrumbs">
           <ul>
             <li>
-              <router-link class="icon-home" to="/dashboard"
-                >Dashboard</router-link
-              >
+              <router-link class="icon-home" to="/dashboard">Dashboard</router-link>
             </li>
             <li><span>Mes Candidatures</span></li>
           </ul>
@@ -26,19 +24,15 @@
                 <div class="row display-list">
                   <div class="row">
                     <div class="mb-30">
-                      <label class="font-sm color-text-muted mb-10 mt-2"
-                        >Type d'offre *</label
-                      >
-                      <select
-                        v-model="jobType"
-                        class="form-control"
-                        @change="handleJobTypeChange"
-                      >
+                      <label class="font-sm color-text-muted mb-10 mt-2">Type d'offre *</label>
+                      <select v-model="jobType" class="form-control" @change="handleJobTypeChange">
                         <option value="job">Offre d'emploi</option>
                         <option value="internship">Stage</option>
                       </select>
                     </div>
                   </div>
+
+                  <!-- Loading skeletons -->
                   <template v-if="loading">
                     <div class="skeleton-loader" v-for="n in 3" :key="n">
                       <div class="skeleton-card">
@@ -48,76 +42,59 @@
                       </div>
                     </div>
                   </template>
+
+                  <!-- No applications message -->
                   <template v-else>
-                    <div
-                      v-if="applications.length === 0"
-                      class="no-offers-message"
-                    >
+                    <div v-if="filteredApplications.length === 0" class="no-offers-message">
                       <p>Aucune candidature disponible.</p>
                     </div>
+                    
+                    <!-- Application cards -->
                     <div v-else>
                       <div
                         class="col-lg-12"
-                        v-for="application in applications"
+                        v-for="application in filteredApplications"
                         :key="application.offre.id"
                       >
                         <div
                           class="card-style-2 hover-up"
-                          v-if="application.offre.type === jobType"
                           @click="goToJobDetail(application.offre.id)"
                         >
                           <div class="card-head">
                             <div class="card-image">
                               <img
-                                :src="
-                                  'http://localhost:8000/api/societe/logo/' +
-                                  application.offre.societe_id
-                                "
+                                :src="'http://localhost:8000/api/societe/logo/' + application.offre.societe_id"
                                 alt="PortailTN"
                               />
                             </div>
                             <div class="card-title">
-                              <h6>
-                                {{ application.offre.title }}
-                              </h6>
-                              <span class="job-type">{{
-                                application.offre.type
-                              }}</span>
-                              <span class="time-post"
-                                >Publiée il y a
-                                {{
-                                  calculateDaysAgo(application.offre.created_at)
-                                }}
-                                jours</span
-                              >
-                              <span class="location"
-                                >{{ application.offre.city }},
-                                {{ application.offre.country }}</span
-                              >
+                              <h6>{{ application.offre.title }}</h6>
+                              <span class="job-type">{{ application.offre.type }}</span>
+                              <span class="time-post">
+                                Publiée il y a {{ calculateDaysAgo(application.offre.created_at) }} jours
+                              </span>
+                              <span class="location">
+                                {{ application.offre.city }}, {{ application.offre.country }}
+                              </span>
                             </div>
                           </div>
                           <div class="card-tags">
                             <a
-                              v-for="tag in JSON.parse(
-                                application.offre.skills
-                              )"
+                              v-for="tag in JSON.parse(application.offre.skills)"
                               :key="tag"
                               class="btn btn-tag"
-                              >{{ tag }}</a
                             >
+                              {{ tag }}
+                            </a>
                           </div>
                           <div class="card-price">
-                            <span
-                              >Salaire: {{ application.offre.minSalary }} -
-                              {{ application.offre.maxSalary }} DT</span
-                            >
+                            <span>
+                              Salaire: {{ application.offre.minSalary }} - {{ application.offre.maxSalary }} DT
+                            </span>
                           </div>
                           <div class="card-body">
                             <p>{{ application.offre.description }}</p>
                           </div>
-                        </div>
-                        <div class="no-offers-message" v-else>
-                          <p>Aucune candidature disponible.</p>
                         </div>
                       </div>
                     </div>
@@ -131,40 +108,54 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRouter } from "vue-router";
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 const loading = ref(true);
 const applications = ref([]);
-const id = localStorage.getItem("id");
-const jobType = ref("job");
+const id = localStorage.getItem('id');
+const jobType = ref('job');
 
 onMounted(() => {
   getApplications(id);
 });
 
 const goToJobDetail = (id) => {
-  router.push({ name: "JobDetail", params: { id: id } });
+  // Get the URL for the JobDetail route
+  const url = router.resolve({ name: 'JobDetail', params: { id: id } }).href;
+
+  // Open the URL in a new tab
+  window.open(url, '_blank');
 };
 
 const handleJobTypeChange = () => {
   loading.value = true;
   setTimeout(() => {
     loading.value = false;
-  }, "1000");
+  }, 1000); // Update to 1000 ms for correct duration
 };
 
+// Filtered applications based on jobType
+const filteredApplications = computed(() => {
+  if (jobType.value === 'internship') {
+    return applications.value.filter(app => app.offre.type === 'internship');
+  }
+  return applications.value.filter(app => app.offre.type === 'job');
+});
+
 const getApplications = async (id) => {
-  const response = await axios.get(
-    `http://localhost:8000/api/postulation/user/${id}`
-  );
-  applications.value = response.data;
-  loading.value = false;
+  try {
+    const response = await axios.get(`http://localhost:8000/api/postulation/user/${id}`);
+    applications.value = response.data;
+    loading.value = false;
+  } catch (error) {
+    console.error('Error fetching applications:', error);
+    loading.value = false;
+  }
 };
 
 const calculateDaysAgo = (createdAt) => {
@@ -175,6 +166,7 @@ const calculateDaysAgo = (createdAt) => {
   return daysAgo;
 };
 </script>
+
 
 <style scoped>
 .skeleton-loader {

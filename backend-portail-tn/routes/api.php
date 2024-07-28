@@ -35,9 +35,9 @@ Route::get('/offre/{id}', [OffreController::class, 'show']);
 //offreBySociete id
 Route::get('/offre/societe/{id}', [OffreController::class, 'offreBySociete']);
 //getAllIntership
-Route::get('/offre/internship', [OffreController::class, 'getAllInterships']);
+Route::get('/onlyinternships', [OffreController::class, 'getAllInterships']);
 //getAllJobs
-Route::get('/offre/jobs', [OffreController::class, 'getAllJobs']);
+Route::get('/onlyjobs', [OffreController::class, 'getAllJobs']);
 //getInternshipBySociete
 Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getInternshipsBySociete']);
 //getJobsBySociete
@@ -52,6 +52,8 @@ Route::get('/profil', [ProfilController::class, 'index']);
 Route::post('/profil', [ProfilController::class, 'store']);
 Route::get('/profil/image/{id}', [ProfilController::class, 'getProfilePicture']);
 Route::get('/profil/{id}', [ProfilController::class, 'getProfilById']);
+//profile by userid
+Route::get('/profil/user/{id}', [ProfilController::class, 'getProfilByUserId']);
 
 
 //SocieteController

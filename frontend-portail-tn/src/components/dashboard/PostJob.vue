@@ -81,6 +81,7 @@
                           <option value="Informatique">Informatique</option>
                           <option value="Finance">Finance</option>
                           <option value="Mecanique">Mecanique</option>
+
                         </select>
                       </div>
                     </div>
@@ -299,9 +300,15 @@
                         class="form-control"
                         v-model="internshipDetails.domain"
                       >
-                        <option value="Informatique">Informatique</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Mecanique">Mecanique</option>
+                          <option value="Informatique">Informatique</option>
+                          <option value="Finance">Finance</option>
+                          <option value="Mecanique">Mecanique</option>
+                          <option value="Marketing">Marketing</option>
+                          <option value="Ressources Humaines">Ressources Humaines</option>
+                          <option value="Architecture">Architecture</option>
+                          <option value="Design">Design</option>
+                          <option value="Autre">Autre</option>
+
                       </select>
                     </div>
                   </div>

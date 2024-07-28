@@ -11,22 +11,36 @@
             <br class="d-none d-lg-block" />qui vous convient.
           </p>
           <div class="list-tabs list-tabs-2 mt-30">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li><a class="active" id="nav-tab-job-1" href="#tab-job-1" data-bs-toggle="tab" role="tab" aria-controls="tab-job-1" aria-selected="true"><img src="assets/home/imgs/page/homepage1/management.svg" alt="PortailTN"> Management</a></li>
-                                <li><a id="nav-tab-job-2" href="#tab-job-2" data-bs-toggle="tab" role="tab" aria-controls="tab-job-2" aria-selected="false"><img src="assets/home/imgs/page/homepage1/marketing.svg" alt="PortailTN"> Marketing &amp; Sale</a></li>
-                                <li><a id="nav-tab-job-3" href="#tab-job-3" data-bs-toggle="tab" role="tab" aria-controls="tab-job-3" aria-selected="false"><img src="assets/home/imgs/page/homepage1/finance.svg" alt="PortailTN"> Finance</a></li>
-
-                            </ul>
-                        </div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li v-for="domain in domains" :key="domain">
+                <a 
+                  :class="{ active: domain === selectedDomain }" 
+                  href="#" 
+                  @click.prevent="selectDomain(domain)" 
+                  role="tab">
+                  {{ domain }}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="mt-10">
           <div class="row">
-            
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" v-for="item in jobs" :key="item.id">
+            <div 
+              class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" 
+              v-for="item in featuredJobsByDomain[selectedDomain]" 
+              :key="item.id"
+            >
               <div class="card-grid-2 grid-bd-16 hover-up">
                 <div class="card-grid-2-inner">
                   <div class="card-grid-2-image">
-                    <span class="lbl-hot bg-green"><span>Emploi</span></span>
+                     <!-- Conditional label based on job type -->
+                     <span class="lbl-hot bg-green" v-if="item.type === 'job'">
+                      <span>Emploi</span>
+                    </span>
+                    <span class="lbl-hot bg-blue" v-else-if="item.type === 'internship'">
+                      <span>Stage</span>
+                    </span>
                     <div class="image-box">
                       <figure>
                         <img :src="item.image || 'assets/home/imgs/page/homepage2/img1.png'" alt="PortailTN" />
@@ -40,13 +54,11 @@
                     <div class="card-details">
                       <div class="card-location">{{ item.city }}, {{ item.country }}</div>
                       <div class="card-time ml-10">Postée il y a {{ calculateDaysAgo(item.created_at) }} jours</div>
-                      <div class="card-location ml-10">{{getWorkplaceType(item.workplace) }}</div>
-                      
+                      <div class="card-location ml-10">{{ getWorkplaceType(item.workplace) }}</div>
                     </div>
                     <div class="card-tags">
                       <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tags-sm mr-5">{{ tag }}</a>
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -63,44 +75,84 @@
 
 <script>
 import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "LatestJobs",
-  data() {
-    return {
-      jobs: []
-    };
-  },
-  methods: {
-    async fetchJobs() {
+  setup() {
+    const jobs = ref([]);
+    const domains = ref([]);
+    const selectedDomain = ref('');
+    const featuredJobsByDomain = ref({});
+
+    const fetchJobs = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/offre');
-        // Filter jobs to only include those that are featured
-        this.jobs = response.data.filter(job => job.featured === 1);
+        
+        // Extract unique domains
+        const allDomains = response.data.map(job => job.domain);
+        domains.value = [...new Set(allDomains)];
+        
+        // Initialize featuredJobsByDomain
+        const jobsByDomain = {};
+        domains.value.forEach(domain => {
+          jobsByDomain[domain] = [];
+        });
+
+        // Filter and categorize jobs
+        const filteredJobs = response.data.filter(job => job.featured === 1);
+        filteredJobs.forEach(job => {
+          if (jobsByDomain[job.domain]) {
+            jobsByDomain[job.domain].push(job);
+          }
+        });
+
+        featuredJobsByDomain.value = jobsByDomain;
+
+        // Set the default selected domain
+        if (domains.value.length > 0) {
+          selectedDomain.value = domains.value[0];
+        }
       } catch (error) {
         console.error("Error fetching jobs:", error);
       }
-    },
-    calculateDaysAgo(createdAt) {
+    };
+
+    const calculateDaysAgo = (createdAt) => {
       const createdDate = new Date(createdAt);
       const currentDate = new Date();
       const timeDifference = currentDate - createdDate;
       return Math.floor(timeDifference / (1000 * 3600 * 24));
-    },
-    getWorkplaceType(workplace) {
+    };
+
+    const getWorkplaceType = (workplace) => {
       switch (workplace) {
         case 0: return 'Télétravail';
         case 1: return 'Bureau';
         case 2: return 'Hybrid';
         default: return 'Non spécifié';
       }
-    }
-  },
-  mounted() {
-    this.fetchJobs();
+    };
+
+    const selectDomain = (domain) => {
+      selectedDomain.value = domain;
+    };
+
+    onMounted(fetchJobs);
+
+    return {
+      jobs,
+      domains,
+      selectedDomain,
+      featuredJobsByDomain,
+      calculateDaysAgo,
+      getWorkplaceType,
+      selectDomain
+    };
   }
 };
 </script>
+
 
 
 <style scoped>

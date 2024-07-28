@@ -8,8 +8,7 @@ import DashboardView from '../views/DashboardView.vue'
 import JobDetailView from '../views/JobDetailView.vue'
 import JobListView from '../views/JobListView.vue'
 import InternshipListView from '@/views/InternshipListView.vue'
-
-
+import ProfileDetailView from '@/views/ProfileDetailView.vue'
 
 const routes = [
   {
@@ -20,7 +19,14 @@ const routes = [
   {
     path : '/signin',
     name : 'signin',
-    component : SignInView
+    component : SignInView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('islogged') === 'true') {
+        next('/'); 
+      } else {
+        next();
+      }
+    }
   },
   {
     path : '/signin/admin',
@@ -31,7 +37,14 @@ const routes = [
   {
     path : '/signup',
     name : 'signup',
-    component : SignUpView
+    component : SignUpView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('islogged') === 'true') {
+        next('/'); 
+      } else {
+        next();
+      }
+    }
   },
     {
     path : '/dashboard',
@@ -49,7 +62,8 @@ const routes = [
     path: '/job/:id',
     name: 'JobDetail',
     component: JobDetailView,  
-    props: true 
+    props: true,
+
 
   },
   {
@@ -62,6 +76,19 @@ const routes = [
     name: 'InternshipList',
     component: InternshipListView
   },
+  {
+    path : '/profile',
+    name : 'profile',
+    component : ProfileDetailView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('islogged') === 'true') {
+        next(); 
+      } else {
+        next('/signin');
+      }
+    }
+
+  }
   
   
 
@@ -69,6 +96,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+    scrollBehavior() {
+    return { top: 0 }
+  },
   routes
 })
 

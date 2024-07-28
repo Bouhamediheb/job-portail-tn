@@ -18,9 +18,9 @@
           <div class="col-lg-8 col-md-12">
             <h3 class="ml-20">{{ job.title }}</h3>
             <div class="mt-0 mb-15 ml-20">
-              <span class="card-briefcase">{{
-                job.employmentType === 1 ? "Fulltime" : "Parttime"
-              }}</span>
+              <span class="card-briefcase">
+                {{ job.employmentType === 1 ? "Fulltime" : "Parttime" }}
+              </span>
               <span class="card-time">3 mins ago</span>
             </div>
           </div>
@@ -34,129 +34,130 @@
         <div class="row">
           <div class="col-lg-8 col-md-12 col-sm-12 col-12">
             <div class="job-overview">
-              <h5 class="border-bottom pb-15 mb-30">Informations :</h5>
-              <div class="row">
-                <div class="col-md-6 d-flex">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/industry.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description industry-icon mb-10"
-                      >Domaine</span
-                    >
-                    <strong class="small-heading">{{ job.domain }}</strong>
-                  </div>
-                </div>
-                <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/job-level.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description joblevel-icon mb-10"
-                      >Type</span
-                    >
-                    <strong class="small-heading">{{
-                      job.type === "job" ? "Offre emploi" : "Stage"
-                    }}</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-25">
-                <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/salary.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description salary-icon mb-10"
-                      >Salary</span
-                    >
-                    <strong class="small-heading"
-                      >{{ job.minSalary }}DT -- {{ job.maxSalary }}DT</strong
-                    >
-                  </div>
-                </div>
-                <div class="col-md-6 d-flex">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/experience.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description experience-icon mb-10"
-                      >Expérience</span
-                    >
-                    <strong class="small-heading"
-                      >{{ job.yearsOfExperience }} ans</strong
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-25">
-                <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/job-type.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description jobtype-icon mb-10"
-                      >Emplacement</span
-                    >
-                    <strong class="small-heading">{{
-                      job.workplace === 0
-                        ? "Télétravail"
-                        : job.workplace === 1
-                        ? "Bureau"
-                        : "Hybrid"
-                    }}</strong>
-                  </div>
-                </div>
-                <div
-                  class="col-md-6 d-flex mt-sm-15"
-                  v-if="job.type == 'stage'"
-                >
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/deadline.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description mb-10">Durée</span>
-                    <strong class="small-heading">{{
-                      job.internshipDuration
-                    }}</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-25">
-                <div class="col-md-6 d-flex mt-sm-15">
-                  <div class="sidebar-icon-item">
-                    <img
-                      src="/assets/home/imgs/page/job-single/location.svg"
-                      alt="PortailTN"
-                    />
-                  </div>
-                  <div class="sidebar-text-info ml-10">
-                    <span class="text-description mb-10">Location</span>
-                    <strong class="small-heading"
-                      >{{ job.city }}, {{ job.country }}</strong
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
+  <h5 class="border-bottom pb-15 mb-30">Informations :</h5>
+  <div class="row">
+    <!-- Domain -->
+    <div class="col-md-6 d-flex">
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/industry.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description industry-icon mb-10">Domaine</span>
+        <strong class="small-heading">{{ job.domain }}</strong>
+      </div>
+    </div>
+    
+    <!-- Type (Job or Internship) -->
+    <div class="col-md-6 d-flex mt-sm-15">
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/job-level.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description joblevel-icon mb-10">Type</span>
+        <strong class="small-heading">
+          {{ job.type === 'job' ? 'Offre emploi' : 'Stage' }}
+        </strong>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-25">
+    <!-- Salary or Motivation -->
+    <div class="col-md-6 d-flex mt-sm-15">
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/salary.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description salary-icon mb-10">
+          {{ job.type === 'internship' ? 'Motivation' : 'Salary' }}
+        </span>
+        <strong class="small-heading">
+          {{ job.type === 'internship' ? (job.motivation || '--') : `${job.minSalary}DT -- ${job.maxSalary}DT` }}
+        </strong>
+      </div>
+    </div>
+    
+    <!-- Experience -->
+<div class="col-md-6 d-flex">
+  <div class="sidebar-icon-item">
+    <img
+      src="/assets/home/imgs/page/job-single/experience.svg"
+      alt="PortailTN"
+    />
+  </div>
+  <div class="sidebar-text-info ml-10">
+    <span class="text-description experience-icon mb-10">Expérience</span>
+    <strong class="small-heading">
+      {{ job.type === 'job' ? (job.yearsOfExperience ? `${job.yearsOfExperience} ans` : '--') : 'Pas d\'expérience requise' }}
+    </strong>
+  </div>
+</div>
+</div>
+
+
+  <div class="row mt-25">
+    <!-- Workplace -->
+    <div class="col-md-6 d-flex mt-sm-15">
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/job-type.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description jobtype-icon mb-10">Emplacement</span>
+        <strong class="small-heading">
+          {{ job.workplace === 0 ? 'Télétravail' : job.workplace === 1 ? 'Bureau' : 'Hybrid' }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- Internship Duration (only for internships) -->
+    <div
+      class="col-md-6 d-flex mt-sm-15"
+      v-if="job.type === 'internship'"
+    >
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/deadline.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description mb-10">Durée</span>
+        <strong class="small-heading">
+          {{ job.internshipDuration }}
+        </strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-25">
+    <!-- Location -->
+    <div class="col-md-6 d-flex mt-sm-15">
+      <div class="sidebar-icon-item">
+        <img
+          src="/assets/home/imgs/page/job-single/location.svg"
+          alt="PortailTN"
+        />
+      </div>
+      <div class="sidebar-text-info ml-10">
+        <span class="text-description mb-10">Location</span>
+        <strong class="small-heading">{{ job.city }}, {{ job.country }}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
             <div class="content-single">
               <h4>Description du poste :</h4>
               <p class="ml-20">{{ job.description }}</p>
@@ -209,6 +210,18 @@
                 </div>
               </div>
             </div>
+            <div class="single-apply-jobs" v-if="!isLogged()">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                <span>Vous devez vous conntectez avant de postuler </span>
+                  <a
+                    class="btn btn-default mr-20 mt-20"
+                    href="/signin"
+                    >Se connecter !</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
           <div
             class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30"
@@ -219,17 +232,15 @@
                   <figure>
                     <img
                       alt="PortailTN"
-                      :src="
-                        'http://localhost:8000/api/societe/logo/' +
-                        job.societe_id
-                      "
+                      :src="'http://localhost:8000/api/societe/logo/' + job.societe_id"
+                      style="height: 50px;"
                     />
                   </figure>
                   <div class="sidebar-info">
                     <span class="sidebar-company">{{ company?.name }}</span>
-                    <span class="card-location"
-                      >{{ company?.city }}, {{ company?.country }}</span
-                    >
+                    <span class="card-location">
+                      {{ company?.city }}, {{ company?.country }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -252,6 +263,7 @@
     </section>
   </div>
 </template>
+
 
 <script setup>
 import axios from "axios";
@@ -284,23 +296,16 @@ console.log("Final jobId:", jobId);
 const fetchJobDetail = async (jobId) => {
   try {
     console.log("Fetching details for jobId:", jobId);
-    const jobResponse = await axios.get(
-      `http://localhost:8000/api/offre/job/${jobId}`
-    );
-    job.value = jobResponse.data[0];
+    const jobResponse = await axios.get(`http://localhost:8000/api/offre/${jobId}`);
+    job.value = jobResponse.data;  // Ensure this matches the response structure
 
-    const companyResponse = await axios.get(
-      `http://localhost:8000/api/societe/profile/${job.value.societe_id}`
-    );
+    const companyResponse = await axios.get(`http://localhost:8000/api/societe/profile/${job.value.societe_id}`);
     company.value = companyResponse.data;
 
     console.log("Job:", job.value);
     console.log("Company:", company.value);
   } catch (error) {
-    console.error(
-      "Error fetching job or company detail:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Error fetching job or company detail:", error.response ? error.response.data : error.message);
   }
 };
 
@@ -323,6 +328,10 @@ const postuler = async (offreId) => {
       error.response ? error.response.data : error.message
     );
   }
+};
+
+const isLogged = () => {
+  return localStorage.getItem("islogged") === "true";
 };
 
 const isAdmin = () => {

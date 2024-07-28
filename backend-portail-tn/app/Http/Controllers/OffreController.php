@@ -172,9 +172,6 @@ class OffreController extends Controller
     }
 
 
-
-
-    //return only job
     public function getAllJobs()
     {
         $offres = Offre::where('type', 'job')->get();
