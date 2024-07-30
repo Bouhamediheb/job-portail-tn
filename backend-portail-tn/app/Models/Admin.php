@@ -24,6 +24,11 @@ class Admin extends Authenticatable
         'password',
     ];
 
+    public function blog()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

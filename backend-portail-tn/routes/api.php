@@ -11,6 +11,7 @@ use App\Http\Controllers\OffreController;
 use App\Http\Controllers\SocieteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PostulationController;
+use App\Http\Controllers\BlogController;
 
 
 Route::post('/register', [RegisterControllerUser::class, 'register']);
@@ -70,3 +71,7 @@ Route::get('/postulation/user/{userId}', [PostulationController::class, 'getPost
 Route::get('/postulation/societe/{societeId}', [PostulationController::class, 'getPosulationsBySociete']);
 Route::get('/postulation/offre/{offreId}', [PostulationController::class, 'getPostulationByOffre']);
 Route::get('/postulation/societe/{societeId}/latest', [PostulationController::class, 'getLatestCandidates']);
+
+//BlogController
+Route::post('/blog/post', [BlogController::class, 'post']);
+Route::get('/blogs', [BlogController::class, 'getAllPosts']);
