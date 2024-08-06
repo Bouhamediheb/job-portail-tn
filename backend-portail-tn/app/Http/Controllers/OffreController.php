@@ -141,15 +141,18 @@ class OffreController extends Controller
 
 
     public function delete($id)
-    {
-        $offre = Offre::find($id);
+{
+    $offre = Offre::find($id);
 
-        $offre->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Job Deleted Successfully',
-        ], 200);
-    }
+    $offre->postulations()->delete();
+
+    $offre->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Job Deleted Successfully',
+    ], 200);
+}
 
     public function offreBySociete($id)
     {
@@ -190,5 +193,12 @@ class OffreController extends Controller
     {
         $offre = Offre::where('type', 'job')->where('id', $id)->get();
         return $offre;
+    }
+
+    //get file by jobid
+    public function getFileByJobId($id)
+    {
+        $offre = Offre::find($id);
+        return response()->file(public_path('files/offres/' . $offre->file));
     }
 }

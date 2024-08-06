@@ -13,65 +13,85 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PostulationController;
 use App\Http\Controllers\BlogController;
 
-
+// User Registration and Login
 Route::post('/register', [RegisterControllerUser::class, 'register']);
 Route::post('/login', [LoginControllerUser::class, 'login']);
+Route::post('/logout', [LoginControllerUser::class, 'logout'])->middleware('auth:sanctum');
 
+// Societe Registration and Login
 Route::post('/societe/register', [RegisterControllerSociete::class, 'register']);
 Route::post('/societe/login', [LoginControllerSociete::class, 'login']);
 
+// Admin Registration and Login
 Route::post('/admin/login', [LoginControllerAdmin::class, 'login']);
 Route::post('/admin/register', [RegisterControllerAdmin::class, 'register']);
 
-Route::post('/logout', [LoginControllerUser::class, 'logout'])->middleware('auth:sanctum');
-
-//OffreController
+// OffreController (Job Offers)
+// Create a new offer
 Route::post('/offre', [OffreController::class, 'store']);
-//get all offers
+// Get all offers
 Route::get('/offre', [OffreController::class, 'index']);
-//update offer
+// Update an offer by ID
 Route::put('/offre/{id}', [OffreController::class, 'update']);
+// Get an offer by ID
 Route::get('/offre/{id}', [OffreController::class, 'show']);
-
-//offreBySociete id
+// Get offers by Societe ID
 Route::get('/offre/societe/{id}', [OffreController::class, 'offreBySociete']);
-//getAllIntership
+// Get all internships
 Route::get('/onlyinternships', [OffreController::class, 'getAllInterships']);
-//getAllJobs
+// Get all jobs
 Route::get('/onlyjobs', [OffreController::class, 'getAllJobs']);
-//getInternshipBySociete
+// Get internships by Societe ID
 Route::get('/offre/internship/societe/{id}', [OffreController::class, 'getInternshipsBySociete']);
-//getJobsBySociete
+// Get jobs by Societe ID
 Route::get('/offre/jobs/societe/{id}', [OffreController::class, 'getJobsBySociete']);
-//getJobByID
+// Get a job by ID
 Route::get('/offre/job/{id}', [OffreController::class, 'getJobByID']);
+// Get a file by job ID
+Route::get('/offre/file/{id}', [OffreController::class, 'getFileByJobId']);
+// Delete an offer by ID
+Route::delete('/offre/{id}', [OffreController::class, 'delete']);
 
-
-
-//profile
+// ProfilController (User Profiles)
+// Get the profile index
 Route::get('/profil', [ProfilController::class, 'index']);
+// Create or update a profile
 Route::post('/profil', [ProfilController::class, 'store']);
+// Get profile picture by ID
 Route::get('/profil/image/{id}', [ProfilController::class, 'getProfilePicture']);
+// Get profile by ID
 Route::get('/profil/{id}', [ProfilController::class, 'getProfilById']);
-//profile by userid
+// Get profile by User ID
 Route::get('/profil/user/{id}', [ProfilController::class, 'getProfilByUserId']);
 
 
-//SocieteController
+
+// SocieteController (Companies)
+// Create or update company profile by ID
 Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']);
+// Get company profile by ID
 Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);
+// Get company logo by ID
 Route::get('/societe/logo/{id}', [SocieteController::class, 'getLogo']);
 
-
-//PostulationController
+// PostulationController (Applications)
+// Create a new application for an offer
 Route::post('/postulation/{offreId}/{userId}', [PostulationController::class, 'store']);
+// Get all applications
 Route::get('/postulation', [PostulationController::class, 'index']);
+// Delete an application by ID
 Route::delete('/postulation/{id}', [PostulationController::class, 'delete']);
+// Get applications by User ID
 Route::get('/postulation/user/{userId}', [PostulationController::class, 'getPostulationsByUser']);
+// Get applications by Societe ID
 Route::get('/postulation/societe/{societeId}', [PostulationController::class, 'getPosulationsBySociete']);
+// Get applications by Offer ID
 Route::get('/postulation/offre/{offreId}', [PostulationController::class, 'getPostulationByOffre']);
+// Get latest candidates for a Societe
 Route::get('/postulation/societe/{societeId}/latest', [PostulationController::class, 'getLatestCandidates']);
 
-//BlogController
+// BlogController
+// Create a new blog post
 Route::post('/blog/post', [BlogController::class, 'post']);
+// Get all blog posts
 Route::get('/blogs', [BlogController::class, 'getAllPosts']);

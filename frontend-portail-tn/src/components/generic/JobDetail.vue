@@ -180,6 +180,23 @@
                 Aucune compétence requise
               </p>
             </div>
+            <div class="row" v-if="job.file">
+                <div class="col-lg-12 mt-4 pt-2">
+                    <h4 class="text-dark">Document joint :</h4>
+                </div>
+            </div>
+            <div class="row" v-if="job.file">
+                <div class="col-lg-12">
+                    <div class="job-detail border rounded mt-2 p-4">
+                        <div class="job-detail-desc">
+                            <embed :src="'http://localhost:8000/api/offre/file/'+ job.id + '#toolbar=0'"
+                                type="application/pdf" width="100%" height="600px" />
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div class="single-apply-jobs" v-if="isItaUser()">
               <div class="row align-items-center">
                 <div class="col-md-6" v-if="!alreadyApplied()">
@@ -220,9 +237,15 @@
                     >Se connecter !</a
                   >
                 </div>
+                
               </div>
             </div>
+            
+            
+            
+             
           </div>
+         
           <div
             class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30"
           >
@@ -298,6 +321,7 @@ const fetchJobDetail = async (jobId) => {
     console.log("Fetching details for jobId:", jobId);
     const jobResponse = await axios.get(`http://localhost:8000/api/offre/${jobId}`);
     job.value = jobResponse.data;  // Ensure this matches the response structure
+    console.log("job", job.value);
 
     const companyResponse = await axios.get(`http://localhost:8000/api/societe/profile/${job.value.societe_id}`);
     company.value = companyResponse.data;

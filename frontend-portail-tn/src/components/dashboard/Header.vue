@@ -45,10 +45,8 @@
 
             <span class="ml-30"> </span>
             <div class="member-login">
-              <img
-                alt=""
-                src="assets/dashboard/imgs/page/dashboard/profile.png"
-              />
+              <img v-if = "isCompany" :src="'http://localhost:8000/api/profile/logo/' + id" alt="Company logo" />
+              <img v-else :src="'http://localhost:8000/api/profile/logo/' + id" alt="User avatar" />  
               <div class="info-member mt-5">
                 <strong class="color-brand-1"
                   >Bienvenue,
@@ -166,6 +164,12 @@
 <script>
 
 export default {
+  data() {
+    return {
+      //userId from localStorage id
+      id: localStorage.getItem("id"),
+    }
+  },
   computed: {
     displayUserName() {
       if (typeof localStorage !== "undefined") {

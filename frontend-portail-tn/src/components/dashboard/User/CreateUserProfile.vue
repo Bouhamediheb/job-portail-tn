@@ -171,6 +171,12 @@
                             placeholder="Entreprise"
                           />
                           <input
+                            v-model="entry.title"
+                            class="form-control mb-10"
+                            type="text"
+                            placeholder="Titre du poste"
+                          />
+                          <input
                             v-model="entry.startYear"
                             class="form-control mb-10"
                             type="text"
@@ -389,13 +395,14 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import allskills from '../../../allskills.js'
 
 const selectedProfilePicture = ref(null);
 const profilePicture = ref(null);
 
 const skillInput = ref("");
 const selectedSkills = ref([]);
-const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
+const skills = allskills.skills;
 const filteredSkills = ref([]);
 
 const profileCreated = ref(null);
@@ -451,6 +458,7 @@ const removeAcademicEntry = (index) => {
 const addProfessionalEntry = () => {
   formData.value.professionalEntries.push({
     company: "",
+    title: "",
     startYear: "",
     endYear: "",
   });

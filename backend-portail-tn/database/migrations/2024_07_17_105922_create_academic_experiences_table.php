@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('academic_experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('diploma');
-            $table->string('school');
-            $table->date('obtainedDate');
-            $table->text('description');
-            $table->unsignedBigInteger('profil_id');
-            $table->foreign('profil_id')->references('id')->on('profils');
+            $table->unsignedBigInteger('profil_id'); // Ensure this is unsignedBigInteger
+            $table->string('institute');
+            $table->string('degree');
+            $table->year('graduation_year');
             $table->timestamps();
+
+            // Define the foreign key constraint
+            $table->foreign('profil_id')->references('id')->on('profils')->onDelete('cascade');
         });
     }
 

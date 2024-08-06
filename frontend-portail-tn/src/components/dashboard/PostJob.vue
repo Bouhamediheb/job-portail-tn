@@ -81,6 +81,11 @@
                           <option value="Informatique">Informatique</option>
                           <option value="Finance">Finance</option>
                           <option value="Mecanique">Mecanique</option>
+                          <option value="Marketing">Marketing</option>
+                          <option value="Ressources Humaines">Ressources Humaines</option>
+                          <option value="Architecture">Architecture</option>
+                          <option value="Design">Design</option>
+                          <option value="Autre">Autre</option>
 
                         </select>
                       </div>
@@ -491,40 +496,35 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { onMounted } from "vue";
-import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import { SweetModal } from "sweet-modal-vue-3";
 import { useRouter } from "vue-router";
+import skillsByDomain from '../../skills.js';
 
 const router = useRouter();
 const postedJob = ref(null);
 const type = ref("job");
 const skillInput = ref("");
 const selectedSkills = ref([]);
-const skills = ["Java", "Python", "JavaScript", "C++", "Ruby", "Go", "PHP"];
+const skills = ref([]);
 const filteredSkills = ref([]);
 const companyId = ref(localStorage.getItem("id"));
-
-onMounted(() => {
-  console.log("Company ID:", companyId.value);
-});
 
 const jobDetails = ref({
   title: "",
   description: "",
   yearsOfExperience: "",
-  workplace: "",
+  workplace: 0,
   employmentType: 0,
   city: "",
   country: "",
   address: "",
   minSalary: "",
   maxSalary: "",
-  domain: "",
+  domain: "Informatique",
   featured: 0,
   file: null,
-
   societe_id: companyId.value,
 });
 
@@ -532,16 +532,31 @@ const internshipDetails = ref({
   title: "",
   description: "",
   internshipDuration: "",
-  workplace: "",
+  workplace: 0,
   address: "",
   city: "",
   country: "",
   internshipMotivation: "",
-  domain: "",
+  domain: "Informatique",
   featured: false,
   file: null,
   societe_id: companyId.value,
 });
+
+onMounted(() => {
+  console.log("Company ID:", companyId.value);
+});
+
+watch(() => jobDetails.value.domain, (newDomain) => {
+  skills.value = skillsByDomain[newDomain] || [];
+  filterSkills();
+}, { immediate: true }); 
+
+watch (() => internshipDetails.value.domain, (newDomain) => {
+  skills.value = skillsByDomain[newDomain] || [];
+  filterSkills();
+}, { immediate: true });
+
 
 function resetFields() {
   selectedSkills.value = [];
@@ -552,38 +567,35 @@ function resetFields() {
     description: "",
     yearsOfExperience: "",
     workplace: "",
-    location: {
-      address: "",
-      city: "",
-      country: "",
-    },
+    employmentType: 0,
+    city: "",
+    country: "",
+    address: "",
+    minSalary: "",
+    maxSalary: "",
+    domain: "Informatique",
     featured: 0,
-    domain: "",
-    salary: {
-      min: "",
-      max: "",
-    },
     file: null,
+    societe_id: companyId.value,
   };
   internshipDetails.value = {
     title: "",
     description: "",
     internshipDuration: "",
     workplace: "",
-    location: {
-      address: "",
-      city: "",
-      country: "",
-    },
-    domain: "",
-    featured: false,
+    address: "",
+    city: "",
+    country: "",
     internshipMotivation: "",
+    domain: "Informatique",
+    featured: false,
     file: null,
+    societe_id: companyId.value,
   };
 }
 
 function filterSkills() {
-  filteredSkills.value = skills.filter(
+  filteredSkills.value = skills.value.filter(
     (skill) =>
       skill.toLowerCase().includes(skillInput.value.toLowerCase()) &&
       !selectedSkills.value.includes(skill)
@@ -603,9 +615,8 @@ function removeSkill(skill) {
 }
 
 function handleFileUpload(event) {
-  if (type.value == "job") {
+  if (type.value === "job") {
     jobDetails.value.file = event.target.files[0];
-    console.log(jobDetails.value.file);
   } else {
     internshipDetails.value.file = event.target.files[0];
   }
@@ -614,9 +625,6 @@ function handleFileUpload(event) {
 const submitForm = async () => {
   try {
     let data;
-    console.log("Id", companyId.value);
-    console.log("Job Details:", jobDetails.value);
-    console.log("Internship Details:", internshipDetails.value);
     if (type.value === "job") {
       data = {
         societe_id: companyId.value,
@@ -631,18 +639,15 @@ const submitForm = async () => {
         type: type.value,
         skills: JSON.stringify(selectedSkills.value),
         ...internshipDetails.value,
-        featured: internshipDetails.value.featured ? 1 : 0, // Convert checkbox value
+        featured: internshipDetails.value.featured ? 1 : 0,
       };
     }
-
-    console.log(data);
 
     const response = await axios.post("http://localhost:8000/api/offre", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(response.data);
     if (postedJob.value) {
       postedJob.value.open();
     }
@@ -657,6 +662,7 @@ const submitForm = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 .dropdown-menu {

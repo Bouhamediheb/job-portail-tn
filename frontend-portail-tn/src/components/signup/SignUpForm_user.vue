@@ -6,7 +6,7 @@
           <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
             <div class="text-center">
               <p class="font-sm text-brand-2">Créez votre compte !</p>
-              <h2 class="mt-10 mb-5 text-brand-1">Inscription</h2>
+              <h2 class="mt-10 mb-5 text-brand-1">Inscription pour les candidats</h2>
               <p class="font-sm text-muted mb-30">
                 Créer un compte pour accéder à toutes les fonctionnalités.
               </p>
@@ -88,7 +88,7 @@
                 class="login_footer form-group d-flex justify-content-between"
               >
                 <label class="cb-container">
-                  <input type="checkbox" /><span class="text-small">
+                  <input type="checkbox" ref="termsCheckbox" required /><span class="text-small">
                     J'accepte les
                     <a class="text-muted" href="page-contact.html"
                       >termes et conditions</a
@@ -147,7 +147,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
+import { SweetModal } from "sweet-modal-vue-3";
 
 const router = useRouter();
 const createdAccount = ref(null);
@@ -158,10 +158,16 @@ const emailaddress = ref("");
 const password = ref("");
 const rePassword = ref("");
 const errorMessage = ref("");
+const termsCheckbox = ref(null);
 
 const register = async () => {
   if (password.value !== rePassword.value) {
     errorMessage.value = "Les mots de passe ne correspondent pas.";
+    return;
+  }
+
+  if (!termsCheckbox.value.checked) {
+    errorMessage.value = "Vous devez accepter les termes et conditions.";
     return;
   }
 

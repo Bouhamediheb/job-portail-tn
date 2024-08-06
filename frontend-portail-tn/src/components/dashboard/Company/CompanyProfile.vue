@@ -27,8 +27,11 @@
                     <label class="font-sm color-text-mutted mb-10"
                       >Logo *</label
                     >
-                    <img :src="selectedFile || logo" alt="Company Logo" />
-                  </div>
+                    <img
+                      alt="Company logo"
+                      :src="'http://localhost:8000/api/societe/logo/' + id"
+                      style="height: 50px;"
+                    />                  </div>
                   <div class="info-profile">
                     <label for="logo-upload" class="btn btn-default"
                       >Upload Logo</label

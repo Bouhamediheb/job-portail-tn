@@ -8,9 +8,7 @@
         <div class="breadcrumbs">
           <ul>
             <li>
-              <router-link class="icon-home" to="/dashboard"
-                >Dashboard</router-link
-              >
+              <router-link class="icon-home" to="/dashboard">Dashboard</router-link>
             </li>
             <li><span>Mes annonces</span></li>
           </ul>
@@ -25,11 +23,7 @@
               <div class="box-padding">
                 <div class="row display-list">
                   <template v-if="loading">
-                    <div
-                      class="skeleton-loader"
-                      v-for="n in itemsPerPage"
-                      :key="n"
-                    >
+                    <div class="skeleton-loader" v-for="n in itemsPerPage" :key="n">
                       <div class="skeleton-card">
                         <div class="skeleton-image"></div>
                         <div class="skeleton-title"></div>
@@ -38,92 +32,58 @@
                     </div>
                   </template>
                   <template v-else>
-                    <div
-                      v-if="paginatedItems.length === 0"
-                      class="no-offers-message"
-                    >
+                    <div v-if="paginatedItems.length === 0" class="no-offers-message">
                       <p>Aucune annonce disponible.</p>
                     </div>
                     <div v-else>
-                      <div
-                        class="col-lg-12"
-                        v-for="item in paginatedItems"
-                        :key="item.id"
-                      >
+                      <div class="col-lg-12" v-for="item in paginatedItems" :key="item.id">
                         <div class="card-style-2 hover-up">
                           <div class="card-head">
                             <div class="card-image">
-                              <img
-                                :src="
-                                  'http://localhost:8000/api/societe/logo/' +
-                                  item.societe_id
-                                "
-                                alt="PortailTN"
-                              />
+                              <img :src="'http://localhost:8000/api/societe/logo/' +
+                                item.societe_id
+                                " alt="PortailTN" />
                             </div>
                             <div class="card-title">
                               <h6 @click="goToJobDetail(item.id)">
                                 {{ item.title }}
                               </h6>
                               <span class="job-type">{{ item.type }}</span>
-                              <span class="time-post"
-                                >Posté il y a
+                              <span class="time-post">Posté il y a
                                 {{ calculateDaysAgo(item.created_at) }}
-                                jours</span
-                              >
-                              <span class="location"
-                                >{{ item.city }}, {{ item.country }}</span
-                              >
+                                jours</span>
+                              <span class="location">{{ item.city }}, {{ item.country }}</span>
                             </div>
                           </div>
                           <div class="card-tags">
-                            <a
-                              v-for="tag in JSON.parse(item.skills)"
-                              :key="tag"
-                              class="btn btn-tag"
-                              >{{ tag }}</a
-                            >
+                            <a v-for="tag in JSON.parse(item.skills)" :key="tag" class="btn btn-tag">{{ tag }}</a>
                           </div>
                           <div class="card-price">
-                            
-                            <a @click="goToEditJob(item.id)" class="btn btn-tag"
-                            >Modifier</a                  </div>
 
-                 
+                            <a @click="goToEditJob(item.id)" class="btn btn-tag">Modifier</a </div>
+                              <a @click="deleteJob(item.id)" class="btn btn-tag-delete
+                              ">Supprimer</a>
+
                           </div>
-                          
+
                         </div>
-                        
+
                       </div>
                     </div>
                   </template>
                 </div>
                 <div class="paginations" v-if="paginatedItems.length > 0">
                   <ul class="pager">
-                    <li
-                      @click="prevPage"
-                      :class="{ disabled: currentPage === 1 }"
-                    >
+                    <li @click="prevPage" :class="{ disabled: currentPage === 1 }">
                       <a class="pager-prev" href="#"></a>
                     </li>
-                    <li
-                      v-for="page in totalPages"
-                      :key="page"
-                      @click="setPage(page)"
-                    >
-                      <a
-                        :class="[
-                          'pager-number',
-                          { active: currentPage === page },
-                        ]"
-                        href="#"
-                        >{{ page }}</a
-                      >
+                    <li v-for="page in totalPages" :key="page" @click="setPage(page)">
+                      <a :class="[
+                        'pager-number',
+                        { active: currentPage === page },
+                      ]" href="#">{{ page }}</a>
                     </li>
-                    <li
-                      @click="nextPage"
-                      :class="{ disabled: currentPage === totalPages }"
-                    >
+                    <li @click="nextPage" :class="{ disabled: currentPage === totalPages }">
                       <a class="pager-next" href="#"></a>
                     </li>
                   </ul>
@@ -204,6 +164,22 @@ export default {
       this.$emit("editJob", jobId);
       console.log("jobId", jobId);
     },
+    deleteJob(jobId) {
+      if (confirm("Voulez-vous vraiment supprimer cette annonce?")) {
+        axios
+          .delete(`http://localhost:8000/api/offre/${jobId}`)
+          .then((response) => {
+            console.log(response);
+            this.fetchOffers();
+            //set page 1
+            this.currentPage = 1;
+          })
+          .catch((error) => {
+            console.error("Error deleting job:", error);
+          });
+      }
+
+    },
   },
   mounted() {
     this.fetchOffers();
@@ -216,36 +192,47 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .skeleton-card {
-  background: #ffffff; /* Placeholder color */
+  background: #ffffff;
+  /* Placeholder color */
   margin: 10px 0;
   padding: 15px;
   border-radius: 5px;
   animation: pulse 1.5s infinite;
 }
+
 .skeleton-image {
   height: 150px;
-  background: #e5eaf0; /* Placeholder for image */
+  background: #e5eaf0;
+  /* Placeholder for image */
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
 .skeleton-title {
   height: 20px;
-  background: #e5eaf0; /* Placeholder for title */
+  background: #e5eaf0;
+  /* Placeholder for title */
   margin-bottom: 5px;
 }
+
 .skeleton-info {
   height: 15px;
-  background: #e5eaf0; /* Placeholder for additional info */
+  background: #e5eaf0;
+  /* Placeholder for additional info */
   margin-bottom: 5px;
 }
+
 @keyframes pulse {
   0% {
     opacity: 0.5;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.5;
   }
