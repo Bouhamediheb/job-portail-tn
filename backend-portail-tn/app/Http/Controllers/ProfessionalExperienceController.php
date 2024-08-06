@@ -19,10 +19,9 @@ class ProfessionalExperienceController extends Controller
         $request->validate([
             'companyName' => 'required|string|max:255',
             'jobTitle' => 'required|string|max:255',
-            'startDate' => 'required|date',
-            'endDate' => 'required|date',
-            'description' => 'nullable|string',
-            'profil_id' => 'required|integer'
+            'startDate' => 'required',
+            'endDate' => 'required',
+            'profil_id' => 'required'
         ]);
 
         // Create a new professional experience instance
@@ -33,7 +32,6 @@ class ProfessionalExperienceController extends Controller
         $professionalExperience->jobTitle = $request->jobTitle;
         $professionalExperience->startDate = $request->startDate;
         $professionalExperience->endDate = $request->endDate;
-        $professionalExperience->description = $request->description;
         $professionalExperience->profil_id = $request->profil_id;
 
         // Save the professional experience to the database

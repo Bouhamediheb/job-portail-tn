@@ -132,7 +132,7 @@
                             placeholder="Diplôme"
                           />
                           <input
-                            v-model="entry.graduationYear"
+                            v-model="entry.graduation_year"
                             class="form-control mb-10"
                             type="text"
                             placeholder="Année de graduation"
@@ -165,25 +165,25 @@
                           :key="index"
                         >
                           <input
-                            v-model="entry.company"
+                            v-model="entry.companyName"
                             class="form-control mb-10"
                             type="text"
                             placeholder="Entreprise"
                           />
                           <input
-                            v-model="entry.title"
+                            v-model="entry.jobTitle"
                             class="form-control mb-10"
                             type="text"
                             placeholder="Titre du poste"
                           />
                           <input
-                            v-model="entry.startYear"
+                            v-model="entry.startDate"
                             class="form-control mb-10"
                             type="text"
                             placeholder="Année de début"
                           />
                           <input
-                            v-model="entry.endYear"
+                            v-model="entry.endDate"
                             class="form-control mb-10"
                             type="text"
                             placeholder="Année de fin"
@@ -374,17 +374,15 @@
                   </div>
                 </div>
               </div>
-              <div class="panel-footer">
-               
-              </div>
+              <div class="panel-footer"></div>
             </div>
           </div>
         </div>
         <sweet-modal icon="success" ref="profileCreated">
-            <div class="spacingtop">
-              Votre profil a été mis à jour avec succés !
-            </div>
-          </sweet-modal>
+          <div class="spacingtop">
+            Votre profil a été mis à jour avec succés !
+          </div>
+        </sweet-modal>
       </div>
     </div>
   </div>
@@ -392,13 +390,15 @@
   
   
 <script setup>
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref } from "vue";
+import axios from "axios";
 import { SweetModal, SweetModalTab } from "sweet-modal-vue-3";
-import allskills from '../../../allskills.js'
+import allskills from "../../../allskills.js";
 
 const selectedProfilePicture = ref(null);
 const profilePicture = ref(null);
+
+const user_id = localStorage.getItem("id");
 
 const skillInput = ref("");
 const selectedSkills = ref([]);
@@ -416,14 +416,24 @@ const formData = ref({
   personalWebsite: "",
   bio: "",
   languages: "",
-  academicEntries: [{ institute: "", degree: "", graduationYear: "" }],
-  professionalEntries: [{ company: "", startYear: "", endYear: "" }],
+  academicEntries: [
+    { institute: "", degree: "", graduation_year: "", profil_id: "" },
+  ],
+  professionalEntries: [
+    {
+      companyName: "",
+      jobTitle: "",
+      startDate: "",
+      endDate: "",
+      profil_id: "",
+    },
+  ],
   country: "",
   city: "",
   address: "",
   website: "",
   cv: null,
-  selectedProfilePicture : null,
+  selectedProfilePicture: null,
 });
 
 const handlePPUpload = (event) => {
@@ -447,7 +457,8 @@ const addAcademicEntry = () => {
   formData.value.academicEntries.push({
     institute: "",
     degree: "",
-    graduationYear: "",
+    graduation_year: "",
+    profil_id: "",
   });
 };
 
@@ -457,10 +468,11 @@ const removeAcademicEntry = (index) => {
 
 const addProfessionalEntry = () => {
   formData.value.professionalEntries.push({
-    company: "",
-    title: "",
-    startYear: "",
-    endYear: "",
+    companyName: "",
+    jobTitle: "",
+    startDate: "",
+    endDate: "",
+    profil_id: "",
   });
 };
 
@@ -488,35 +500,53 @@ function removeSkill(skill) {
   selectedSkills.value = selectedSkills.value.filter((s) => s !== skill);
 }
 
-const postFormData = () => {
+const postFormData = async () => {
   const data = {
     ...formData.value,
     profilePicture: profilePicture.value,
     languages: JSON.stringify(formData.value.languages.split(",")),
     user_id: localStorage.getItem("id"),
     skills: JSON.stringify(selectedSkills.value),
-    
   };
+
+  const profilId = ref(null);
 
   console.log(data);
 
-  axios
-    .post("http://localhost:8000/api/profil", data,
-    {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
+  await axios
+    .post("http://localhost:8000/api/profil", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
     .then((response) => {
       console.log(response.data);
+      profilId.value = response.data.id;
       if (profileCreated.value) {
         profileCreated.value.open();
-    }
-
+      }
     })
     .catch((error) => {
       console.error(error);
     });
+
+  formData.value.academicEntries.forEach((entry) => {
+    entry.profil_id = profilId.value;
+    console.log("academic", entry);
+    const response = axios.post(
+      "http://localhost:8000/api/experience/academic",
+      entry
+    );
+  });
+
+  formData.value.professionalEntries.forEach((entry) => {
+    entry.profil_id = profilId.value;
+    console.log("professional", entry);
+    const response = axios.post(
+      "http://localhost:8000/api/experience/professional",
+      entry
+    );
+  });
 };
 </script>
 

@@ -12,6 +12,8 @@ use App\Http\Controllers\SocieteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PostulationController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AcademicExperienceController;
+use App\Http\Controllers\ProfessionalExperienceController;
 
 // User Registration and Login
 Route::post('/register', [RegisterControllerUser::class, 'register']);
@@ -95,3 +97,9 @@ Route::get('/postulation/societe/{societeId}/latest', [PostulationController::cl
 Route::post('/blog/post', [BlogController::class, 'post']);
 // Get all blog posts
 Route::get('/blogs', [BlogController::class, 'getAllPosts']);
+
+//AcademicExperience
+Route::post('/experience/academic', [AcademicExperienceController::class, 'store']);
+
+//ProfessionalExperience
+Route::post('/experience/professional', [ProfessionalExperienceController::class, 'store']);

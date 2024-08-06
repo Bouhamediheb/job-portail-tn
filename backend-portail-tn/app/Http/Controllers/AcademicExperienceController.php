@@ -17,9 +17,9 @@ class AcademicExperienceController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            'diploma' => 'required|string|max:255',
-            'school' => 'required|string|max:255',
-            'obtainedDate' => 'required|date',
+            'institute' => 'required|string|max:255',
+            'degree' => 'required|string|max:255',
+            'graduation_year' => 'required',
             'profil_id' => 'required|integer'
         ]);
 
@@ -27,9 +27,9 @@ class AcademicExperienceController extends Controller
         $academicExperience = new AcademicExperience();
 
         // Assign the validated data to the model's attributes
-        $academicExperience->diploma = $request->diploma;
-        $academicExperience->school = $request->school;
-        $academicExperience->obtainedDate = $request->obtainedDate;
+        $academicExperience->institute = $request->institute;
+        $academicExperience->degree = $request->degree;
+        $academicExperience->graduation_year = $request->graduation_year;
         $academicExperience->profil_id = $request->profil_id;
 
         // Save the academic experience to the database

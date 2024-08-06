@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('profil_id'); // Ensure this is unsignedBigInteger
             $table->string('institute');
             $table->string('degree');
-            $table->year('graduation_year');
+            $table->string('graduation_year');
             $table->timestamps();
 
             // Define the foreign key constraint

@@ -10,9 +10,9 @@ class AcademicExperience extends Model
     use HasFactory;
 
     protected $fillable = [
-        'diploma',
-        'school',
-        'obtainedDate',
+        'institute',
+        'degree',
+        'graduation_year',
         'description',
         'profil_id'
     ];

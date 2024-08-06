@@ -64,6 +64,8 @@ class ProfilController extends Controller
         }
 
         $profil->save();
+
+        return response()->json($profil);
     }
 
     public function delete($id)
@@ -90,17 +92,17 @@ class ProfilController extends Controller
     }
 
     public function getProfilByUserId($id)
-{
-    // Fetch Profil and related User data
-    $profil = Profil::where('user_id', $id)
-        ->with(['user', 'professionalExperiences', 'academicExperiences']) // Eager load the related User and experiences
-        ->first(); // Use `first()` to get a single record
+    {
+        // Fetch Profil and related User data
+        $profil = Profil::where('user_id', $id)
+            ->with(['user', 'professionalExperiences', 'academicExperiences']) // Eager load the related User and experiences
+            ->first(); // Use `first()` to get a single record
 
-    // Check if profil was found
-    if ($profil) {
-        return response()->json($profil);
-    } else {
-        return response()->json(['error' => 'Profil not found'], 404);
+        // Check if profil was found
+        if ($profil) {
+            return response()->json($profil);
+        } else {
+            return response()->json(['error' => 'Profil not found'], 404);
+        }
     }
-}
 }
