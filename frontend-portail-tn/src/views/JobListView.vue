@@ -1,13 +1,16 @@
+
 <template>
-  <link href="/assets/home/css/stylecd4e.css" rel="stylesheet" />
-  
-  <Header />
-  <main class="main">
-    <Heading class="heading-spacing"/>
-    <JobListing />
-    <BlogList />
-  </main>
-  <Footer />
+    <link href="/assets/home/css/stylecd4e.css" rel="stylesheet" />
+
+  <div>
+    <Header />
+    <main class="main">
+      <Heading class="heading-spacing"/>
+      <JobListing :searchParams="searchParams" />
+      <BlogList />
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -18,15 +21,31 @@ import JobListing from "@/components/joblist/JobListing.vue";
 import BlogList from "@/components/joblist/BlogList.vue";
 
 export default {
-  name: "JoblistView",
+  name: "JobListView",
   components: {
     Header,
     Footer,
     Heading,
     JobListing,
-    BlogList,
+    BlogList
+  },
+  data() {
+    return {
+      searchParams: {
+        domain: '',
+        location: '',
+        keywords: ''
+      }
+    };
   },
   methods: {
+    updateSearchParams() {
+      this.searchParams = {
+        domain: this.$route.query.domain || '',
+        location: this.$route.query.location || '',
+        keywords: this.$route.query.keywords || ''
+      };
+    },
     loadScripts() {
       const scripts = [
         "/assets/home/js/vendor/modernizr-3.6.0.min.js",
@@ -54,14 +73,14 @@ export default {
   },
   mounted() {
     this.loadScripts();
+    this.updateSearchParams();
   }
 };
 </script>
 
 <style scoped>
-/* Ensure the space between Header and Heading */
 .heading-spacing {
-  margin-top: 50px; /* Adjust this value as needed */
+  margin-top: 50px;
 }
 
 /* Mobile-specific adjustments */

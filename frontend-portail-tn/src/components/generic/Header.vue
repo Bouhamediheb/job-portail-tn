@@ -16,6 +16,7 @@
               <li><router-link to="/jobs">Emploi</router-link></li>
               <li><router-link to="/internships">Stages</router-link></li>
               <li><router-link to="/blog">Notre Blog</router-link></li>
+              <li><router-link to="/dashboard">Dashboard</router-link></li>
             </ul>
           </nav>
           <div class="burger-icon burger-icon-white">

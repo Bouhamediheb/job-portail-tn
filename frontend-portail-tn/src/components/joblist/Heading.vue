@@ -4,7 +4,7 @@
       <div class="banner-hero banner-single banner-single-bg">
         <div class="block-banner text-center">
           <h3 class="wow animate__animated animate__fadeInUp noshowmobile">
-            <span class="total-jobs">{{ totalJobs }}</span> offres d'emploi disponibles
+            <span class="total-jobs"> <span class="color-brand-2">{{ totalJobs }} </span></span> offres d'emploi disponibles
           </h3>
         </div>
       </div>
@@ -14,7 +14,7 @@
 
 <script setup>
 import axios from 'axios';
-import { ref, onMounted } from 'vue'; // Correct import for ref and onMounted
+import { ref, onMounted } from 'vue';
 
 const totalJobs = ref(0);
 const domains = ref([]);
