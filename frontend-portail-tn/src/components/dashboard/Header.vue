@@ -6,7 +6,6 @@
           <div class="header-jobhub-logo">
             <a class="d-flex" href="/"
               ><img
-                
                 alt="PortailTN"
                 src="/assets/home/imgs/template/jobhub-logo.png"
                 title="PortailTN"
@@ -35,7 +34,7 @@
           </ul>
         </div>
         <div class="header-right">
-          <div class="block-signin" >
+          <div class="block-signin">
             <a
               class="btn btn-default icon-edit hover-up"
               @click="postJob(99)"
@@ -45,8 +44,20 @@
 
             <span class="ml-30"> </span>
             <div class="member-login">
-              <img v-if = "isCompany" :src="'http://localhost:8000/api/profile/logo/' + id" alt="Company logo" />
-              <img v-else :src="'http://localhost:8000/api/profile/logo/' + id" alt="User avatar" />  
+              <img
+                v-if="isCompany"
+                :src="
+                  'http://localhost:8000/api/societe/logo/' + userProfile.id
+                "
+                alt="Company logo"
+              />
+              <img
+                v-else
+                :src="
+                  'http://localhost:8000/api/profil/image/' + userProfile.id
+                "
+                alt="User avatar"
+              />
               <div class="info-member mt-5">
                 <strong class="color-brand-1"
                   >Bienvenue,
@@ -161,43 +172,55 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
+import { ref, computed, onMounted } from "vue";
+import axios from "axios";
 
-export default {
-  data() {
-    return {
-      //userId from localStorage id
-      id: localStorage.getItem("id"),
+const emit = defineEmits(["inFocus", "submit"]);
+const id = ref(localStorage.getItem("id"));
+const userProfile = ref([]);
+
+const displayUserName = computed(() => {
+  if (typeof localStorage !== "undefined") {
+    const userType = localStorage.getItem("type");
+    console.log(userType);
+    if (userType === "user") {
+      const userFirstName = localStorage.getItem("firstName");
+      const userLastName = localStorage.getItem("lastName");
+      return `${userFirstName} ${userLastName}`;
+    } else if (userType === "company") {
+      return localStorage.getItem("companyName");
+    } else {
+      return ""; // Handle other cases or return default value
     }
-  },
-  computed: {
-    displayUserName() {
-      if (typeof localStorage !== "undefined") {
-        const userType = localStorage.getItem("type");
-        console.log(userType);
-        if (userType === "user") {
-          // Assuming user details are available in localStorage
-          const userFirstName = localStorage.getItem("firstName");
-          const userLastName = localStorage.getItem("lastName");
-          return `${userFirstName} ${userLastName}`;
-        } else if (userType === "company") {
-          return localStorage.getItem("companyName");
-        } else {
-          return ""; // Handle other cases or return default value
-        }
-      } else {
-        return ""; // Handle case where localStorage is not supported
-      }
-    },
-    isCompany() {
-      return localStorage.getItem("type") === "company";
-    },
-  },
-  methods: {
-    postJob(x) {
-      console.log("xxx", x);
-      this.$emit("navigateToPostJob", x);
-    },
-  },
+  } else {
+    return ""; // Handle case where localStorage is not supported
+  }
+});
+
+const isCompany = computed(() => localStorage.getItem("type") === "company");
+
+onMounted(() => {
+  getProfile();
+});
+
+const postJob = (x) => {
+  console.log("xxx", x);
+  emit("navigateToPostJob", x);
+};
+
+const getProfile = async () => {
+  if (localStorage.getItem("type") === "user") {
+    const response = await axios.get(
+      `http://localhost:8000/api/profil/user/${id.value}`
+    );
+    userProfile.value = response.data;
+  } else {
+    const response = await axios.get(
+      `http://localhost:8000/api/societe/profile/${id.value}`
+    );
+    userProfile.value = response.data;
+  }
 };
 </script>
+

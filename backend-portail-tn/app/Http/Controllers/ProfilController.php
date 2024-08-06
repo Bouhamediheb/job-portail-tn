@@ -105,4 +105,13 @@ class ProfilController extends Controller
             return response()->json(['error' => 'Profil not found'], 404);
         }
     }
+
+    public function checkProfileExistance($userId)
+    {
+        if (Profil::where('user_id', $userId)->exists()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

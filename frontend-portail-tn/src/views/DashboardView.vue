@@ -28,6 +28,8 @@
 
 
 <script>
+import { ref, computed, defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import Header from "@/components/dashboard/Header.vue";
 import Menu from "@/components/dashboard/Menu.vue";
 import Overview from "@/components/dashboard/Overview.vue";
@@ -41,10 +43,10 @@ import CandidateApplications from "@/components/dashboard/Company/CandidateAppli
 import PendingJobPosts from "@/components/dashboard/Admin/PendingJobPosts.vue";
 import ShowUserProfile from "@/components/dashboard/Company/ShowUserProfile.vue";
 import MyApplications from "@/components/dashboard/User/MyApplications.vue";
-import { useRouter } from "vue-router";
 
-export default {
+export default defineComponent({
   name: "DashboardView",
+
   components: {
     Header,
     Menu,
@@ -60,21 +62,21 @@ export default {
     PendingJobPosts,
     MyApplications,
   },
-  data() {
-    return {
-      userType: localStorage.getItem("type") || "user",
-      viewMode: 0,
-      selectedJobId: null,
-    };
-  },
-  computed: {
-    currentViewComponent() {
-      if (this.viewMode === 7) {
-        this.logout();
+
+  setup() {
+    const userType = ref(localStorage.getItem("type") || "user");
+    const viewMode = ref(0);
+    const selectedJobId = ref(null);
+    const selectedUserId = ref(null);
+    const router = useRouter();
+
+    const currentViewComponent = computed(() => {
+      if (viewMode.value === 7) {
+        logout();
         return null;
       }
-      if (this.userType === "user") {
-        switch (this.viewMode) {
+      if (userType.value === "user") {
+        switch (viewMode.value) {
           case 0:
             return "Overview";
           case 1:
@@ -84,8 +86,8 @@ export default {
           case 6:
             return "Deconnexion";
         }
-      } else if (this.userType === "company") {
-        switch (this.viewMode) {
+      } else if (userType.value === "company") {
+        switch (viewMode.value) {
           case 0:
             return "Overview";
           case 1:
@@ -107,8 +109,8 @@ export default {
           case 6:
             return "Deconnexion";
         }
-      } else if (this.userType === "admin") {
-        switch (this.viewMode) {
+      } else if (userType.value === "admin") {
+        switch (viewMode.value) {
           case 0:
             return "Overview";
           case 1:
@@ -119,29 +121,31 @@ export default {
             return "Deconnexion";
         }
       }
-    },
-  },
-  methods: {
-    updateViewMode(mode) {
-      this.viewMode = mode;
-    },
-    handleViewJobDetail(jobId) {
-      this.selectedJobId = jobId;
-      this.viewMode = 98;
-    },
-    handleEditJob(jobId) {
-      this.selectedJobId = jobId;
-      console.log("selectedJobId", this.selectedJobId);
-      this.viewMode = 97;
-    },
-    handleShowProfil(userId) {
-      this.selectedUserId = userId;
-      this.viewMode = 96;
-    },
-    logout() {
-      const router = useRouter();
+    });
 
-      if (localStorage.getItem("type") === "user") {
+    const updateViewMode = (mode) => {
+      viewMode.value = mode;
+    };
+
+    const handleViewJobDetail = (jobId) => {
+      selectedJobId.value = jobId;
+      viewMode.value = 98;
+    };
+
+    const handleEditJob = (jobId) => {
+      selectedJobId.value = jobId;
+      console.log("selectedJobId", selectedJobId.value);
+      viewMode.value = 97;
+    };
+
+    const handleShowProfil = (userId) => {
+      selectedUserId.value = userId;
+      viewMode.value = 96;
+    };
+
+    const logout = () => {
+      const type = localStorage.getItem("type");
+      if (type === "user") {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         localStorage.setItem("islogged", false);
@@ -150,7 +154,7 @@ export default {
         localStorage.removeItem("id");
         localStorage.removeItem("type");
         router.push("/");
-      } else if (localStorage.getItem("type") === "company") {
+      } else if (type === "company") {
         localStorage.removeItem("token");
         localStorage.removeItem("societe");
         localStorage.setItem("islogged", false);
@@ -162,12 +166,24 @@ export default {
         localStorage.removeItem("token");
         localStorage.removeItem("type");
         localStorage.removeItem("adminName");
-
         router.push("/");
       }
-    },
+    };
+
+    return {
+      userType,
+      viewMode,
+      selectedJobId,
+      selectedUserId,
+      currentViewComponent,
+      updateViewMode,
+      handleViewJobDetail,
+      handleEditJob,
+      handleShowProfil,
+      logout,
+    };
   },
-};
+});
 </script>
 
 

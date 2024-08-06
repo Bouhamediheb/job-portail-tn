@@ -29,9 +29,10 @@
                     >
                     <img
                       alt="Company logo"
-                      :src="'http://localhost:8000/api/societe/logo/' + id"
-                      style="height: 50px;"
-                    />                  </div>
+                      :src="selectedFile || logo"
+                      style="height: 50px"
+                    />
+                  </div>
                   <div class="info-profile">
                     <label for="logo-upload" class="btn btn-default"
                       >Upload Logo</label
@@ -78,7 +79,7 @@
           </div>
         </div>
       </div>
-      
+
       <sweet-modal icon="success" ref="updatedProfile">
         <div class="spacingtop">
           Votre profil a été mis à jour avec succès !

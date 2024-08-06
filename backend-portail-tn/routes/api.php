@@ -65,6 +65,8 @@ Route::get('/profil/image/{id}', [ProfilController::class, 'getProfilePicture'])
 Route::get('/profil/{id}', [ProfilController::class, 'getProfilById']);
 // Get profile by User ID
 Route::get('/profil/user/{id}', [ProfilController::class, 'getProfilByUserId']);
+// Check profile existance by User ID
+Route::get('/profile/exists/{id}', [ProfilController::class, 'checkProfileExistance']);
 
 
 
@@ -75,6 +77,8 @@ Route::post('/societe/profile/{id}', [SocieteController::class, 'createProfile']
 Route::get('/societe/profile/{id}', [SocieteController::class, 'getProfile']);
 // Get company logo by ID
 Route::get('/societe/logo/{id}', [SocieteController::class, 'getLogo']);
+// Check Societe Profile existance by ID
+Route::get('/societe/profile/exists/{id}', [SocieteController::class, 'checkProfileExistance']);
 
 // PostulationController (Applications)
 // Create a new application for an offer

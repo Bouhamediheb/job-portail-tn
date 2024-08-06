@@ -54,4 +54,14 @@ class SocieteController extends Controller
         $societe = Societe::find($id);
         return response()->file('images/societe/' . $societe->logo);
     }
+
+    public function checkProfileExistance($societeId)
+    {
+        $societe = Societe::find($societeId);
+        if ($societe->address && $societe->phoneNumber && $societe->fax && $societe->city && $societe->country && $societe->website && $societe->logo) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
