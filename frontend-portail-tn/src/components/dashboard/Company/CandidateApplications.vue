@@ -8,7 +8,9 @@
         <div class="breadcrumbs">
           <ul>
             <li>
-              <router-link class="icon-home" to="/dashboard">Dashboard</router-link>
+              <router-link class="icon-home" to="/dashboard"
+                >Dashboard</router-link
+              >
             </li>
             <li><span>Mes annonces</span></li>
           </ul>
@@ -32,38 +34,73 @@
               </div>
               <div v-else>
                 <div v-if="offres.length === 0">
-                  <p>Aucune offre disponible. Commencez par publier une offre.</p>
+                  <p>
+                    Aucune offre disponible. Commencez par publier une offre.
+                  </p>
                 </div>
                 <div v-else>
                   <!-- Display only offers for the current page -->
-                  <div v-for="offre in paginatedOffres" :key="offre.id" class="col-lg-12">
-                    <div class="card-style-2 hover-up" @click="getCandidatesByOffres(offre.id)">
+                  <div
+                    v-for="offre in paginatedOffres"
+                    :key="offre.id"
+                    class="col-lg-12"
+                  >
+                    <div
+                      class="card-style-2 hover-up"
+                      @click="getCandidatesByOffres(offre.id)"
+                    >
                       <div class="card-head">
                         <div class="card-image">
                           <img
-                            :src="'http://localhost:8000/api/societe/logo/' + offre.societe_id"
-                            alt="PortailTN" />
+                            :src="
+                              'http://localhost:8000/api/societe/logo/' +
+                              offre.societe_id
+                            "
+                            alt="PortailTN"
+                          />
                         </div>
                         <div class="card-title">
                           <h6>{{ offre.title }}</h6>
                           <span class="job-type">{{ offre.type }}</span>
-                          <span class="time-post">Posté il y a {{ calculateDaysAgo(offre.created_at) }} jours</span>
-                          <span class="location">{{ offre.city }}, {{ offre.country }}</span>
+                          <span class="time-post"
+                            >Posté il y a
+                            {{ calculateDaysAgo(offre.created_at) }} jours</span
+                          >
+                          <span class="location"
+                            >{{ offre.city }}, {{ offre.country }}</span
+                          >
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- Pagination Controls -->
                   <div class="paginations" v-if="paginatedOffres.length > 0">
                     <ul class="pager">
-                      <li @click="prevPage" :class="{ disabled: currentPage === 1 }">
+                      <li
+                        @click="prevPage"
+                        :class="{ disabled: currentPage === 1 }"
+                      >
                         <a class="pager-prev" href="#"></a>
                       </li>
-                      <li v-for="page in totalPages" :key="page" @click="setPage(page)">
-                        <a :class="['pager-number', { active: currentPage === page }]" href="#">{{ page }}</a>
+                      <li
+                        v-for="page in totalPages"
+                        :key="page"
+                        @click="setPage(page)"
+                      >
+                        <a
+                          :class="[
+                            'pager-number',
+                            { active: currentPage === page },
+                          ]"
+                          href="#"
+                          >{{ page }}</a
+                        >
                       </li>
-                      <li @click="nextPage" :class="{ disabled: currentPage === totalPages }">
+                      <li
+                        @click="nextPage"
+                        :class="{ disabled: currentPage === totalPages }"
+                      >
                         <a class="pager-next" href="#"></a>
                       </li>
                     </ul>
@@ -79,21 +116,63 @@
               </div>
               <div v-else>
                 <div v-if="candidates.length === 0">
-                  <p>Aucun candidat pour ce poste {{ selectedOffre.type === 'internship' ? 'stage' : 'emploi' }} pour le moment.</p>
+                  <p>
+                    Aucun candidat pour ce poste
+                    {{
+                      selectedOffre.type === "internship" ? "stage" : "emploi"
+                    }}
+                    pour le moment.
+                  </p>
                 </div>
                 <div v-else v-for="candidat in candidates" :key="candidat.id">
-                  <div class="card-style-2 hover-up col-lg-12" v-if="candidat.user.profil !== null">
+                  <div
+                    class="card-style-2 hover-up col-lg-12"
+                    v-if="
+                      candidat.user.profil !== null &&
+                      candidat.etat === 'demande'
+                    "
+                  >
                     <div class="card-head">
                       <div class="">
-                        <img :src="'http://localhost:8000/api/profil/image/' + candidat.user.profil.id" alt="PortailTN" class="profile-pic" />
+                        <img
+                          :src="
+                            'http://localhost:8000/api/profil/image/' +
+                            candidat.user.profil.id
+                          "
+                          alt="PortailTN"
+                          class="profile-pic"
+                        />
                       </div>
                       <div class="card-title ml-20 mt-15">
-                        <h6>{{ candidat.user.firstname }} {{ candidat.user.lastname }}</h6>
+                        <h6>
+                          {{ candidat.user.firstname }}
+                          {{ candidat.user.lastname }}
+                        </h6>
                       </div>
                     </div>
                     <!-- show user profile button -->
-                    <div>
-                      <a @click="goToShowProfil(candidat.user.id)" class="btn btn-tag">Consulter</a>
+                    <div class="col">
+                      <div>
+                        <a
+                          @click="goToShowProfil(candidat.user.id)"
+                          class="btn btn-tag"
+                          >Consulter</a
+                        >
+                      </div>
+                      <div>
+                        <a
+                          @click="acceptApplication(candidat.id)"
+                          class="btn btn-tag btn-success"
+                          >Accepter</a
+                        >
+                      </div>
+                      <div>
+                        <a
+                          @click="rejectApplication(candidat.id)"
+                          class="btn btn-tag btn-danger"
+                          >Refuser</a
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -107,9 +186,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 const selectedOffre = ref(false);
@@ -120,7 +199,9 @@ const loading = ref(true);
 const currentPage = ref(1);
 const itemsPerPage = 4;
 
-const totalPages = computed(() => Math.ceil(offres.value.length / itemsPerPage));
+const totalPages = computed(() =>
+  Math.ceil(offres.value.length / itemsPerPage)
+);
 
 const paginatedOffres = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
@@ -143,36 +224,48 @@ const calculateDaysAgo = (createdAt) => {
 const getCandidatesByOffres = async (id) => {
   try {
     if (Array.isArray(offres.value)) {
-      selectedOffre.value = offres.value.find(offre => offre.id === id);
-      
+      selectedOffre.value = offres.value.find((offre) => offre.id === id);
+
       if (selectedOffre.value) {
-        const response = await axios.get(`http://localhost:8000/api/postulation/offre/${id}`);
+        const response = await axios.get(
+          `http://localhost:8000/api/postulation/offre/${id}`
+        );
         candidates.value = response.data;
-        console.log('Candidates:', candidates.value);
+        console.log("Candidates:", candidates.value);
       } else {
-        console.error('Offer not found');
+        console.error("Offer not found");
       }
     } else {
-      console.error('Offres is not an array');
+      console.error("Offres is not an array");
     }
   } catch (error) {
-    console.error('Error fetching candidates:', error);
+    console.error("Error fetching candidates:", error);
   }
 };
 
 const getOffres = async () => {
-  const id = localStorage.getItem('id');
+  const id = localStorage.getItem("id");
   try {
-    const response = await axios.get(`http://localhost:8000/api/offre/societe/${id}`);
+    const response = await axios.get(
+      `http://localhost:8000/api/offre/societe/${id}`
+    );
     offres.value = response.data;
     loading.value = false;
   } catch (error) {
-    console.error('Error fetching offres:', error);
+    console.error("Error fetching offres:", error);
   }
 };
 const goToShowProfil = (id) => {
-  const url = router.resolve({ name: 'profile', query: { userId: id } }).href;
-  window.open(url, '_blank');
+  const url = router.resolve({ name: "profile", query: { userId: id } }).href;
+  window.open(url, "_blank");
+};
+
+const acceptApplication = async (id) => {
+  const response = await axios.post(`http://localhost:8000/api/accept/${id}`);
+};
+
+const rejectApplication = async (id) => {
+  const response = await axios.post(`http://localhost:8000/api/reject/${id}`);
 };
 
 // Change page
@@ -236,7 +329,6 @@ const nextPage = () => {
   }
 }
 
-
 /* Style for the profile picture */
 .profile-pic {
   width: 90px; /* Set width as desired */
@@ -276,5 +368,4 @@ const nextPage = () => {
   border-color: #e0e0e0;
   cursor: not-allowed;
 }
-
 </style>

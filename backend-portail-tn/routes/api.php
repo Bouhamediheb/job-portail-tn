@@ -95,6 +95,10 @@ Route::get('/postulation/societe/{societeId}', [PostulationController::class, 'g
 Route::get('/postulation/offre/{offreId}', [PostulationController::class, 'getPostulationByOffre']);
 // Get latest candidates for a Societe
 Route::get('/postulation/societe/{societeId}/latest', [PostulationController::class, 'getLatestCandidates']);
+// Accept or reject an application
+Route::post('/accept/{postulationId}', [PostulationController::class, 'acceptApplication']);
+Route::post('/reject/{postulationId}', [PostulationController::class, 'rejectApplication']);
+
 
 // BlogController
 // Create a new blog post

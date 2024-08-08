@@ -67,4 +67,28 @@ class PostulationController extends Controller
         })->with('user', 'user.profil')->latest()->take(5)->get();
         return $postulations;
     }
+
+    public function acceptApplication($postulationId)
+    {
+        $postulation = Postulation::where('id', $postulationId)->first();
+        $postulation->etat = 'acceptee';
+        $postulation->save();
+        return response()->json([
+            'status' => true,
+            'message' => 'Postulation Accepted Successfully',
+            'postulation' => $postulation
+        ]);
+    }
+
+    public function rejectApplication($postulationId)
+    {
+        $postulation = Postulation::where('id', $postulationId)->first();
+        $postulation->etat = 'refusee';
+        $postulation->save();
+        return response()->json([
+            'status' => true,
+            'message' => 'Postulation Rejected Successfully',
+            'postulation' => $postulation
+        ]);
+    }
 }
