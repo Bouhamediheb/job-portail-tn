@@ -14,6 +14,7 @@ use App\Http\Controllers\PostulationController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AcademicExperienceController;
 use App\Http\Controllers\ProfessionalExperienceController;
+use App\Http\Controllers\MailController;
 
 // User Registration and Login
 Route::post('/register', [RegisterControllerUser::class, 'register']);
@@ -111,3 +112,6 @@ Route::post('/experience/academic', [AcademicExperienceController::class, 'store
 
 //ProfessionalExperience
 Route::post('/experience/professional', [ProfessionalExperienceController::class, 'store']);
+
+//Mail
+Route::post('/candidatmail', [MailController::class, 'sendCandidatMail']);

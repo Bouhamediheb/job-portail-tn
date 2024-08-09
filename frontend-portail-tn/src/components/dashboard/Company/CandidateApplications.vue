@@ -127,10 +127,7 @@
                 <div v-else v-for="candidat in candidates" :key="candidat.id">
                   <div
                     class="card-style-2 hover-up col-lg-12"
-                    v-if="
-                      candidat.user.profil !== null &&
-                      candidat.etat === 'demande'
-                    "
+                    v-if="candidat.user.profil !== null"
                   >
                     <div class="card-head">
                       <div class="">
@@ -148,10 +145,14 @@
                           {{ candidat.user.firstname }}
                           {{ candidat.user.lastname }}
                         </h6>
+                        <span class="location"
+                          >{{ candidat.user.profil.city }},
+                          {{ candidat.user.profil.country }}</span
+                        >
                       </div>
                     </div>
                     <!-- show user profile button -->
-                    <div class="col">
+                    <div>
                       <div>
                         <a
                           @click="goToShowProfil(candidat.user.id)"
@@ -159,19 +160,27 @@
                           >Consulter</a
                         >
                       </div>
-                      <div>
-                        <a
-                          @click="acceptApplication(candidat.id)"
-                          class="btn btn-tag btn-success"
-                          >Accepter</a
-                        >
+                      <div v-if="candidat.etat === 'demande'">
+                        <div>
+                          <a
+                            @click="acceptApplication(candidat.id)"
+                            class="btn btn-tag btn-success"
+                            >Accepter</a
+                          >
+                        </div>
+                        <div>
+                          <a
+                            @click="rejectApplication(candidat.id)"
+                            class="btn btn-tag btn-danger"
+                            >Refuser</a
+                          >
+                        </div>
                       </div>
-                      <div>
-                        <a
-                          @click="rejectApplication(candidat.id)"
-                          class="btn btn-tag btn-danger"
-                          >Refuser</a
-                        >
+                      <div v-else-if="candidat.etat === 'acceptee'">
+                        <div class="badge bg-success">Acceptée</div>
+                      </div>
+                      <div v-else>
+                        <div class="badge bg-danger">Refusée</div>
                       </div>
                     </div>
                   </div>
@@ -182,6 +191,12 @@
         </div>
       </div>
     </div>
+    <sweet-modal icon="success" ref="applicationAccepted">
+      <div class="spacingtop">Candidature Acceptée !</div>
+    </sweet-modal>
+    <sweet-modal icon="error" ref="applicationRejected">
+      <div class="spacingtop">Candidature Refusée !</div>
+    </sweet-modal>
   </div>
 </template>
 
@@ -189,12 +204,15 @@
 import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { SweetModal } from "sweet-modal-vue-3";
 
 const router = useRouter();
 const selectedOffre = ref(false);
 const offres = ref([]);
 const candidates = ref([]);
 const loading = ref(true);
+const applicationAccepted = ref(null);
+const applicationRejected = ref(null);
 
 const currentPage = ref(1);
 const itemsPerPage = 4;
@@ -212,6 +230,8 @@ const paginatedOffres = computed(() => {
 onMounted(() => {
   getOffres();
 });
+
+const order = ["demande", "acceptee", "refusee"];
 
 const calculateDaysAgo = (createdAt) => {
   const createdDate = new Date(createdAt);
@@ -241,6 +261,9 @@ const getCandidatesByOffres = async (id) => {
   } catch (error) {
     console.error("Error fetching candidates:", error);
   }
+  candidates.value.sort((a, b) => {
+    return order.indexOf(a.etat) - order.indexOf(b.etat);
+  });
 };
 
 const getOffres = async () => {
@@ -262,10 +285,15 @@ const goToShowProfil = (id) => {
 
 const acceptApplication = async (id) => {
   const response = await axios.post(`http://localhost:8000/api/accept/${id}`);
+  applicationAccepted.value.open();
+  setTimeout(() => {
+    router.push("/dashboard");
+  }, 1000);
 };
 
 const rejectApplication = async (id) => {
   const response = await axios.post(`http://localhost:8000/api/reject/${id}`);
+  applicationRejected.value.open();
 };
 
 // Change page
@@ -287,7 +315,6 @@ const nextPage = () => {
   }
 };
 </script>
-
 
 <style scoped>
 .skeleton-loader {
