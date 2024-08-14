@@ -49,4 +49,10 @@ class BlogController extends Controller
 
         return $blogs;
     }
+
+    public function getBlogByID($id)
+    {
+        $blog = Blog::with('images')->find($id);
+        return $blog;
+    }
 }

@@ -106,6 +106,8 @@ Route::post('/reject/{postulationId}', [PostulationController::class, 'rejectApp
 Route::post('/blog/post', [BlogController::class, 'post']);
 // Get all blog posts
 Route::get('/blogs', [BlogController::class, 'getAllPosts']);
+// Get Blog by ID
+Route::get('/blogs/{id}', [BlogController::class, 'getBlogByID']);
 
 //AcademicExperience
 Route::post('/experience/academic', [AcademicExperienceController::class, 'store']);

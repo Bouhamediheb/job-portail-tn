@@ -213,6 +213,7 @@ const candidates = ref([]);
 const loading = ref(true);
 const applicationAccepted = ref(null);
 const applicationRejected = ref(null);
+const selectedOffreID = ref(null);
 
 const currentPage = ref(1);
 const itemsPerPage = 4;
@@ -251,6 +252,7 @@ const getCandidatesByOffres = async (id) => {
           `http://localhost:8000/api/postulation/offre/${id}`
         );
         candidates.value = response.data;
+        selectedOffreID.value = id;
         console.log("Candidates:", candidates.value);
       } else {
         console.error("Offer not found");
@@ -286,14 +288,19 @@ const goToShowProfil = (id) => {
 const acceptApplication = async (id) => {
   const response = await axios.post(`http://localhost:8000/api/accept/${id}`);
   applicationAccepted.value.open();
+  getCandidatesByOffres(selectedOffreID.value);
   setTimeout(() => {
-    router.push("/dashboard");
-  }, 1000);
+    applicationAccepted.value.close();
+  }, 2000);
 };
 
 const rejectApplication = async (id) => {
   const response = await axios.post(`http://localhost:8000/api/reject/${id}`);
   applicationRejected.value.open();
+  getCandidatesByOffres(selectedOffreID.value);
+  setTimeout(() => {
+    applicationRejected.value.close();
+  }, 2000);
 };
 
 // Change page

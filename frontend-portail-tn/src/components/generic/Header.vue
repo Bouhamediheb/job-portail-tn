@@ -1,11 +1,15 @@
 <template>
- <header class="header sticky-bar mb-50">
+  <header class="header sticky-bar mb-50">
     <div class="container">
       <div class="main-header">
         <div class="header-left">
           <div class="header-logo">
             <a class="d-flex" href="/">
-              <img class="logo-img" alt="PortailTN" src="/assets/home/imgs/template/jobhub-logo.png" />
+              <img
+                class="logo-img"
+                alt="PortailTN"
+                src="/assets/home/imgs/template/jobhub-logo.png"
+              />
             </a>
           </div>
         </div>
@@ -15,7 +19,7 @@
               <li><router-link to="/">Home</router-link></li>
               <li><router-link to="/jobs">Emploi</router-link></li>
               <li><router-link to="/internships">Stages</router-link></li>
-              <li><router-link to="/blog">Notre Blog</router-link></li>
+              <li><router-link to="/blogs">Notre Blog</router-link></li>
               <li><router-link to="/dashboard">Dashboard</router-link></li>
             </ul>
           </nav>
@@ -27,11 +31,30 @@
         </div>
         <div class="header-right">
           <div class="block-signin">
-            <router-link to="/signup" class="btn btn-default icon-edit hover-up" v-if="!loggedIn">Inscription</router-link>
-            <router-link to="/signin" class="btn btn-default icon-edit hover-up ml-20" v-if="!loggedIn">Connexion</router-link>
+            <router-link
+              to="/signup"
+              class="btn btn-default icon-edit hover-up"
+              v-if="!loggedIn"
+              >Inscription</router-link
+            >
+            <router-link
+              to="/signin"
+              class="btn btn-default icon-edit hover-up ml-20"
+              v-if="!loggedIn"
+              >Connexion</router-link
+            >
             <div class="user-info" v-if="loggedIn">
-              <span class="ml-30">{{ whoLoggedIn === 'user' ? `Bienvenue ,${firstName}` : `Bienvenue, ${companyName}` }}</span>
-              <a @click="logout" href="#" class="btn btn-default icon-edit hover-up ml-20">Déconnexion</a>
+              <span class="ml-30">{{
+                whoLoggedIn === "user"
+                  ? `Bienvenue ,${firstName}`
+                  : `Bienvenue, ${companyName}`
+              }}</span>
+              <a
+                @click="logout"
+                href="#"
+                class="btn btn-default icon-edit hover-up ml-20"
+                >Déconnexion</a
+              >
             </div>
           </div>
         </div>
@@ -39,13 +62,18 @@
     </div>
   </header>
   <!-- Mobile Header -->
-  <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+  <div
+    class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar"
+  >
     <div class="mobile-header-wrapper-inner">
       <div class="mobile-header-content-area">
         <div class="perfect-scroll">
           <a class="d-flex" href="/">
-
-          <img class="logo-img" alt="PortailTN" src="/assets/home/imgs/template/jobhub-logo.png" />
+            <img
+              class="logo-img"
+              alt="PortailTN"
+              src="/assets/home/imgs/template/jobhub-logo.png"
+            />
           </a>
           <div class="mobile-menu-wrap mobile-header-border">
             <nav>
@@ -63,7 +91,9 @@
               <li><a href="#">Profile</a></li>
               <li><a href="#">Paramétres</a></li>
               <li><a href="#">Version payante</a></li>
-              <li><a @click="logout" v-if="loggedIn" href="#">Déconnexion</a></li>
+              <li>
+                <a @click="logout" v-if="loggedIn" href="#">Déconnexion</a>
+              </li>
             </ul>
           </div>
           <div class="mobile-account" v-if="!loggedIn">
@@ -111,10 +141,9 @@ if (whoLoggedIn === "user") {
 
 const axiosConfig = {
   headers: {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  }
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
 };
-
 
 const logout = async () => {
   try {
@@ -125,15 +154,17 @@ const logout = async () => {
     );
 
     if (response.status === 200) {
-      localStorage.removeItem('token'); 
+      localStorage.removeItem("token");
       localStorage.clear();
       router.push("/");
     }
   } catch (error) {
-    console.log('Logout Error:', error.response ? error.response.data : error.message);
+    console.log(
+      "Logout Error:",
+      error.response ? error.response.data : error.message
+    );
   }
 };
-
 </script>
 <style lang="css" scoped>
 .header-right {
@@ -155,9 +186,9 @@ const logout = async () => {
 
 .user-info {
   display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
 }
 
 .user-info span {
@@ -172,7 +203,6 @@ const logout = async () => {
 .logo-img {
   width: 250px; /* Adjust as needed */
 }
-
 
 /* Mobile styles */
 @media (max-width: 768px) {
