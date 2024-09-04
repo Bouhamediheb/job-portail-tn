@@ -87,10 +87,12 @@ const login = async () => {
     );
 
     if (response.data.status) {
+      console.log(response.data);
       loggedIn.value = true;
       localStorage.setItem("token", response.data.token);
       console.log("token", response.data.token);
-      localStorage.setItem("adminName", response.data.user.firstname);
+      localStorage.setItem("admin_id", response.data.admin.id);
+      localStorage.setItem("adminName", response.data.admin.fname);
       localStorage.setItem("islogged", true);
       localStorage.setItem("type", "admin");
       router.push("/dashboard");

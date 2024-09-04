@@ -10,7 +10,7 @@ import JobListView from '../views/JobListView.vue'
 import InternshipListView from '@/views/InternshipListView.vue'
 import ProfileDetailView from '@/views/ProfileDetailView.vue'
 import BlogListView from '@/views/BlogListView.vue'
-import BlogDetails from '@/components/blog/BlogDetails.vue'
+import BlogDetailsView from '@/views/BlogDetailsView.vue'
 
 const routes = [
   {
@@ -85,8 +85,8 @@ const routes = [
   },
   {
     path: '/blog/:id',
-    name: 'BlogDetails',
-    component: BlogDetails
+    name: 'BlogDetailsView',
+    component: BlogDetailsView
   },
   {
     path : '/profile',

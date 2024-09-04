@@ -23,7 +23,7 @@
 <script>
 export default {
   name: "Menu",
-  props: ['userType'],
+  props: ["userType"],
   data() {
     return {
       selectedMenuIndex: 0,
@@ -78,7 +78,7 @@ export default {
             company: null,
           },
         },
-        
+
         {
           name: "Paramètres",
           href: "",
@@ -100,6 +100,16 @@ export default {
           },
         },
         {
+          name: "Blogs",
+          href: "",
+          img: "assets/dashboard/imgs/page/blog/picture-icon.svg",
+          viewMode: {
+            admin: 8,
+            user: null,
+            company: null,
+          },
+        },
+        {
           name: "Deconnexion",
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/logout.svg",
@@ -114,8 +124,8 @@ export default {
   },
   computed: {
     filteredMenuItems() {
-      return this.menuItems.filter(item =>
-        item.viewMode[this.userType] !== null
+      return this.menuItems.filter(
+        (item) => item.viewMode[this.userType] !== null
       );
     },
   },
@@ -125,7 +135,6 @@ export default {
       this.selectedMenuIndex = this.filteredMenuItems.indexOf(item); // Update based on filteredMenuItems
       this.$emit("updateViewMode", item.viewMode[this.userType]);
     },
-    
   },
 };
 </script>

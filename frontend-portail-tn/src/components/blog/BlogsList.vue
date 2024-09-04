@@ -115,6 +115,6 @@ onMounted(() => {
 });
 
 const goToBlogDetails = (id) => {
-  router.push({ name: "BlogDetails", params: { id: id } });
+  router.push({ name: "BlogDetailsView", params: { id: id } });
 };
 </script>

@@ -43,6 +43,7 @@ import CandidateApplications from "@/components/dashboard/Company/CandidateAppli
 import PendingJobPosts from "@/components/dashboard/Admin/PendingJobPosts.vue";
 import ShowUserProfile from "@/components/dashboard/Company/ShowUserProfile.vue";
 import MyApplications from "@/components/dashboard/User/MyApplications.vue";
+import BlogsList from "@/components/dashboard/Admin/BlogsList.vue";
 
 export default defineComponent({
   name: "DashboardView",
@@ -61,6 +62,7 @@ export default defineComponent({
     CandidateApplications,
     PendingJobPosts,
     MyApplications,
+    BlogsList,
   },
 
   setup() {
@@ -117,6 +119,8 @@ export default defineComponent({
             return "MyPosts";
           case 2:
             return "PendingJobPosts";
+          case 8:
+            return "BlogsList";
           case 6:
             return "Deconnexion";
         }
