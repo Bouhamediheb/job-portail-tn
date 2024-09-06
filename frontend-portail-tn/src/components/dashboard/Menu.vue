@@ -110,6 +110,16 @@ export default {
           },
         },
         {
+          name: "Utilisateurs",
+          href: "",
+          img: "assets/dashboard/imgs/page/dashboard/candidates.svg",
+          viewMode: {
+            admin: 9,
+            user: null,
+            company: null,
+          },
+        },
+        {
           name: "Deconnexion",
           href: "",
           img: "assets/dashboard/imgs/page/dashboard/logout.svg",

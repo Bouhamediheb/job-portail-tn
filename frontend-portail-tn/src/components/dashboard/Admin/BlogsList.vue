@@ -25,7 +25,7 @@
               <div class="box-padding">
                 <div class="box-action mb-30">
                   <button class="btn btn-primary" @click="openBlogModal">
-                    Add Blog
+                    Ajouter un Blog
                   </button>
                 </div>
                 <div class="row display-list">

@@ -15,6 +15,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AcademicExperienceController;
 use App\Http\Controllers\ProfessionalExperienceController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\UserController;
 
 // User Registration and Login
 Route::post('/register', [RegisterControllerUser::class, 'register']);
@@ -114,6 +115,11 @@ Route::post('/experience/academic', [AcademicExperienceController::class, 'store
 
 //ProfessionalExperience
 Route::post('/experience/professional', [ProfessionalExperienceController::class, 'store']);
+
+//UserController
+Route::get('/users', [UserController::class, 'getAllUsers']);
+Route::post('/users/block/{id}', [UserController::class, 'blockUser']);
+Route::post('/users/unblock/{id}', [UserController::class, 'unblockUser']);
 
 //Mail
 Route::post('/candidatmail', [MailController::class, 'sendCandidatMail']);

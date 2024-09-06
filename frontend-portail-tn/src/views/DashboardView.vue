@@ -1,5 +1,10 @@
   <template>
   <link href="/assets/dashboard/css/stylecd4e.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/primeflex@latest/primeflex.css"
+  />
+
   <div class="dashboard-container">
     <Header @navigateToPostJob="updateViewMode" />
     <main class="main">
@@ -44,6 +49,7 @@ import PendingJobPosts from "@/components/dashboard/Admin/PendingJobPosts.vue";
 import ShowUserProfile from "@/components/dashboard/Company/ShowUserProfile.vue";
 import MyApplications from "@/components/dashboard/User/MyApplications.vue";
 import BlogsList from "@/components/dashboard/Admin/BlogsList.vue";
+import UsersList from "@/components/dashboard/Admin/UsersList.vue";
 
 export default defineComponent({
   name: "DashboardView",
@@ -63,6 +69,7 @@ export default defineComponent({
     PendingJobPosts,
     MyApplications,
     BlogsList,
+    UsersList,
   },
 
   setup() {
@@ -121,6 +128,8 @@ export default defineComponent({
             return "PendingJobPosts";
           case 8:
             return "BlogsList";
+          case 9:
+            return "UsersList";
           case 6:
             return "Deconnexion";
         }
@@ -166,10 +175,11 @@ export default defineComponent({
         localStorage.removeItem("type");
         router.push("/");
       } else {
-        localStorage.removeItem("id");
         localStorage.removeItem("token");
         localStorage.removeItem("type");
         localStorage.removeItem("adminName");
+        localStorage.removeItem("admin_id");
+        localStorage.setItem("isLogged", false);
         router.push("/");
       }
     };

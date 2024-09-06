@@ -149,7 +149,6 @@ const logout = async () => {
   try {
     const response = await axios.post(
       "http://localhost:8000/api/logout",
-      {},
       axiosConfig
     );
 
