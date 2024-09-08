@@ -69,11 +69,10 @@
                   name="password"
                   placeholder="************"
                 />
+                <small v-if="passwordError" class="text-danger">{{ passwordError }}</small>
               </div>
               <div class="form-group">
-                <label class="form-label" for="input-5"
-                  >Confirmation mot de passe *</label
-                >
+                <label class="form-label" for="input-5">Confirmation mot de passe *</label>
                 <input
                   class="form-control"
                   id="input-5"
@@ -83,17 +82,14 @@
                   name="re-password"
                   placeholder="************"
                 />
+                <small v-if="passwordMismatch" class="text-danger">Les mots de passe ne correspondent pas.</small>
               </div>
-              <div
-                class="login_footer form-group d-flex justify-content-between"
-              >
+              <div class="login_footer form-group d-flex justify-content-between">
                 <label class="cb-container">
                   <input type="checkbox" ref="termsCheckbox" required /><span class="text-small">
                     J'accepte les
-                    <a class="text-muted" href="page-contact.html"
-                      >termes et conditions</a
-                    > </span
-                  ><span class="checkmark"></span>
+                    <a class="text-muted" href="page-contact.html">termes et conditions</a>
+                  </span><span class="checkmark"></span>
                 </label>
               </div>
               <div class="form-group">
@@ -110,7 +106,6 @@
                 <router-link to="/signin">Connectez-vous</router-link>
               </div>
               <div class="spacingbottom-small"></div>
-
               <div class="divider-text-center"></div>
               <div class="spacingbottom-small"></div>
             </form>
@@ -141,6 +136,9 @@
 .spacingtop {
   padding-top: 30px;
 }
+.text-danger {
+  color: red;
+}
 </style>
 
 <script setup>
@@ -159,10 +157,35 @@ const password = ref("");
 const rePassword = ref("");
 const errorMessage = ref("");
 const termsCheckbox = ref(null);
+const passwordError = ref("");
+const passwordMismatch = ref(false);
+
+const validatePassword = (pwd) => {
+  const minLength = 8;
+  const hasUpperCase = /[A-Z]/.test(pwd);
+  const hasNumber = /\d/.test(pwd);
+  
+  if (pwd.length < minLength) {
+    return "Le mot de passe doit contenir au moins 8 caractères.";
+  }
+  if (!hasUpperCase) {
+    return "Le mot de passe doit contenir au moins une lettre majuscule.";
+  }
+  if (!hasNumber) {
+    return "Le mot de passe doit contenir au moins un chiffre.";
+  }
+  return "";
+};
 
 const register = async () => {
+  passwordError.value = validatePassword(password.value);
+
+  if (passwordError.value) {
+    return;
+  }
+
   if (password.value !== rePassword.value) {
-    errorMessage.value = "Les mots de passe ne correspondent pas.";
+    passwordMismatch.value = true;
     return;
   }
 
